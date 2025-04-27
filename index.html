@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FNW - Custom Edtech </title>
+    <style>
+        /* Reset de overflow para layout fixo */
+        html, body { height: 100%; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; }
+        /* Header fixo para cobrir gap acima do mainTitle */
+        header { position: fixed; top: 0; left: 0; right: 0; height: 60px; background: Gray; color: #fff; display: flex; align-items: center; padding: 0 20px; z-index: 900; }
+        header h1 { margin: 0; font-size: 1.3em; }
+        /* Sidebar abaixo do header */
+        aside { position: fixed; top:90px; bottom: 0; left: 0; width: 200px; background: #f8f8f8; border-right: 1px solid #ddd; overflow-y: auto; padding: 5px; }
+        aside h2 { margin-top: 10; font-size: 1.2em; }
+        #categoriesList { list-style: none; padding: 0; }
+        #categoriesList li { margin-bottom: 10px; }
+        #categoriesList button { width: 100%; padding: 8px; text-align: left; border: none; background: #fff; cursor: pointer; border-radius: 4px; }
+        #categoriesList button.active, #categoriesList button:hover { background: #0c7cac; color: #fff; }
+        #myCoursesBtn { width:100%; padding:2px; background:#0c7cac; color:#fff; border:none; border-radius:4px; cursor:pointer; margin-bottom:15px; }
+        #myCoursesBtn:hover { background:#095d7a; }
+        /* Conteúdo ao lado da sidebar, abaixo do header */
+        main { position: fixed; top: 90px; left: 200px; right: 0; bottom: 0; overflow-y: auto; padding: 0px 20px; }
+        main h1 { margin-top: 0; }
+        /* Tornar título da categoria sticky no topo do main */
+        #mainTitle {
+            position: sticky;
+            top: 0;
+            background: #fff;
+            padding: 4px 0 8px;
+            margin: 0 0 10px;
+            z-index: 10;
+            /* Garante espaçamento abaixo do header ao ancorar */
+            scroll-margin-top: 70px;
+        }
+        .courses-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 20px; }
+        .course-card { background: #fff; border:1px solid #ddd; border-radius:4px; overflow:hidden; box-shadow:0 2px 4px rgba(0,0,0,0.1); cursor: pointer; }
+        .course-card img { width:100%; height:120px; object-fit:cover; }
+        .course-card .info { padding:10px; }
+        .course-card h3 { margin:0 0 8px; font-size:1em; color:#333; }
+        .course-card p { font-size:0.9em; color:#555; margin:0; }
+        /* Modal */
+        .modal { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; }
+        .modal.hidden { display: none; }
+        .modal-content { background: #fff; width: 90%; max-width: 600px; padding: 20px; border-radius:4px; position: relative; max-height: 90vh; overflow-y: auto; }
+        .modal-content img { width:100%; height:auto; margin-bottom:15px; }
+        .modal-content h2 { margin-top: 0; }
+        .close { position: absolute; top: 10px; right: 15px; font-size: 1.5em; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <header>
+      <br>  <img src="https://d1yei2z3i6k35z.cloudfront.net/3119789/680a61c83f31c_LogoFNW_SIE.png" alt="Logo FNW" style="height:40px; margin-left:15px; margin-right:15px;">
+        <h3>Curadoria de Conteúdo de Apoio</h3>
+    </header>
+    <aside>
+        <button id="myCoursesBtn">Meus Cursos</button>
+        <h2>Categorias</h2>
+        <ul id="categoriesList"><li>Carregando...</li></ul>
+    </aside>
+    <main>
+        <h1 id="mainTitle">Selecione uma categoria</h1>
+        <div id="coursesContainer"><p>Sem cursos para exibir.</p></div>
+    </main>
+
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <span id="modalClose" class="close">&times;</span>
+            <div id="courseDetails"></div>
+        </div>
+    </div>
+
+    <!-- Modal de Curadoria -->
+    <div id="curationModal" class="modal hidden">
+      <div class="modal-content">
+        <h2>Curadoria de Cursos</h2>
+        <!-- Passo 1: adicionar/ignorar -->
+        <div id="curationConfirm">
+          <p id="curationMessage"></p>
+          <p id="curationRemaining" style="font-weight:bold; margin:5px 0;"></p>
+          <button id="curateYes">Sim</button>
+          <button id="curateNo">Não</button>
+        </div>
+        <!-- Passo 2: rever seleção com nome/email -->
+        <div id="curationReview" style="display:none; margin-top:15px;">
+          <h3>Revise sua seleção</h3>
+          <ul id="curationList"></ul>
+          <div style="margin-top:10px;">
+            <button id="curateBack">Voltar</button>
+            <button id="curateContinue">Continuar</button>
+            <button id="curateFinish">Finalizar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        const curationList = [];
+        const MAX_CURATION = 4;
+
+        const apiToken = '6a2f35f5b59eee441a72b515f83271bbf85ef3d4'; // substitua pelo seu API token
+        const categoryUrl = 'https://www.iped.com.br/api/category/get-categories';
+        const coursesUrl = 'https://www.iped.com.br/api/course/get-courses';
+
+        async function fetchCategories() {
+            const ul = document.getElementById('categoriesList');
+            ul.innerHTML = '<li>Carregando...</li>';
+            try {
+                const fd = new FormData();
+                fd.append('token', apiToken);
+                const res = await fetch(categoryUrl, { method: 'POST', body: fd });
+                const data = await res.json();
+                if (data.CATEGORIES) renderCategories(data.CATEGORIES);
+                else ul.innerHTML = '<li>Erro ao carregar categorias.</li>';
+            } catch {
+                ul.innerHTML = '<li>Erro de rede.</li>';
+            }
+        }
+
+        function renderCategories(cats) {
+            const ul = document.getElementById('categoriesList');
+            ul.innerHTML = '';
+            cats.forEach((cat, idx) => {
+                const li = document.createElement('li');
+                const btn = document.createElement('button');
+                btn.textContent = cat.category_title;
+                btn.dataset.id = cat.category_id;
+                if (idx === 0) btn.classList.add('active');
+                btn.addEventListener('click', () => selectCategory(btn));
+                li.appendChild(btn);
+                ul.appendChild(li);
+            });
+            const first = ul.querySelector('button');
+            if (first) fetchCourses(first.dataset.id, first.textContent);
+        }
+
+        function selectCategory(btn) {
+            // Atualiza classe ativa
+            document.querySelectorAll('#categoriesList button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            // Scroll suave para o título da categoria
+            fetchCourses(btn.dataset.id, btn.textContent).then(() => {
+                const title = document.getElementById('mainTitle');
+                title.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
+
+        async function fetchCourses(catId, catTitle) {
+            document.getElementById('mainTitle').textContent = catTitle;
+            const cont = document.getElementById('coursesContainer');
+            cont.innerHTML = '<p>Carregando cursos...</p>';
+            try {
+                const fd = new FormData();
+                fd.append('token', apiToken);
+                fd.append('category_id', catId);
+                const res = await fetch(coursesUrl, { method: 'POST', body: fd });
+                const data = await res.json();
+                if (data.COURSES) renderCourses(data.COURSES);
+                else cont.innerHTML = '<p>Erro ao carregar cursos.</p>';
+            } catch {
+                cont.innerHTML = '<p>Erro de rede.</p>';
+            }
+        }
+
+        function renderCourses(courses) {
+            const cont = document.getElementById('coursesContainer');
+            if (!courses.length) {
+                cont.innerHTML = '<p>Nenhum curso encontrado.</p>';
+                return;
+            }
+            const grid = document.createElement('div');
+            grid.className = 'courses-grid';
+            courses.forEach(course => {
+                const card = document.createElement('div'); card.className = 'course-card';
+                card.innerHTML = `
+                    <img src="${course.course_image || ''}" alt="${course.course_title || ''}">
+                    <div class="info">
+                        <h3>${course.course_title}</h3>
+                        <p>${(course.course_description || '').substring(0, 60)}...</p>
+                    </div>`;
+                card.onclick = () => promptCurate(course);
+                grid.appendChild(card);
+            });
+            cont.innerHTML = '';
+            cont.appendChild(grid);
+        }
+
+        async function openDetails(id) {
+            try {
+                const fd = new FormData();
+                fd.append('token', apiToken);
+                fd.append('course_id', id);
+                const res = await fetch(coursesUrl, { method: 'POST', body: fd });
+                const d = await res.json();
+                if (d.COURSES && d.COURSES[0]) showModal(d.COURSES[0]);
+            } catch {
+                console.error('Erro ao carregar detalhes');
+            }
+        }
+
+        function showModal(course) {
+            const md = document.getElementById('modal');
+            const div = document.getElementById('courseDetails');
+            div.innerHTML = `
+                <img src="${course.course_image || ''}">
+                <h2>${course.course_title}</h2>
+                <p>${course.course_description || ''}</p>
+                <p><strong>Professor:</strong> ${course.course_teacher?.teacher_name || ''}</p>
+                <p><strong>Preço:</strong> R$${course.course_price?.toFixed(2) || '--'}</p>`;
+            md.classList.remove('hidden');
+        }
+
+        document.getElementById('modalClose').addEventListener('click', () => {
+            document.getElementById('modal').classList.add('hidden');
+        });
+
+        document.getElementById('myCoursesBtn').addEventListener('click', () => {
+            window.location.href = 'https://freenat-doc.systeme.io/fnw-acesso-sie-custom';
+        });
+
+        const MAX_SELECTION = 4;
+        let selection = [];
+        let current = null;
+        
+        function promptCurate(course) {
+            current = course;
+            document.getElementById('curationMessage').textContent = `Adicionar "${course.course_title}"?`;
+            document.getElementById('curationRemaining').textContent = `Você pode selecionar ${MAX_SELECTION - selection.length} curso${selection.length !== MAX_SELECTION-1?'s':''}`;
+            document.getElementById('curationConfirm').style.display = 'block';
+            document.getElementById('curationReview').style.display = 'none';
+            document.getElementById('curationModal').classList.remove('hidden');
+        }
+
+        document.getElementById('curateYes').onclick = () => {
+            if (selection.length < MAX_SELECTION && !selection.find(c => c.course_id === current.course_id)) selection.push(current);
+            showReview();
+        };
+        document.getElementById('curateNo').onclick = showReview;
+
+        function showReview() {
+            document.getElementById('curationConfirm').style.display = 'none';
+            document.getElementById('curationReview').style.display = 'block';
+            const ul = document.getElementById('curationList'); ul.innerHTML = '';
+            selection.forEach((c,i) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<label><input type='checkbox' data-idx='${i}' checked> ${c.course_title}</label>`;
+                ul.appendChild(li);
+            });
+        }
+
+        // Atualiza seleção a partir das checkboxes da revisão
+        function applyReview() {
+            const newSel = [];
+            document.querySelectorAll('#curationList input[type=checkbox]').forEach(cb => {
+                if (cb.checked) newSel.push(selection[parseInt(cb.dataset.idx)]);
+            });
+            selection = newSel;
+        }
+        // Atualiza contagem no passo de confirmação
+        function updateRemainingConfirm() {
+            document.getElementById('curationRemaining').textContent =
+                `Você pode selecionar ${MAX_SELECTION - selection.length} curso${selection.length !== MAX_SELECTION - 1 ? 's' : ''}`;
+        }
+        document.getElementById('curateBack').onclick = () => {
+            applyReview();
+            updateRemainingConfirm();
+            document.getElementById('curationReview').style.display = 'none';
+            document.getElementById('curationConfirm').style.display = 'block';
+        };
+        document.getElementById('curateContinue').onclick = () => {
+            applyReview();
+            document.getElementById('curationModal').classList.add('hidden');
+        };
+        document.getElementById('curateFinish').onclick = () => {
+            // Atualiza seleção
+            applyReview();
+            const finalList = selection;
+            // Captura nome e email apenas agora
+            const name = prompt('Digite seu nome:');
+            const email = prompt('Digite seu email:');
+            if (!name || !email) {
+                alert('Nome e email são obrigatórios.');
+                return;
+            }
+            const payload = { name, email, courses: finalList };
+            const dataStr = JSON.stringify(payload, null, 2);
+            // Gera arquivo JSON para download
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            // Monta nome do arquivo com nome e email sanitizados
+            const fileName = `trilha_${name.replace(/\s+/g,'_')}_${email.replace(/[@\.]/g,'_')}.json`;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            document.getElementById('curationModal').classList.add('hidden');
+        };
+
+        document.addEventListener('DOMContentLoaded', fetchCategories);
+    </script>
+</body>
+</html> 
