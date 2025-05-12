@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -53,10 +52,10 @@
 <body>
     <header>
       <br>  <img src="https://d1yei2z3i6k35z.cloudfront.net/3119789/680a61c83f31c_LogoFNW_SIE.png" alt="Logo FNW" style="height:40px; margin-left:15px; margin-right:15px;">
-        <h3>Curadoria de Conteúdo de Apoio</h3>
+        <h3>Customização Cliente   Categorias</h3>
     </header>
     <aside>
-        <button id="myCoursesBtn">Meus Cursos</button>
+        <button id="myCoursesBtn">Meus Acessos</button>
         <h2>Categorias</h2>
         <ul id="categoriesList"><li>Carregando...</li></ul>
     </aside>
@@ -100,7 +99,7 @@
         const curationList = [];
         const MAX_CURATION = 4;
 
-        const apiToken = 'dbb2c4d19a5ef0fec48e363618611614b4e0dfce'; // substitua pelo seu API token
+        const apiToken = '6a2f35f5b59eee441a72b515f83271bbf85ef3d4'; // substitua pelo seu API token
         const categoryUrl = 'https://www.iped.com.br/api/category/get-categories';
         const coursesUrl = 'https://www.iped.com.br/api/course/get-courses';
 
@@ -110,6 +109,7 @@
             try {
                 const fd = new FormData();
                 fd.append('token', apiToken);
+                fd.append('all_formats', 'true');
                 const res = await fetch(categoryUrl, { method: 'POST', body: fd });
                 const data = await res.json();
                 if (data.CATEGORIES) renderCategories(data.CATEGORIES);
@@ -155,6 +155,7 @@
                 const fd = new FormData();
                 fd.append('token', apiToken);
                 fd.append('category_id', catId);
+                fd.append('all_formats', 'true');
                 const res = await fetch(coursesUrl, { method: 'POST', body: fd });
                 const data = await res.json();
                 if (data.COURSES) renderCourses(data.COURSES);
