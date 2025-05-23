@@ -7,61 +7,418 @@
     <style>
         /* Reset de overflow para layout fixo */
         html, body { height: 100%; margin: 0; padding: 0; }
-        body { font-family: Arial, sans-serif; }
-        /* Header fixo para cobrir gap acima do mainTitle */
-        header { position: fixed; top: 0; left: 0; right: 0; height: 60px; background: Gray; color: #fff; display: flex; align-items: center; padding: 0 20px; z-index: 900; }
-        header h1 { margin: 0; font-size: 1.3em; }
-        /* Sidebar abaixo do header */
-        aside { position: fixed; top:90px; bottom: 0; left: 0; width: 200px; background: #f8f8f8; border-right: 1px solid #ddd; overflow-y: auto; padding: 5px; }
-        aside h2 { margin-top: 10; font-size: 1.2em; }
-        #categoriesList { list-style: none; padding: 0; }
-        #categoriesList li { margin-bottom: 10px; }
-        #categoriesList button { width: 100%; padding: 8px; text-align: left; border: none; background: #fff; cursor: pointer; border-radius: 4px; }
-        #categoriesList button.active, #categoriesList button:hover { background: #0c7cac; color: #fff; }
-        #myCoursesBtn { width:100%; padding:2px; background:#0c7cac; color:#fff; border:none; border-radius:4px; cursor:pointer; margin-bottom:15px; }
-        #myCoursesBtn:hover { background:#095d7a; }
-        /* Conteúdo ao lado da sidebar, abaixo do header */
-        main { position: fixed; top: 90px; left: 200px; right: 0; bottom: 0; overflow-y: auto; padding: 0px 20px; }
-        main h1 { margin-top: 0; }
-        /* Tornar título da categoria sticky no topo do main */
-        #mainTitle {
-            position: sticky;
-            top: 0;
-            background: #fff;
-            padding: 4px 0 8px;
-            margin: 0 0 10px;
-            z-index: 10;
-            /* Garante espaçamento abaixo do header ao ancorar */
-            scroll-margin-top: 70px;
+        body { 
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-image: linear-gradient(to bottom, #503060, #3B204A);
+            background-color: #3B204A; /* Fallback */
+            color: #e5e5e5; /* Cor de texto padrão clara */
+            padding-top: 70px; /* Espaço para o header fixo */
         }
-        .courses-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 20px; }
-        .course-card { background: #fff; border:1px solid #ddd; border-radius:4px; overflow:hidden; box-shadow:0 2px 4px rgba(0,0,0,0.1); cursor: pointer; }
-        .course-card img { width:100%; height:120px; object-fit:cover; }
-        .course-card .info { padding:10px; }
-        .course-card h3 { margin:0 0 8px; font-size:1em; color:#333; }
-        .course-card p { font-size:0.9em; color:#555; margin:0; }
+        /* Header fixo GERiAH */
+        header { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            height: 70px; 
+            background-color: rgba(71, 71, 71, 0.452);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #fff; 
+            display: flex; 
+            align-items: center; 
+            padding: 0 20px; 
+            z-index: 1000; /* Z-index alto */
+            border-bottom: 1px solid rgba(255,255,255,0.1); /* Linha sutil de separação */
+        }
+        header h3 { /* Ajuste no título do header */
+            margin: 0; 
+            font-size: 1.2em; 
+            font-weight: normal;
+        }
+        /* Sidebar abaixo do header */
+        aside { 
+            position: fixed; 
+            top: 70px; /* Abaixo do header GERiAH */
+            bottom: 0; 
+            left: 0; 
+            width: 230px; 
+            background: rgba(42, 26, 58, 0.8); /* Tom de roxo GERiAH com transparência */
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-right: 1px solid rgba(80, 48, 96, 0.7); 
+            overflow-y: auto; 
+            padding: 15px 15px 20px 15px; /* REINTRODUZIDO padding-top de 15px na aside */
+            z-index: 990; /* Abaixo do header mas acima do main */
+        }
+        aside h2 { 
+            margin-top: 0; /* Garante que o h2 respeite o margin-bottom do botão acima */
+            font-size: 1.1em; 
+            color: #fff; 
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(80, 48, 96, 0.7);
+            font-weight: bold;
+        }
+        #categoriesList {
+            list-style: none; 
+            padding: 0; /* Removido padding-top extra, o fluxo deve ser natural */
+        }
+        #categoriesList li { margin-bottom: 8px; }
+        #categoriesList button { 
+            width: 100%; 
+            padding: 10px 15px; 
+            text-align: left; 
+            border: none; 
+            background: transparent; 
+            color: #d3d3d3; /* Lightgray para itens não ativos */
+            cursor: pointer; 
+            border-radius: 4px; 
+            font-size: 0.95em;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        #categoriesList button.active, #categoriesList button:hover { 
+            background: rgba(80, 48, 96, 0.9); /* Roxo mais forte para ativo/hover */
+            color: #fff; 
+            font-weight: bold;
+        }
+        #myCoursesBtn { 
+            /* Estilos de posicionamento fixo na aside removidos */
+            /* z-index: 10; */
+            /* background-color: #2A1A3A; */ 
+
+            /* width:100%; */ /* Não mais 100% da aside */
+            padding: 8px 15px; /* Padding ajustado para o header */
+            color:#fff; 
+            border: 1px solid #fff; 
+            border-radius:4px; 
+            background: transparent; /* Fundo transparente no header */
+            cursor:pointer; 
+            margin-left: auto; /* Empurra o botão para a direita do header */
+            margin-right: 10px; /* Pequena margem da borda direita do header */
+            /* margin-bottom removido pois não é mais relevante para o fluxo da aside */
+            font-weight: bold;
+            font-size: 0.9em; /* Levemente reduzido para o header */
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        #myCoursesBtn:hover { 
+            background: rgba(255,255,255,0.1); /* Hover sutil no header */
+            color: #fff;
+        }
+        /* Conteúdo ao lado da sidebar, abaixo do header */
+        main { 
+            /* Removido position:fixed; top; left; right; bottom */
+            /* main agora flui normalmente no body, que tem padding-top */
+            margin-left: 230px; /* Largura da sidebar */
+            padding: 8px 30px 20px 30px; /* AJUSTADO padding-top para 8px (era 15px) */
+            background-color: #100818; /* MAIS ESCURO: Fundo sólido para o main, próximo ao preto */
+        }
+        main h1 { /* Este é o #mainTitle - agora usado apenas se necessário ou pode ser removido do JS */
+            margin-top: 0; 
+            color: #fff; 
+        }
+        /* Estilo para o título da categoria quando exibido acima do carrossel */
+        .category-title-header {
+            font-size: 1.8em; 
+            color: #fff; 
+            margin-bottom: 30px; /* AJUSTADO (era 60px) para aproximar o carrossel do título */
+            padding-bottom: 10px; 
+            border-bottom: 1px solid rgba(80, 48, 96, 0.7);
+        }
+
+        /* Removido .courses-grid, agora usamos .carousel-track */
+        .carousel-track {
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden; /* Esconde scrollbar vertical se houver */
+            padding: 120px 500px 130px 500px; 
+            margin-bottom: 1px; /* AJUSTADO (era 10px) */
+            position: relative; /* Necessário para posicionar os pseudo-elementos do esfumaçado */
+            /* Adicionando perspectiva para transformações 3D dos cards */
+            perspective: 1200px;
+            transform-style: preserve-3d; /* Garante que os filhos sejam tratados em 3D */
+            /* Estilizando a scrollbar horizontal para o trilho */
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: rgba(70, 40, 86, 0.9) rgba(30, 18, 40, 0.7); /* Firefox: thumb track - AJUSTADO */
+        }
+        .carousel-track::-webkit-scrollbar {
+            height: 12px; /* AJUSTADO (era 8px) */
+        }
+        .carousel-track::-webkit-scrollbar-track {
+            background: rgba(30, 18, 40, 0.7); /* AJUSTADO (era rgba(42, 26, 58, 0.5)) */
+        }
+        .carousel-track::-webkit-scrollbar-thumb {
+            background: rgba(70, 40, 86, 0.9); /* AJUSTADO (era rgba(80, 48, 96, 0.8)) */
+            border-radius: 4px;
+        }
+        .carousel-track::-webkit-scrollbar-thumb:hover {
+            background: rgba(100, 68, 116, 1); 
+        }
+
+        /* Pseudo-elementos para o efeito de esfumaçar nas laterais do carrossel */
+        .carousel-track::before, .carousel-track::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0; 
+            width: 280px; /* AUMENTADO: Largura da faixa de esfumaçamento (era 180px) */
+            z-index: 2; 
+            pointer-events: none; 
+        }
+        .carousel-track::before {
+            left: 0;
+            /* AJUSTADO: Degradê com início na cor do novo fundo do main mais dominante e transição mais para dentro */
+            background: linear-gradient(to right, #100818 60%, rgba(16, 8, 24, 0.65) 85%, rgba(16, 8, 24, 0) 100%);
+        }
+        .carousel-track::after {
+            right: 0;
+            /* AJUSTADO: Degradê com início na cor do novo fundo do main mais dominante e transição mais para dentro */
+            background: linear-gradient(to left, #100818 60%, rgba(16, 8, 24, 0.65) 85%, rgba(16, 8, 24, 0) 100%);
+        }
+
+        .course-card { 
+            background: rgba(63, 44, 80, 0.7); 
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border:1px solid rgba(80, 48, 96, 0.9); 
+            border-radius: 8px; 
+            overflow:hidden; 
+            box-shadow:0 4px 8px rgba(0,0,0,0.3); 
+            cursor: pointer; 
+            color: #e5e5e5;
+            width: 308px; /* AUMENTADO 40% (de 220px) */
+            flex-shrink: 0; 
+            margin-right: 2px; /* MARGEM MÍNIMA para evitar que colem totalmente sem transform */
+            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out, opacity 0.4s ease-in-out, filter 0.4s ease-in-out, z-index 0s 0.2s; 
+            opacity: 0.1; 
+            filter: brightness(0.1); 
+            /* Transform inicial: recuado e menor. translateX e rotateY serão via JS para vizinhos */
+            transform: translateZ(-200px) scale(0.8);
+            transform-origin: center center; 
+        }
+        .course-card:last-child {
+            margin-right: 0; 
+        }
+        .course-card:hover {
+            /* Hover mantém uma escala mais próxima do 'normal' mas ainda se destaca dos distantes */
+            transform: scale(1.12); /* Mantém scale uniforme no hover, sem espremer */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+            z-index: 10; 
+            opacity: 0.95; 
+            filter: brightness(0.9); 
+        }
+        /* Nova classe para o card focado no centro do carrossel */
+        .course-card.focused-card {
+            /* EFEITO 3D: Card focado vem para frente e aumenta */
+            transform: translateZ(60px) scale(1.12); /* Leve ajuste no scale/translateZ do focado */
+            box-shadow: 0 20px 45px rgba(0,0,0,0.8); 
+            z-index: 20; 
+            opacity: 1; 
+            filter: brightness(1); 
+        }
+        /* Classe para cards adjacentes (nível 1) ao focado - Usada para opacidade/brilho */
+        .course-card.adjacent-style {
+            opacity: 0.6; 
+            filter: brightness(0.6); 
+            /* transform é aplicado via JS */
+        }
+        /* Classe para cards vizinhos de segundo nível - Usada para opacidade/brilho */
+        .course-card.secondary-neighbor-style {
+            opacity: 0.3;
+            filter: brightness(0.3);
+            /* transform é aplicado via JS */
+        }
+        .course-card img { 
+            width:100%; 
+            height:196px; /* AUMENTADO 40% (de 140px) */
+            object-fit:cover; 
+            border-bottom: 1px solid rgba(80, 48, 96, 0.9);
+        }
+        .course-card .info { 
+            padding:15px; 
+        }
+        .course-card h3 { 
+            margin:0 0 10px; 
+            font-size:1.05em; 
+            color:#fff; 
+            height: 56px; /* AUMENTADO 40% (de 40px) */
+            overflow: hidden;
+        }
+        .course-card p { 
+            font-size:0.85em; 
+            color:#ccc; /* Cor da descrição um pouco mais clara */
+            margin:0; 
+            line-height: 1.3;
+            height: 70px; /* AUMENTADO 40% (de 50px) */
+            overflow: hidden;
+        }
         /* Modal */
-        .modal { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; }
+        .modal { 
+            position: fixed; 
+            top:0; 
+            left:0; 
+            width:100%; 
+            height:100%; 
+            background: rgba(0,0,0,0.8); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 1001; /* Mais alto que o header */
+        }
         .modal.hidden { display: none; }
-        .modal-content { background: #fff; width: 90%; max-width: 600px; padding: 20px; border-radius:4px; position: relative; max-height: 90vh; overflow-y: auto; }
-        .modal-content img { width:100%; height:auto; margin-bottom:15px; }
-        .modal-content h2 { margin-top: 0; }
-        .close { position: absolute; top: 10px; right: 15px; font-size: 1.5em; cursor: pointer; }
+        .modal-content { 
+            background: rgba(59, 32, 74, 0.95); /* Roxo GERiAH para modal */
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #fff;
+            width: 90%; 
+            max-width: 700px; 
+            padding: 25px; 
+            border-radius:6px; 
+            border: 1px solid rgba(80, 48, 96, 1);
+            position: relative; 
+            max-height: 90vh; 
+            overflow-y: auto; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .modal-content img { 
+            width:100%; 
+            height:auto; 
+            margin-bottom:20px; 
+            border-radius: 4px; 
+        }
+        .modal-content h2 { 
+            margin-top: 0; 
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
+        .modal-content p {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #e0e0e0;
+            margin-bottom: 10px;
+        }
+        .close { 
+            position: absolute; 
+            top: 15px; 
+            right: 20px; 
+            font-size: 1.8em; 
+            color: #aaa; 
+            cursor: pointer; 
+            transition: color 0.2s ease;
+        }
+        .close:hover {
+            color: #fff;
+        }
+        /* Scrollbar customizada (Webkit) - GERiAH Style */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(42, 26, 58, 0.5); /* Roxo translúcido para track */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(80, 48, 96, 0.8); /* Roxo mais sólido para thumb */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(100, 68, 116, 1); /* Roxo mais claro no hover */
+        }
+
+        /* Ajustes para o Modal de Curadoria - GERiAH Style */
+        #curationModal .modal-content {
+            /* Herda a maioria dos estilos de .modal-content */
+            background: rgba(59, 32, 74, 0.98); /* Um pouco mais opaco para legibilidade */
+        }
+        #curationModal h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        #curationConfirm p, #curationReview h3, #curationList li {
+            color: #e5e5e5;
+        }
+        #curationConfirm button, #curationReview button {
+            background-color: rgba(100, 68, 116, 0.9); /* Roxo GERiAH para botões */
+            color: white;
+            border: 1px solid rgba(120, 88, 136, 1);
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+        #curationConfirm button:hover, #curationReview button:hover {
+            background-color: rgba(120, 88, 136, 1);
+            border-color: rgba(140, 108, 156, 1);
+        }
+        #curationConfirm button#curateNo, #curationReview button#curateBack { /* Botão secundário */
+            background-color: rgba(70, 70, 70, 0.8);
+            border-color: rgba(90,90,90,1);
+        }
+        #curationConfirm button#curateNo:hover, #curationReview button#curateBack:hover {
+            background-color: rgba(90, 90, 90, 0.9);
+            border-color: rgba(110,110,110,1);
+        }
+        #curationList input[type=checkbox] {
+            margin-right: 8px;
+            accent-color: #804C9A; /* Cor roxa para o checkbox */
+        }
+
+        @media (max-width: 768px) {
+            .carousel-track {
+                /* Reduzir padding para telas menores */
+                padding: 80px 60px 80px 60px;
+            }
+
+            .carousel-track::before,
+            .carousel-track::after {
+                width: 100px; /* Largura do esfumaçado reduzida */
+            }
+
+            .carousel-track::before {
+                background: linear-gradient(to right, #100818 30%, rgba(16, 8, 24, 0.65) 75%, rgba(16, 8, 24, 0) 100%);
+            }
+
+            .carousel-track::after {
+                background: linear-gradient(to left, #100818 30%, rgba(16, 8, 24, 0.65) 75%, rgba(16, 8, 24, 0) 100%);
+            }
+
+            /* Se os cards precisarem ser menores em mobile, descomente e ajuste:
+            .course-card {
+                width: 220px; 
+                margin-right: 1px;
+            }
+            .course-card img {
+                height: 120px; 
+            }
+            .course-card .info h3 {
+                height: 36px; 
+                font-size: 0.95em;
+            }
+            .course-card .info p {
+                height: 45px; 
+                font-size: 0.8em;
+            }
+            */
+        }
     </style>
 </head>
 <body>
     <header>
-      <br>  <img src="https://d1yei2z3i6k35z.cloudfront.net/3119789/680a61c83f31c_LogoFNW_SIE.png" alt="Logo FNW" style="height:40px; margin-left:15px; margin-right:15px;">
-        <h3>Customização Cliente   Categorias</h3>
+      <img src="https://www.sie.com.br/admin/_upload/2022/01/18/29233/682fdb1dbf08a.png" alt="GERiAH Logo" style="max-height:60px; margin-left:10px; margin-right:20px; position: relative; top: -2px;">
+        <h3>Curadoria de Conteúdo</h3>
+        <button id="myCoursesBtn">Meus Acessos</button>
     </header>
     <aside>
-        <button id="myCoursesBtn">Meus Acessos</button>
         <h2>Categorias</h2>
         <ul id="categoriesList"><li>Carregando...</li></ul>
     </aside>
     <main>
-        <h1 id="mainTitle">Selecione uma categoria</h1>
-        <div id="coursesContainer"><p>Sem cursos para exibir.</p></div>
+        <h1 id="mainTitle"></h1>
+        <div id="coursesContainer"><p style="color: #ccc; text-align: center; margin-top: 50px; font-size: 1.2em;">Selecione uma categoria ao lado para ver os cursos.</p></div>
     </main>
 
     <div id="modal" class="modal hidden">
@@ -127,30 +484,23 @@
                 const btn = document.createElement('button');
                 btn.textContent = cat.category_title;
                 btn.dataset.id = cat.category_id;
-                if (idx === 0) btn.classList.add('active');
                 btn.addEventListener('click', () => selectCategory(btn));
                 li.appendChild(btn);
                 ul.appendChild(li);
             });
-            const first = ul.querySelector('button');
-            if (first) fetchCourses(first.dataset.id, first.textContent);
         }
 
         function selectCategory(btn) {
             // Atualiza classe ativa
             document.querySelectorAll('#categoriesList button').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            // Scroll suave para o título da categoria
-            fetchCourses(btn.dataset.id, btn.textContent).then(() => {
-                const title = document.getElementById('mainTitle');
-                title.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
+            // Limpa o contêiner de cursos antes de buscar novos
+            document.getElementById('coursesContainer').innerHTML = '<p style="color: #ccc;">Carregando cursos da categoria: ' + btn.textContent + '...</p>';
+            fetchCourses(btn.dataset.id, btn.textContent); 
         }
 
         async function fetchCourses(catId, catTitle) {
-            document.getElementById('mainTitle').textContent = catTitle;
             const cont = document.getElementById('coursesContainer');
-            cont.innerHTML = '<p>Carregando cursos...</p>';
             try {
                 const fd = new FormData();
                 fd.append('token', apiToken);
@@ -158,34 +508,243 @@
                 fd.append('all_formats', 'true');
                 const res = await fetch(coursesUrl, { method: 'POST', body: fd });
                 const data = await res.json();
-                if (data.COURSES) renderCourses(data.COURSES);
-                else cont.innerHTML = '<p>Erro ao carregar cursos.</p>';
+                if (data.COURSES) renderCourses(data.COURSES, catTitle);
+                else cont.innerHTML = '<p style="color: #ff6b6b;">Erro ao carregar cursos.</p>';
             } catch {
-                cont.innerHTML = '<p>Erro de rede.</p>';
+                cont.innerHTML = '<p style="color: #ff6b6b;">Erro de rede ao buscar cursos.</p>';
             }
         }
 
-        function renderCourses(courses) {
-            const cont = document.getElementById('coursesContainer');
-            if (!courses.length) {
-                cont.innerHTML = '<p>Nenhum curso encontrado.</p>';
+        function renderCourses(courses, categoryTitle) {
+            const container = document.getElementById('coursesContainer');
+            container.innerHTML = '';
+
+            // Cria o título da categoria principal (antigo #mainTitle, agora dinâmico)
+            // Este título fica fora do carrossel, no topo da área de cursos.
+            const categoryHeader = document.createElement('h2');
+            categoryHeader.className = 'category-title-header'; // Reutiliza o estilo existente
+            categoryHeader.textContent = categoryTitle;
+            container.appendChild(categoryHeader);
+
+            if (!courses || courses.length === 0) { // Verificação mais robusta
+                // Se não há cursos, apenas mostra a mensagem abaixo do título da categoria.
+                // Não cria o .carousel-track nem os pseudo-elementos de esfumaçar.
+                const noCoursesMessage = document.createElement('p');
+                noCoursesMessage.textContent = 'Nenhum curso encontrado nesta categoria.';
+                noCoursesMessage.style.color = '#ccc';
+                noCoursesMessage.style.marginTop = '20px';
+                container.appendChild(noCoursesMessage);
                 return;
             }
-            const grid = document.createElement('div');
-            grid.className = 'courses-grid';
+
+            // Cria o trilho do carrossel
+            const carouselTrack = document.createElement('div');
+            carouselTrack.className = 'carousel-track';
+
             courses.forEach(course => {
-                const card = document.createElement('div'); card.className = 'course-card';
+                const card = document.createElement('div'); 
+                card.className = 'course-card';
+                if(course.course_id) card.dataset.courseId = course.course_id; 
+
+                let displayTitle = course.course_title || 'Curso sem título';
+                if (displayTitle.toLowerCase().startsWith('curso de ')) {
+                    displayTitle = displayTitle.substring(9); // Remove "Curso de " (9 caracteres)
+                }
+
                 card.innerHTML = `
-                    <img src="${course.course_image || ''}" alt="${course.course_title || ''}">
-                    <div class="info">
-                        <h3>${course.course_title}</h3>
-                        <p>${(course.course_description || '').substring(0, 60)}...</p>
+                    <img src="${course.course_image || 'https://via.placeholder.com/308x196.png?text=Sem+Imagem'}" alt="${course.course_title || 'Curso sem título'}" style="width:100%; height:196px; object-fit:cover; border-bottom: 1px solid rgba(80, 48, 96, 0.9);">
+                    <div class="info" style="padding:15px;">
+                        <h3 style="margin:0 0 10px; font-size:1.05em; color:#fff; height: 56px; overflow: hidden;">${displayTitle}</h3>
+                        <p style="font-size:0.85em; color:#ccc; margin:0; line-height: 1.3; height: 70px; overflow: hidden;">${(course.course_description || 'Sem descrição disponível.').substring(0, 100)}...</p>
                     </div>`;
                 card.onclick = () => promptCurate(course);
-                grid.appendChild(card);
+                carouselTrack.appendChild(card);
             });
-            cont.innerHTML = '';
-            cont.appendChild(grid);
+            container.appendChild(carouselTrack);
+
+            // Adiciona listener de scroll ao carrossel recém-criado
+            const debouncedUpdateFocus = debounce(() => updateCarouselFocus(carouselTrack), 50);
+            
+            let scrollEndTimer = null;
+            carouselTrack.addEventListener('scroll', () => {
+                // Atualiza o foco visualmente durante o scroll
+                debouncedUpdateFocus(); 
+
+                // Detecta o fim do scroll para o snap
+                clearTimeout(scrollEndTimer);
+                scrollEndTimer = setTimeout(() => {
+                    snapToNearestCard(carouselTrack);
+                }, 150); // Ajuste este valor se necessário (tempo para considerar o scroll parado)
+            });
+
+            // Chama uma vez para definir o foco inicial se houver scroll inicial
+            updateCarouselFocus(carouselTrack); 
+        }
+
+        function snapToNearestCard(carouselTrack) {
+            if (!carouselTrack || carouselTrack.children.length === 0) return;
+
+            const cards = Array.from(carouselTrack.querySelectorAll('.course-card'));
+            if (cards.length === 0) return;
+
+            const trackRect = carouselTrack.getBoundingClientRect();
+            const trackVisibleWidth = carouselTrack.clientWidth; // Largura visível, excluindo scrollbars
+            const trackScrollLeft = carouselTrack.scrollLeft;
+
+            let nearestCard = null;
+            let smallestDistance = Infinity;
+
+            // Calcula a "linha central" da área visível do carrossel
+            const viewportCenterLine = trackScrollLeft + trackVisibleWidth / 2;
+
+            cards.forEach(card => {
+                const cardMidPoint = card.offsetLeft + card.offsetWidth / 2;
+                const distance = Math.abs(viewportCenterLine - cardMidPoint);
+
+                if (distance < smallestDistance) {
+                    smallestDistance = distance;
+                    nearestCard = card;
+                }
+            });
+
+            if (nearestCard) {
+                // Calcula o scrollLeft necessário para centralizar o nearestCard
+                const targetScrollLeft = nearestCard.offsetLeft - (trackVisibleWidth / 2) + (nearestCard.offsetWidth / 2);
+                
+                // Só faz o scroll se a posição alvo for significativamente diferente da atual
+                // para evitar loops de snap em alguns casos, e para não "snappar" se já estiver perto.
+                if (Math.abs(carouselTrack.scrollLeft - targetScrollLeft) > 1) { 
+                    carouselTrack.scrollTo({
+                        left: targetScrollLeft,
+                        behavior: 'smooth'
+                    });
+                    // A debouncedUpdateFocus no listener de scroll cuidará de atualizar o visual após a animação de snap.
+                }
+            }
+        }
+
+        // Função Debounce para otimizar eventos de scroll/resize
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Função para atualizar o foco no card central do carrossel
+        function updateCarouselFocus(carouselTrack) {
+            if (!carouselTrack || carouselTrack.children.length === 0) return;
+
+            const trackRect = carouselTrack.getBoundingClientRect();
+            const trackCenter = trackRect.left + trackRect.width / 2;
+            const cards = Array.from(carouselTrack.querySelectorAll('.course-card'));
+
+            const cardWidth = cards[0] ? cards[0].offsetWidth : 308;
+
+            // --- Parâmetros Responsivos --- 
+            const isMobile = window.innerWidth <= 768;
+
+            // Parâmetros de estilo
+            const MAX_SCALE = isMobile ? 1.15 : 1.28; 
+            const MIN_SCALE = 0.8;
+            const MAX_TRANSLATE_Z = isMobile ? 30 : 60; 
+            const MIN_TRANSLATE_Z = isMobile ? -100 : -200;
+            const MAX_OPACITY = 1.0;
+            const MIN_OPACITY_EDGE = isMobile ? 0.6 : 0.4; 
+            const MIN_OPACITY_FAR = isMobile ? 0.2 : 0.1; 
+            const MAX_BRIGHTNESS = 1.0;
+            const MIN_BRIGHTNESS_EDGE = isMobile ? 0.6 : 0.4;
+            const MIN_BRIGHTNESS_FAR = isMobile ? 0.2 : 0.1;
+
+            const BORDER_DARK_COLOR = '#21112E';
+            const BORDER_LIGHT_COLOR = '#D3C5E0';
+            const BORDER_THICKNESS = 2; 
+
+            const FOCUS_ZONE_WIDTH = cardWidth * (isMobile ? 1.5 : 2.0); 
+
+            const Y_ROTATE_PER_CARD = isMobile ? 5 : 10; 
+            const Y_ROTATE_FOCUS_DAMPING = 0.4; 
+            const X_TRANSLATE_BASE_FACTOR = cardWidth * (isMobile ? 0.15 : 0.25);
+            // --- Fim Parâmetros Responsivos ---
+
+
+            let centralCardIndex = -1;
+            let minDistanceToTrackCenterForPivoting = Infinity;
+            cards.forEach((card, index) => {
+                const cardRect = card.getBoundingClientRect();
+                const cardCenter = cardRect.left + cardRect.width / 2;
+                const distance = Math.abs(cardCenter - trackCenter);
+                if (distance < minDistanceToTrackCenterForPivoting) {
+                    minDistanceToTrackCenterForPivoting = distance;
+                    centralCardIndex = index;
+                }
+            });
+
+            cards.forEach((card, index) => {
+                const cardRect = card.getBoundingClientRect();
+                const cardCenter = cardRect.left + cardRect.width / 2;
+
+                const distanceToTrackCenterCurrentCard = Math.abs(cardCenter - trackCenter);
+                let focusFactor = 1 - (distanceToTrackCenterCurrentCard / (FOCUS_ZONE_WIDTH / 2));
+                focusFactor = Math.max(0, Math.min(1, focusFactor));
+
+                const scale = MIN_SCALE + (MAX_SCALE - MIN_SCALE) * focusFactor;
+                const translateZ = MIN_TRANSLATE_Z + (MAX_TRANSLATE_Z - MIN_TRANSLATE_Z) * focusFactor;
+                
+                let opacity, brightness;
+                let boxShadow = `0 8px 20px rgba(0,0,0,${(0.3 + focusFactor * 0.5).toFixed(2)})`; // Sombra base interpolada
+
+                if (focusFactor > 0.95) { // Ápice do foco
+                    const elevationShadow = `0 20px 45px rgba(0,0,0,0.8)`;
+                    const darkBorder = `0 0 0 ${BORDER_THICKNESS}px ${BORDER_DARK_COLOR}`;
+                    const lightBorder = `0 0 0 ${BORDER_THICKNESS * 2}px ${BORDER_LIGHT_COLOR}`;
+                    boxShadow = `${darkBorder}, ${lightBorder}, ${elevationShadow}`;
+                } else if (focusFactor > 0.5) { // Zona de foco intermediária
+                    const currentElevationAlpha = (0.3 + focusFactor * 0.5).toFixed(2);
+                    boxShadow = `0 ${Math.round(8 + 12 * focusFactor)}px ${Math.round(20 + 25 * focusFactor)}px rgba(0,0,0,${currentElevationAlpha})`;
+                } // Para focusFactor <= 0.5, a sombra base já definida é suficiente (menor e mais sutil)
+
+                if (focusFactor > 0) {
+                    opacity = MIN_OPACITY_EDGE + (MAX_OPACITY - MIN_OPACITY_EDGE) * focusFactor;
+                    brightness = MIN_BRIGHTNESS_EDGE + (MAX_BRIGHTNESS - MIN_BRIGHTNESS_EDGE) * focusFactor;
+                } else {
+                    const falloffDistance = cardWidth * 1.5;
+                    const distBeyondFocusZone = distanceToTrackCenterCurrentCard - (FOCUS_ZONE_WIDTH / 2);
+                    const decay = Math.max(0, 1 - (distBeyondFocusZone / falloffDistance));
+                    opacity = MIN_OPACITY_FAR + (MIN_OPACITY_EDGE - MIN_OPACITY_FAR) * decay;
+                    brightness = MIN_BRIGHTNESS_FAR + (MIN_BRIGHTNESS_EDGE - MIN_BRIGHTNESS_FAR) * decay;
+                }
+                
+                let translateX = 0;
+                let rotateY = 0;
+
+                if (centralCardIndex !== -1) {
+                    const offsetFromCentral = index - centralCardIndex; 
+
+                    rotateY = offsetFromCentral * Y_ROTATE_PER_CARD * (1 - (focusFactor * Y_ROTATE_FOCUS_DAMPING));
+
+                    if (offsetFromCentral !== 0) {
+                        // Cards são empurrados para os lados baseados no offset.
+                        // Este efeito é atenuado se o card atual (index) estiver ele mesmo em foco.
+                        translateX = offsetFromCentral * X_TRANSLATE_BASE_FACTOR * (1 - focusFactor * 0.6);
+                    } else {
+                        translateX = 0; // Card central não tem translateX relativo ao pivô.
+                    }
+                }
+                
+                card.style.transform = `translateX(${translateX.toFixed(1)}px) rotateY(${rotateY.toFixed(1)}deg) translateZ(${translateZ.toFixed(0)}px) scale(${scale.toFixed(2)})`;
+                card.style.opacity = opacity.toFixed(2);
+                card.style.filter = `brightness(${brightness.toFixed(2)})`;
+                card.style.zIndex = Math.floor(translateZ + 200); 
+                card.style.boxShadow = boxShadow;
+
+                card.classList.remove('focused-card', 'adjacent-style', 'secondary-neighbor-style');
+            });
         }
 
         async function openDetails(id) {
