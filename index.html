@@ -438,6 +438,7 @@
           <p id="curationRemaining" style="font-weight:bold; margin:5px 0;"></p>
           <button id="curateYes">Sim</button>
           <button id="curateNo">Não</button>
+          <button id="accessNowBtn" style="display:none;">Acessar Agora</button>
         </div>
         <!-- Passo 2: rever seleção com nome/email -->
         <div id="curationReview" style="display:none; margin-top:15px;">
@@ -456,9 +457,86 @@
         const curationList = [];
         const MAX_CURATION = 4;
 
-        const apiToken = 'dbb2c4d19a5ef0fec48e363618611614b4e0dfce'; // substitua pelo seu API token
+        // Variáveis para parâmetros da URL e estado de embedding
+        let urlParams = new URLSearchParams(window.location.search);
+        let embeddedMode = urlParams.get('embedded') === 'true';
+        let parentOrigin = urlParams.get('origin');
+        let userToken = urlParams.get('userToken');
+        let userId = urlParams.get('userId'); // Pode ser usado futuramente se necessário
+
+        // Usa o token da URL se disponível, senão usa o fallback
+        const apiToken = userToken || 'dbb2c4d19a5ef0fec48e363618611614b4e0dfce'; 
+
         const categoryUrl = 'https://www.iped.com.br/api/category/get-categories';
         const coursesUrl = 'https://www.iped.com.br/api/course/get-courses';
+
+        // Função para ocultar o header e ajustar layout se em modo embedded
+        function adjustForEmbeddedMode() {
+            if (embeddedMode) {
+                const headerElement = document.querySelector('header');
+                const asideElement = document.querySelector('aside');
+                const mainElement = document.querySelector('main');
+
+                if (headerElement) {
+                    headerElement.style.display = 'none';
+                }
+                // Ajusta o padding-top do body para 0, pois o header está oculto
+                document.body.style.paddingTop = '0';
+                
+                // Ajusta a posição do aside e do main para o topo da página
+                if (asideElement) {
+                    asideElement.style.top = '0';
+                }
+                if (mainElement) {
+                    // mainElement já deve fluir normalmente sem paddingTop no body, 
+                    // mas se ele tiver um top específico por JS ou CSS, precisaria ser ajustado.
+                    // No CSS atual, ele tem margin-left e padding, o que é ok.
+                }
+
+                // Oculta o botão "Meus Acessos" se ele estiver no header
+                // (já coberto pelo headerElement.style.display = 'none'; se o botão estiver dentro do header)
+                // Se fosse um botão fora do header, seria tratado aqui.
+
+                // Ajustar o botão "Acessar Agora" no modal de curadoria
+                const accessNowBtn = document.getElementById('accessNowBtn');
+                if (accessNowBtn) {
+                    accessNowBtn.style.display = 'inline-block'; // Mostra o botão em modo embedded
+                    // Estilizar como os outros botões:
+                    accessNowBtn.style.backgroundColor = 'rgba(100, 68, 116, 0.9)';
+                    accessNowBtn.style.color = 'white';
+                    accessNowBtn.style.border = '1px solid rgba(120, 88, 136, 1)';
+                    accessNowBtn.style.padding = '10px 15px';
+                    accessNowBtn.style.margin = '5px';
+                    accessNowBtn.style.borderRadius = '4px';
+                    accessNowBtn.style.cursor = 'pointer';
+                    accessNowBtn.style.fontWeight = 'bold';
+                    accessNowBtn.addEventListener('click', () => {
+                        if (current && parentOrigin) {
+                            window.parent.postMessage({ action: 'acessarItem', itemId: current.course_id }, parentOrigin);
+                            document.getElementById('curationModal').classList.add('hidden'); // Fecha o modal
+                        }
+                    });
+                }
+                 // No modo embedded, o botão "Sim" para adicionar à curadoria deve estar oculto
+                const curateYesBtn = document.getElementById('curateYes');
+                if(curateYesBtn) curateYesBtn.style.display = 'none';
+                
+                // No modo embedded, o botão "Não" (ignorar) deve estar oculto
+                // ou pode ser renomeado/reutilizado para fechar o modal. Por ora, vamos ocultá-lo.
+                const curateNoBtn = document.getElementById('curateNo');
+                if(curateNoBtn) curateNoBtn.style.display = 'none';
+                 // Ajustar texto do prompt de curadoria em modo embedded
+                const curationMessageEl = document.getElementById('curationMessage');
+                if (curationMessageEl && current) {
+                    curationMessageEl.textContent = `Acessar conteúdo "${current.course_title}"?`;
+                }
+                const curationRemainingEl = document.getElementById('curationRemaining');
+                if(curationRemainingEl) curationRemainingEl.style.display = 'none'; // Não relevante para acesso direto
+
+
+            }
+        }
+
 
         async function fetchCategories() {
             const ul = document.getElementById('categoriesList');
@@ -786,20 +864,68 @@
         
         function promptCurate(course) {
             current = course;
-            document.getElementById('curationMessage').textContent = `Adicionar "${course.course_title}"?`;
-            document.getElementById('curationRemaining').textContent = `Você pode selecionar ${MAX_SELECTION - selection.length} curso${selection.length !== MAX_SELECTION-1?'s':''}`;
+            const curationMessageEl = document.getElementById('curationMessage');
+            const curationRemainingEl = document.getElementById('curationRemaining');
+            const accessNowBtn = document.getElementById('accessNowBtn');
+            const curateYesBtn = document.getElementById('curateYes');
+            const curateNoBtn = document.getElementById('curateNo');
+
+            if (embeddedMode) {
+                if (curationMessageEl) curationMessageEl.textContent = `Acessar conteúdo "${current.course_title}"?`;
+                if (curationRemainingEl) curationRemainingEl.style.display = 'none';
+                if (accessNowBtn) accessNowBtn.style.display = 'inline-block';
+                if (curateYesBtn) curateYesBtn.style.display = 'none';
+                if (curateNoBtn) curateNoBtn.style.display = 'none';
+            } else {
+                if (curationMessageEl) curationMessageEl.textContent = `Adicionar "${course.course_title}" à sua curadoria?`;
+                if (curationRemainingEl) {
+                    curationRemainingEl.style.display = 'block';
+                    curationRemainingEl.textContent = `Você pode selecionar ${MAX_SELECTION - selection.length} curso${selection.length !== MAX_SELECTION-1?'s':''}`;
+                }
+                if (accessNowBtn) accessNowBtn.style.display = 'none';
+                if (curateYesBtn) curateYesBtn.style.display = 'inline-block';
+                if (curateNoBtn) curateNoBtn.style.display = 'inline-block';
+            }
+            
             document.getElementById('curationConfirm').style.display = 'block';
             document.getElementById('curationReview').style.display = 'none';
             document.getElementById('curationModal').classList.remove('hidden');
         }
 
         document.getElementById('curateYes').onclick = () => {
-            if (selection.length < MAX_SELECTION && !selection.find(c => c.course_id === current.course_id)) selection.push(current);
-            showReview();
+            if (selection.length < MAX_SELECTION && !selection.find(c => c.course_id === current.course_id)) {
+                selection.push(current);
+            }
+            // Se não estiver em modo embedded, vai para a revisão.
+            // Se estiver em modo embedded, este botão não deveria ser clicável ou visível.
+            if (!embeddedMode) {
+                showReview();
+            } else {
+                // Em modo embedded, o fluxo de curadoria é diferente, "Sim" não se aplica diretamente aqui.
+                // O acesso é feito pelo botão "Acessar Agora".
+                 document.getElementById('curationModal').classList.add('hidden');
+            }
         };
-        document.getElementById('curateNo').onclick = showReview;
+
+        // O botão "Não" (ignorar) em modo não-embedded simplesmente fecha o modal ou vai para revisão sem adicionar.
+        // Em modo embedded, este botão também não é primário. Se visível, poderia apenas fechar o modal.
+        document.getElementById('curateNo').onclick = () => {
+            if (!embeddedMode) {
+                showReview(); // No modo normal, "Não" ainda pode levar à revisão (para desmarcar outros)
+            } else {
+                 // Em modo embedded, "Não" pode simplesmente fechar o modal se "Acessar Agora" não for clicado.
+                document.getElementById('curationModal').classList.add('hidden');
+            }
+        };
+
 
         function showReview() {
+            // Esta função é principalmente para o modo não-embedded (curadoria completa)
+            if (embeddedMode) {
+                // Não deve chegar aqui no fluxo de "Acessar Agora"
+                document.getElementById('curationModal').classList.add('hidden');
+                return;
+            }
             document.getElementById('curationConfirm').style.display = 'none';
             document.getElementById('curationReview').style.display = 'block';
             const ul = document.getElementById('curationList'); ul.innerHTML = '';
@@ -834,34 +960,48 @@
             document.getElementById('curationModal').classList.add('hidden');
         };
         document.getElementById('curateFinish').onclick = () => {
-            // Atualiza seleção
-            applyReview();
+            applyReview(); // Garante que a seleção da lista de checkboxes seja aplicada
             const finalList = selection;
-            // Captura nome e email apenas agora
-            const name = prompt('Digite seu nome:');
-            const email = prompt('Digite seu email:');
-            if (!name || !email) {
-                alert('Nome e email são obrigatórios.');
-                return;
+
+            if (embeddedMode && parentOrigin) {
+                // Em modo embedded, envia a lista de cursos para a página pai
+                // A página pai será responsável por coletar nome/email se necessário
+                window.parent.postMessage({ action: 'finalizarTrilha', trilhaData: finalList }, parentOrigin);
+                document.getElementById('curationModal').classList.add('hidden');
+                // Limpa a seleção para a próxima vez que o modal for aberto.
+                selection = []; 
+                updateRemainingConfirm();
+            } else {
+                // Comportamento original: prompt para nome/email e download JSON
+                const name = prompt('Digite seu nome:');
+                const email = prompt('Digite seu email:');
+                if (!name || !email) {
+                    alert('Nome e email são obrigatórios.');
+                    return;
+                }
+                const payload = { name, email, courses: finalList };
+                const dataStr = JSON.stringify(payload, null, 2);
+                const blob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                const fileName = `trilha_${name.replace(/\\s+/g,'_')}_${email.replace(/[@\\.]/g,'_')}.json`;
+                a.download = fileName;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                document.getElementById('curationModal').classList.add('hidden');
+                // Limpa a seleção
+                selection = []; 
+                updateRemainingConfirm();
             }
-            const payload = { name, email, courses: finalList };
-            const dataStr = JSON.stringify(payload, null, 2);
-            // Gera arquivo JSON para download
-            const blob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            // Monta nome do arquivo com nome e email sanitizados
-            const fileName = `trilha_${name.replace(/\s+/g,'_')}_${email.replace(/[@\.]/g,'_')}.json`;
-            a.download = fileName;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            document.getElementById('curationModal').classList.add('hidden');
         };
 
-        document.addEventListener('DOMContentLoaded', fetchCategories);
+        document.addEventListener('DOMContentLoaded', () => {
+            adjustForEmbeddedMode(); // Chama a função para ajustar a UI se em modo embedded
+            fetchCategories();
+        });
     </script>
 </body>
 </html> 
