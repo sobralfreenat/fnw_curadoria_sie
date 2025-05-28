@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FNW - Custom Edtech </title>
+    <title>FNW - Custom Edtech 4.0 - GERiAH</title>
     <style>
         /* Reset de overflow para layout fixo */
         html, body { height: 100%; margin: 0; padding: 0; }
@@ -62,10 +62,29 @@
         }
         #categoriesList {
             list-style: none; 
-            padding: 0; /* Removido padding-top extra, o fluxo deve ser natural */
+            /* padding: 0; Removido daqui, será tratado pelo .accordion-content */
         }
         #categoriesList li { margin-bottom: 8px; }
-        #categoriesList button { 
+        /* #categoriesList button { // Comentado para usar o seletor mais genérico abaixo
+            width: 100%; 
+            padding: 10px 15px; 
+            text-align: left; 
+            border: none; 
+            background: transparent; 
+            color: #d3d3d3; 
+            cursor: pointer; 
+            border-radius: 4px; 
+            font-size: 0.95em;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        #categoriesList button.active, #categoriesList button:hover { 
+            background: rgba(80, 48, 96, 0.9); 
+            color: #fff; 
+            font-weight: bold;
+        } */
+
+        /* Novo seletor genérico para botões dentro dos acordeões da sidebar */
+        aside .accordion-content ul li button {
             width: 100%; 
             padding: 10px 15px; 
             text-align: left; 
@@ -77,11 +96,13 @@
             font-size: 0.95em;
             transition: background-color 0.2s ease, color 0.2s ease;
         }
-        #categoriesList button.active, #categoriesList button:hover { 
+        aside .accordion-content ul li button:hover,
+        aside .accordion-content ul li button.active { /* .active ainda é útil para categorias */
             background: rgba(80, 48, 96, 0.9); /* Roxo mais forte para ativo/hover */
             color: #fff; 
             font-weight: bold;
         }
+
         #myCoursesBtn { 
             /* Estilos de posicionamento fixo na aside removidos */
             /* z-index: 10; */
@@ -326,11 +347,67 @@
             background: rgba(100, 68, 116, 1); /* Roxo mais claro no hover */
         }
 
+        /* Estilos para Acordeão na Sidebar */
+        aside .accordion-item {
+            border-bottom: 1px solid rgba(80, 48, 96, 0.7); 
+            margin-bottom: 10px; 
+        }
+
+        aside .accordion-header { /* Estilo para os H2 que são cabeçalhos de acordeão */
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding-bottom: 10px; 
+            margin-bottom: 0; 
+            font-size: 1.1em; 
+            color: #fff; 
+            font-weight: bold;
+            margin-top: 0; /* Garante que não haja margem superior extra */
+        }
+        /* Removemos o estilo global de aside h2 para não conflitar com accordion-header */
+        /* aside h2 { ... } */
+
+
+        aside .accordion-icon {
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+
+        aside .accordion-content {
+            padding-left: 10px; 
+            padding-top: 5px; 
+            padding-bottom: 10px; 
+            display: none; /* Começa fechado */
+        }
+        aside .accordion-content ul { /* Para #categoriesList e #toolsCategoriesList */
+            padding: 0; 
+            margin:0;
+            list-style: none; /* Garante que não haja marcadores de lista padrão */
+        }
+        /* Fim Estilos Acordeão */
+
         /* Ajustes para o Modal de Curadoria - GERiAH Style */
         #curationModal .modal-content {
             /* Herda a maioria dos estilos de .modal-content */
             background: rgba(59, 32, 74, 0.98); /* Um pouco mais opaco para legibilidade */
         }
+        /* Estilos para o Modal P.A.I (Painel de Acesso Imediato) */
+        #paiModal .modal-content {
+            /* Ajustes específicos se necessário, por ex, para altura do iframe */
+            /* background: rgba(50, 25, 65, 0.98); /* Um roxo um pouco diferente se desejar */
+            height: 90%; /* Ajustar conforme necessidade */
+            width: 90%; /* Ajustar conforme necessidade */
+            max-width: 1400px; /* Um pouco maior para ferramentas complexas */
+            display: flex; /* Para organizar título e iframe */
+            flex-direction: column; /* Título acima, iframe abaixo */
+        }
+        #paiModal iframe {
+            flex-grow: 1; /* Iframe ocupa o espaço restante */
+            border-radius: 0 0 6px 6px; /* Se o modal-content tiver border-radius */
+        }
+
         #curationModal h2 {
             font-size: 1.5em;
             margin-bottom: 20px;
@@ -408,13 +485,29 @@
 </head>
 <body>
     <header>
-      <img src="https://www.sie.com.br/admin/_upload/2022/01/18/29233/682fdb1dbf08a.png" alt="GERiAH Logo" style="max-height:60px; margin-left:10px; margin-right:20px; position: relative; top: -2px;">
-        <h3>Curadoria de Conteúdo</h3>
+      <img src="https://d1yei2z3i6k35z.cloudfront.net/3119789/68369d8fad915_GERiAHLOGO8donwload.png" alt="GERiAH Logo" style="max-height:60px; margin-left:10px; margin-right:20px; position: relative; top: -2px;">
+        <h2>Conectando Gerações</h2>
         <button id="myCoursesBtn">Meus Acessos</button>
     </header>
     <aside>
-        <h2>Categorias</h2>
-        <ul id="categoriesList"><li>Carregando...</li></ul>
+        <div class="accordion-item">
+            <h2 class="accordion-header">Conteudo de Apoio <span class="accordion-icon">▼</span></h2>
+            <div class="accordion-content">
+                <ul id="categoriesList"><li>Carregando...</li></ul>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">Ferramentas - Acesso Imediato <span class="accordion-icon">▼</span></h2>
+            <div class="accordion-content">
+                <ul id="paiItemsList"><li>Nenhuma categoria F.A.I. configurada.</li></ul>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">Suporte - Inteligencia Artificial <span class="accordion-icon">▼</span></h2>
+            <div class="accordion-content">
+                <ul id="suporteIaItemsList"><li>Carregando subcategorias...</li></ul> 
+            </div>
+        </div>
     </aside>
     <main>
         <h1 id="mainTitle"></h1>
@@ -431,7 +524,7 @@
     <!-- Modal de Curadoria -->
     <div id="curationModal" class="modal hidden">
       <div class="modal-content">
-        <h2>Curadoria de Cursos</h2>
+        <h2>Curadoria de Recursos</h2>
         <!-- Passo 1: adicionar/ignorar -->
         <div id="curationConfirm">
           <p id="curationMessage"></p>
@@ -453,9 +546,75 @@
       </div>
     </div>
 
+    <!-- NOVO Modal P.A.I. -->
+    <div id="paiModal" class="modal hidden">
+        <div class="modal-content pai-modal-content">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; padding-bottom:10px; border-bottom: 1px solid rgba(80, 48, 96, 0.7);">
+                <h2 id="paiModalTitle" style="margin:0; font-size:1.4em; color: #fff;"></h2>
+                <span id="paiModalClose" class="close" style="font-size:1.8em; cursor:pointer; color: #aaa;">&times;</span>
+            </div>
+            <iframe id="paiModalIframe" style="width:100%; height:100%; border:none; background-color: #fff;"></iframe>
+        </div>
+    </div>
+
     <script>
         const curationList = [];
         const MAX_CURATION = 4;
+
+        // Nova estrutura para categorias P.A.I.
+        const paiCategoriesData = [
+            {
+                name: "50+ | Melhor Idade",
+                items: [
+                    { name: "Longevidade", url: "https://longevidade.com.br/", image: "https://api.iconify.design/tabler/plant.svg?color=%23e5e5e5" }, 
+                    { name: "Analise CNIS", url: "https://sobralfreenat.github.io/poc_avaliacao_cnis_aposentadoria/", image: "https://api.iconify.design/tabler/file-text.svg?color=%23e5e5e5" },
+                    { name: "CNIS Suporte", url: "https://sobralfreenat.github.io/cnis_fluxo02_backoffice/", image: "https://api.iconify.design/tabler/tool.svg?color=%23e5e5e5" }
+                ]
+            },
+            {
+                name: "FNW Assessoria",
+                items: [
+                    { name: "Plataforma FNW Assessoria", url: "https://app.appsmith.com/app/fnw-sie-agent/fnw-labv2-0-67b63bcfdfec372b51540618", image: "https://api.iconify.design/tabler/briefcase.svg?color=%23e5e5e5" },
+                    { name: "FNW - ROI Maker", url: "https://sobralfreenat.github.io/fnw_clevel_roi-maker/", image: "https://api.iconify.design/tabler/calculator.svg?color=%23e5e5e5" },
+                    { name: "Painel ETO", url: "https://sobralfreenat.github.io/fnw_connect_panel/", image: "https://api.iconify.design/tabler/layout-dashboard.svg?color=%23e5e5e5" },
+                    { name: "Mapa Tatico SP MG", url: "https://sobralfreenat.github.io/mapa150_sp-106_mg/", image: "https://api.iconify.design/tabler/map-2.svg?color=%23e5e5e5" }
+                ]
+            }
+        ];
+
+        // Restaurando a estrutura de subcategorias para Suporte IA
+        const suporteIaCategoriesData = [
+            {
+                name: "Wizzards",
+                items: [
+                    { name: "IA Prompt Wizzard", url: "https://sobralfreenat.github.io/agent_ai_prompt_gen_tool/", image: "https://api.iconify.design/tabler/wand.svg?color=%23e5e5e5" },
+                    { name: "Plano de Aula - S", url: "https://sobralfreenat.github.io/fnw_plano_aula/", image: "https://api.iconify.design/tabler/school.svg?color=%23e5e5e5" }
+                ]
+            },
+            {
+                name: "Assistentes",
+                items: [
+                    { name: "London Lord", url: "https://sobralfreenat.github.io/agb_gabriel_bourne_master/", image: "https://api.iconify.design/tabler/user-hexagon.svg?color=%23e5e5e5" },
+                    { name: "HumanIA", url: "https://dash.superagentes.ai/@humania", image: "https://api.iconify.design/tabler/users-group.svg?color=%23e5e5e5" }
+                ]
+            },
+            {
+                name: "Agentes",
+                items: [
+                    { name: "Agente Exemplo 1", url: "#", image: "https://api.iconify.design/tabler/robot.svg?color=%23e5e5e5" },
+                    { name: "Agente Exemplo 2", url: "#", image: "https://api.iconify.design/tabler/gizmo.svg?color=%23e5e5e5" }
+                ],
+                statusMessage: "" // Limpa a mensagem pois agora temos itens
+            },
+            {
+                name: "Automações",
+                items: [
+                    { name: "Automação Exemplo 1", url: "#", image: "https://api.iconify.design/simple-icons/n8n.svg?color=%23e5e5e5" },
+                    { name: "Automação Exemplo 2", url: "#", image: "https://api.iconify.design/simple-icons/make.svg?color=%23e5e5e5" }
+                ],
+                statusMessage: "" // Limpa a mensagem pois agora temos itens
+            }
+        ];
 
         // Variáveis para parâmetros da URL e estado de embedding
         let urlParams = new URLSearchParams(window.location.search);
@@ -469,6 +628,16 @@
 
         const categoryUrl = 'https://www.iped.com.br/api/category/get-categories';
         const coursesUrl = 'https://www.iped.com.br/api/course/get-courses';
+
+        const relevantKeywordsFor50Plus = [
+            'saude', 'bem-estar', 'memoria', 'mente', 'corpo', 'nutricao', 'alimentacao', 'exercicio', 'ginastica', 'yoga', 'pilates', 'dança', 'esportes', 'fisioterapia',
+            'artesanato', 'pintura', 'desenho', 'musica', 'canto', 'instrumento', 'fotografia',
+            'historia', 'cultura', 'arte', 'literatura', 'idiomas', 'linguas', 'escrita',
+            'finanças', 'investimentos', 'empreendedorismo', 'negocios', 'direito', 'aposentadoria',
+            'jardinagem', 'horta', 'culinaria', 'gastronomia', 'receitas',
+            'tecnologia', 'digital', 'informatica', 'internet', 'computador', 'celular', 'redes sociais',
+            'viagem', 'turismo', 'lazer', 'jogos', 'espiritualidade', 'meditacao', 'qualidade de vida', 'voluntariado'
+        ];
 
         // Função para ocultar o header e ajustar layout se em modo embedded
         function adjustForEmbeddedMode() {
@@ -557,15 +726,27 @@
         function renderCategories(cats) {
             const ul = document.getElementById('categoriesList');
             ul.innerHTML = '';
+            let categoriesRendered = 0;
+
             cats.forEach((cat, idx) => {
-                const li = document.createElement('li');
-                const btn = document.createElement('button');
-                btn.textContent = cat.category_title;
-                btn.dataset.id = cat.category_id;
-                btn.addEventListener('click', () => selectCategory(btn));
-                li.appendChild(btn);
-                ul.appendChild(li);
+                const categoryTitleLower = cat.category_title.toLowerCase();
+                const isRelevant = relevantKeywordsFor50Plus.some(keyword => categoryTitleLower.includes(keyword));
+
+                if (isRelevant) {
+                    const li = document.createElement('li');
+                    const btn = document.createElement('button');
+                    btn.textContent = cat.category_title;
+                    btn.dataset.id = cat.category_id;
+                    btn.addEventListener('click', () => selectCategory(btn));
+                    li.appendChild(btn);
+                    ul.appendChild(li);
+                    categoriesRendered++;
+                }
             });
+
+            if (categoriesRendered === 0) {
+                ul.innerHTML = '<li>Nenhuma categoria de interesse para 50+ encontrada no momento.</li>';
+            }
         }
 
         function selectCategory(btn) {
@@ -573,7 +754,7 @@
             document.querySelectorAll('#categoriesList button').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             // Limpa o contêiner de cursos antes de buscar novos
-            document.getElementById('coursesContainer').innerHTML = '<p style="color: #ccc;">Carregando cursos da categoria: ' + btn.textContent + '...</p>';
+            document.getElementById('coursesContainer').innerHTML = '<p style="color: #ccc;">Carregando recursos da categoria: ' + btn.textContent + '...</p>';
             fetchCourses(btn.dataset.id, btn.textContent); 
         }
 
@@ -587,9 +768,9 @@
                 const res = await fetch(coursesUrl, { method: 'POST', body: fd });
                 const data = await res.json();
                 if (data.COURSES) renderCourses(data.COURSES, catTitle);
-                else cont.innerHTML = '<p style="color: #ff6b6b;">Erro ao carregar cursos.</p>';
+                else cont.innerHTML = '<p style="color: #ff6b6b;">Erro ao carregar recursos.</p>';
             } catch {
-                cont.innerHTML = '<p style="color: #ff6b6b;">Erro de rede ao buscar cursos.</p>';
+                cont.innerHTML = '<p style="color: #ff6b6b;">Erro de rede ao buscar recursos.</p>';
             }
         }
 
@@ -608,7 +789,7 @@
                 // Se não há cursos, apenas mostra a mensagem abaixo do título da categoria.
                 // Não cria o .carousel-track nem os pseudo-elementos de esfumaçar.
                 const noCoursesMessage = document.createElement('p');
-                noCoursesMessage.textContent = 'Nenhum curso encontrado nesta categoria.';
+                noCoursesMessage.textContent = 'Nenhum recurso encontrado nesta categoria.';
                 noCoursesMessage.style.color = '#ccc';
                 noCoursesMessage.style.marginTop = '20px';
                 container.appendChild(noCoursesMessage);
@@ -880,7 +1061,7 @@
                 if (curationMessageEl) curationMessageEl.textContent = `Adicionar "${course.course_title}" à sua curadoria?`;
                 if (curationRemainingEl) {
                     curationRemainingEl.style.display = 'block';
-                    curationRemainingEl.textContent = `Você pode selecionar ${MAX_SELECTION - selection.length} curso${selection.length !== MAX_SELECTION-1?'s':''}`;
+                    curationRemainingEl.textContent = `Você pode selecionar ${MAX_SELECTION - selection.length} recurso${selection.length !== MAX_SELECTION-1?'s':''}`;
                 }
                 if (accessNowBtn) accessNowBtn.style.display = 'none';
                 if (curateYesBtn) curateYesBtn.style.display = 'inline-block';
@@ -947,7 +1128,7 @@
         // Atualiza contagem no passo de confirmação
         function updateRemainingConfirm() {
             document.getElementById('curationRemaining').textContent =
-                `Você pode selecionar ${MAX_SELECTION - selection.length} curso${selection.length !== MAX_SELECTION - 1 ? 's' : ''}`;
+                `Você pode selecionar ${MAX_SELECTION - selection.length} recurso${selection.length !== MAX_SELECTION - 1 ? 's' : ''}`;
         }
         document.getElementById('curateBack').onclick = () => {
             applyReview();
@@ -998,10 +1179,203 @@
             }
         };
 
+        // RENOMEADA e AJUSTADA: Agora recebe uma ÚNICA categoria P.A.I. e renderiza seus itens.
+        function displayPaiCategoryItems(paiCategory) {
+            const container = document.getElementById('coursesContainer');
+            container.innerHTML = ''; // Limpa conteúdo anterior
+
+            const paiSectionTitle = document.createElement('h2');
+            paiSectionTitle.className = 'category-title-header';
+            paiSectionTitle.textContent = `F.A.I. - ${paiCategory.name}`;
+            container.appendChild(paiSectionTitle);
+
+            if ((!paiCategory.items || paiCategory.items.length === 0)) {
+                const noItemsMessage = document.createElement('p');
+                if (paiCategory.statusMessage) {
+                    noItemsMessage.textContent = paiCategory.statusMessage;
+                } else {
+                    noItemsMessage.textContent = `Nenhum recurso encontrado na categoria F.A.I.: ${paiCategory.name}.`;
+                }
+                noItemsMessage.style.color = '#ccc';
+                noItemsMessage.style.marginTop = '20px';
+                container.appendChild(noItemsMessage);
+                return;
+            }
+
+            const carouselTrack = document.createElement('div');
+            carouselTrack.className = 'carousel-track';
+
+            paiCategory.items.forEach(paiItem => {
+                const card = document.createElement('div');
+                card.className = 'course-card';
+
+                card.addEventListener('click', () => {
+                    openPaiItemInModal(paiItem);
+                });
+
+                card.innerHTML = `
+                    <img src="${paiItem.image || 'https://via.placeholder.com/308x196.png?text=Recurso'}" alt="${paiItem.name}" style="width:100%; height:196px; object-fit:cover; border-bottom: 1px solid rgba(80, 48, 96, 0.9);">
+                    <div class="info" style="padding:15px;">
+                        <h3 style="margin:0 0 10px; font-size:1.05em; color:#fff; height: 56px; overflow: hidden;">${paiItem.name}</h3>
+                        <p style="font-size:0.85em; color:#ccc; margin:0; line-height: 1.3; height: 70px; overflow: hidden;">Clique para abrir este recurso.</p>
+                    </div>
+                `;
+                carouselTrack.appendChild(card);
+            });
+            container.appendChild(carouselTrack);
+
+            const debouncedUpdateFocus = debounce(() => updateCarouselFocus(carouselTrack), 50);
+            let scrollEndTimer = null;
+            carouselTrack.addEventListener('scroll', () => {
+                debouncedUpdateFocus();
+                clearTimeout(scrollEndTimer);
+                scrollEndTimer = setTimeout(() => {
+                    snapToNearestCard(carouselTrack);
+                }, 150);
+            });
+
+            setTimeout(() => {
+                updateCarouselFocus(carouselTrack);
+            }, 0);
+        }
+
+        function openPaiItemInModal(paiItem) {
+            const modal = document.getElementById('paiModal');
+            const titleElement = document.getElementById('paiModalTitle');
+            const iframeElement = document.getElementById('paiModalIframe');
+
+            if (!modal || !titleElement || !iframeElement) {
+                console.error('Elementos do modal P.A.I. não encontrados.');
+                return;
+            }
+
+            titleElement.textContent = paiItem.name;
+            iframeElement.src = paiItem.url;
+            modal.classList.remove('hidden');
+        }
+
+        function renderSuporteIaSubcategoriesSidebar() {
+            const ul = document.getElementById('suporteIaItemsList');
+            ul.innerHTML = ''; 
+
+            if (!suporteIaCategoriesData || suporteIaCategoriesData.length === 0) {
+                ul.innerHTML = '<li>Nenhuma subcategoria de Suporte IA configurada.</li>';
+                return;
+            }
+
+            suporteIaCategoriesData.forEach(subCategory => {
+                const li = document.createElement('li');
+                const btn = document.createElement('button');
+                btn.textContent = subCategory.name;
+
+                btn.addEventListener('click', () => {
+                    ul.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    displayPaiCategoryItems(subCategory); 
+                });
+                li.appendChild(btn);
+                ul.appendChild(li);
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            adjustForEmbeddedMode(); // Chama a função para ajustar a UI se em modo embedded
+            adjustForEmbeddedMode(); 
             fetchCategories();
+            renderPaiCategoriesSidebar(); 
+            renderSuporteIaSubcategoriesSidebar(); // Re-adicionando esta chamada
+
+            const paiModal = document.getElementById('paiModal');
+            const paiModalClose = document.getElementById('paiModalClose');
+            const paiModalIframe = document.getElementById('paiModalIframe');
+
+            if (paiModal && paiModalClose && paiModalIframe) {
+                paiModalClose.addEventListener('click', () => {
+                    paiModal.classList.add('hidden');
+                    paiModalIframe.src = 'about:blank'; // Limpa o iframe para parar carregamento
+                });
+            }
+
+            // Accordion functionality for sidebar
+            document.querySelectorAll('aside .accordion-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector('.accordion-icon');
+                    const isFaiHeader = header.textContent.trim().startsWith('Ferramentas - Acesso Imediato');
+                    const isSuporteIaHeader = header.textContent.trim().startsWith('Suporte - Inteligencia Artificial');
+                    
+                    if (!content) return;
+
+                    const isVisible = content.style.display === 'block';
+                    
+                    document.querySelectorAll('aside .accordion-content').forEach(c => {
+                        if (c !== content) {
+                            c.style.display = 'none';
+                            const otherIcon = c.previousElementSibling.querySelector('.accordion-icon');
+                            if (otherIcon) otherIcon.textContent = '▼';
+                        }
+                    });
+
+                    content.style.display = isVisible ? 'none' : 'block';
+                    if (icon) {
+                        icon.textContent = isVisible ? '▼' : '▲';
+                    }
+
+                    // Se o acordeão P.A.I. foi aberto, configura a área de conteúdo.
+                    if (isFaiHeader && !isVisible) { // !isVisible significa que ESTÁ SENDO ABERTO
+                        // Limpa o container principal e mostra uma mensagem para selecionar uma subcategoria P.A.I.
+                        document.getElementById('coursesContainer').innerHTML = '<p style="color: #ccc; text-align: center; margin-top: 50px; font-size: 1.2em;">Selecione uma subcategoria de Suporte - IA na lista.</p>';
+                    } else if (isFaiHeader && isVisible) {
+                        // Acordeão F.A.I. foi fechado, reseta para a mensagem padrão geral
+                        document.getElementById('coursesContainer').innerHTML = '<p style="color: #ccc; text-align: center; margin-top: 50px; font-size: 1.2em;">Selecione um conteúdo ou ferramenta ao lado.</p>';
+                    } else if (isSuporteIaHeader && !isVisible) {
+                        // Acordeão Suporte - IA foi aberto
+                        // Limpa o container e mostra mensagem para selecionar subcategoria
+                        document.getElementById('coursesContainer').innerHTML = '<p style="color: #ccc; text-align: center; margin-top: 50px; font-size: 1.2em;">Selecione uma subcategoria de Suporte - IA na lista.</p>';
+                    } else if (isSuporteIaHeader && isVisible) {
+                        // Acordeão Suporte - IA foi fechado
+                        document.getElementById('coursesContainer').innerHTML = '<p style="color: #ccc; text-align: center; margin-top: 50px; font-size: 1.2em;">Selecione um conteúdo ou ferramenta ao lado.</p>';
+                    } else if (!isFaiHeader && !isSuporteIaHeader && !isVisible) {
+                        // Acordeão de Conteúdo de Apoio (ou outro) foi aberto
+                        document.getElementById('coursesContainer').innerHTML = '<p style="color: #ccc; text-align: center; margin-top: 50px; font-size: 1.2em;">Selecione uma categoria ao lado para ver os recursos.</p>';
+                    } else if (!isFaiHeader && !isSuporteIaHeader && isVisible){
+                        // Acordeão de Conteúdo de Apoio (ou outro) foi fechado
+                        document.getElementById('coursesContainer').innerHTML = '<p style="color: #ccc; text-align: center; margin-top: 50px; font-size: 1.2em;">Selecione um conteúdo ou ferramenta ao lado.</p>';
+                    }
+                });
+            });
         });
+
+        function renderPaiCategoriesSidebar() {
+            const paiListUl = document.getElementById('paiItemsList');
+            paiListUl.innerHTML = ''; // Limpa itens anteriores, como "Nenhum item P.A.I configurado."
+
+            if (!paiCategoriesData || paiCategoriesData.length === 0) {
+                const li = document.createElement('li');
+                li.textContent = 'Nenhuma categoria P.A.I. configurada.';
+                paiListUl.appendChild(li);
+                return;
+            }
+
+            paiCategoriesData.forEach(paiCategory => {
+                const li = document.createElement('li');
+                const btn = document.createElement('button');
+                btn.textContent = paiCategory.name;
+                // Adiciona a classe 'active' ao primeiro botão por padrão ou com base em estado salvo
+                // if (index === 0) btn.classList.add('active'); 
+
+                btn.addEventListener('click', () => {
+                    // Remove 'active' de todos os botões P.A.I.
+                    paiListUl.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+                    // Adiciona 'active' ao botão clicado
+                    btn.classList.add('active');
+                    // Exibe os itens da categoria P.A.I. selecionada
+                    displayPaiCategoryItems(paiCategory);
+                });
+
+                li.appendChild(btn);
+                paiListUl.appendChild(li);
+            });
+        }
     </script>
 </body>
 </html> 
