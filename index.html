@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FNW - Custom Edtech 5.0 - GERiAH</title>
+    <title>FNW - Custom Edtech 5.1 - GERiAH</title>
     <style>
         /* Reset de overflow para layout fixo */
         html, body { height: 100%; margin: 0; padding: 0; }
@@ -12,14 +12,14 @@
             background-image: linear-gradient(to bottom, #503060, #3B204A);
             background-color: #3B204A; /* Fallback */
             color: #e5e5e5; /* Cor de texto padrão clara */
-            padding-top: 70px; /* Espaço para o header fixo */
+            padding-top: 70px !important; /* Espaço para o header fixo */
         }
         /* Header fixo GERiAH */
         header { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            right: 0; 
+            position: fixed !important; 
+            top: 0 !important; 
+            left: 0 !important; 
+            right: 0 !important; 
             height: 70px; 
             background-color: rgba(71, 71, 71, 0.452);
             backdrop-filter: blur(10px);
@@ -28,7 +28,7 @@
             display: flex; 
             align-items: center; 
             padding: 0 20px; 
-            z-index: 1000; /* Z-index alto */
+            z-index: 9999 !important; /* Z-index alto */
             border-bottom: 1px solid rgba(255,255,255,0.1); /* Linha sutil de separação */
         }
         header h3 { /* Ajuste no título do header */
@@ -38,21 +38,21 @@
         }
         /* Estilos para o botão de toggle do menu (hamburger) */
         .menu-toggle {
-            display: none; /* Esconde por padrão em telas maiores */
+            display: block !important; /* Força a exibição do botão hamburger */
             background: transparent;
             border: none;
             color: white;
             font-size: 2em;
             cursor: pointer;
             padding: 5px 10px;
-            z-index: 1001; /* Garante que fique acima de outros elementos do header */
+            z-index: 10000 !important; /* Garante que fique acima de outros elementos do header */
             margin-right: 15px;
             line-height: 1;
         }
         /* Sidebar abaixo do header */
         aside { 
             position: fixed; 
-            top: 70px; /* Abaixo do header GERiAH */
+            top: 70px !important; /* Abaixo do header GERiAH */
             bottom: 0; 
             left: 0; 
             width: 180px; 
@@ -154,7 +154,7 @@
         /* Conteúdo ao lado da sidebar, abaixo do header */
         main { 
             margin-left: 180px; /* Largura da sidebar */
-            padding: 8px 30px 20px 30px; /* AJUSTADO padding-top para 8px (era 15px) */
+            padding: 70px 30px 20px 30px; /* AJUSTADO padding-top para 70px (era 8px) */
             background-color: #100818; /* MAIS ESCURO: Fundo sólido para o main, próximo ao preto */
             transition: margin-left 0.3s ease-in-out; /* Transição para o push/pull */
         }
@@ -531,6 +531,26 @@
                 background: linear-gradient(to left, #100818 30%, rgba(16, 8, 24, 0.65) 75%, rgba(16, 8, 24, 0) 100%);
             }
         }
+
+        .access-course-button {
+            background-color: #804C9A; /* Roxo GERiAH */
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin-top: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+            display: block; /* Ocupa a largura total */
+            width: calc(100% - 0px); /* Ajusta para preencher o info div */
+            text-align: center;
+            text-decoration: none; /* Remove underline para links */
+        }
+        .access-course-button:hover {
+            background-color: #6C3D82; /* Roxo mais escuro no hover */
+        }
+        /* Fim Novos estilos para botão Acessar */
     </style>
 </head>
 <body>
@@ -675,6 +695,8 @@
         let parentOrigin = urlParams.get('origin');
         let userToken = urlParams.get('userToken');
         let userId = urlParams.get('userId'); // Pode ser usado futuramente se necessário
+        console.log('fnw_curadoria_sie: userToken from URL params:', userToken);
+        console.log('fnw_curadoria_sie: embeddedMode from URL params:', embeddedMode);
 
         // Usa o token da URL se disponível, senão usa o fallback
         const apiToken = userToken || 'dbb2c4d19a5ef0fec48e363618611614b4e0dfce'; 
@@ -697,29 +719,31 @@
             if (embeddedMode) {
                 const headerElement = document.querySelector('header');
                 const asideElement = document.querySelector('aside');
-                const mainElement = document.querySelector('main');
+                const menuToggle = document.getElementById('menuToggle');
 
+                // Forçar visibilidade e posicionamento do header no modo embarcado
                 if (headerElement) {
-                    headerElement.style.display = 'none';
+                    headerElement.style.setProperty('display', 'flex', 'important');
+                    headerElement.style.setProperty('position', 'fixed', 'important');
+                    headerElement.style.setProperty('top', '0', 'important');
+                    headerElement.style.setProperty('left', '0', 'important');
+                    headerElement.style.setProperty('right', '0', 'important');
+                    headerElement.style.setProperty('z-index', '9999', 'important');
                 }
-                // Ajusta o padding-top do body para 0, pois o header está oculto
-                document.body.style.paddingTop = '0';
+                // Forçar visibilidade e z-index do botão de menu (hambúrguer)
+                if (menuToggle) {
+                    menuToggle.style.setProperty('display', 'block', 'important');
+                    menuToggle.style.setProperty('z-index', '10000', 'important');
+                }
+                // Ajusta o padding-top do body para 70px, pois o header está visível
+                document.body.style.setProperty('padding-top', '70px', 'important');
                 
-                // Ajusta a posição do aside e do main para o topo da página
+                // Ajusta a posição do aside para o topo da página (abaixo do header)
                 if (asideElement) {
-                    asideElement.style.top = '0';
-                }
-                if (mainElement) {
-                    // mainElement já deve fluir normalmente sem paddingTop no body, 
-                    // mas se ele tiver um top específico por JS ou CSS, precisaria ser ajustado.
-                    // No CSS atual, ele tem margin-left e padding, o que é ok.
+                    asideElement.style.setProperty('top', '70px', 'important');
                 }
 
-                // Oculta o botão "Meus Acessos" se ele estiver no header
-                // (já coberto pelo headerElement.style.display = 'none'; se o botão estiver dentro do header)
-                // Se fosse um botão fora do header, seria tratado aqui.
-
-                // Ajustar o botão "Acessar Agora" no modal de curadoria
+                // --- Início da lógica restaurada para botões de curadoria no modo embarcado ---
                 const accessNowBtn = document.getElementById('accessNowBtn');
                 if (accessNowBtn) {
                     accessNowBtn.style.display = 'inline-block'; // Mostra o botão em modo embedded
@@ -744,7 +768,6 @@
                 if(curateYesBtn) curateYesBtn.style.display = 'none';
                 
                 // No modo embedded, o botão "Não" (ignorar) deve estar oculto
-                // ou pode ser renomeado/reutilizado para fechar o modal. Por ora, vamos ocultá-lo.
                 const curateNoBtn = document.getElementById('curateNo');
                 if(curateNoBtn) curateNoBtn.style.display = 'none';
                  // Ajustar texto do prompt de curadoria em modo embedded
@@ -754,8 +777,7 @@
                 }
                 const curationRemainingEl = document.getElementById('curationRemaining');
                 if(curationRemainingEl) curationRemainingEl.style.display = 'none'; // Não relevante para acesso direto
-
-
+                // --- Fim da lógica restaurada para botões de curadoria no modo embarcado ---
             }
         }
 
@@ -830,6 +852,7 @@
         }
 
         function renderCourses(courses, categoryTitle) {
+            console.log('renderCourses: userToken value:', userToken);
             const container = document.getElementById('coursesContainer');
             container.innerHTML = '';
 
@@ -870,11 +893,30 @@
                     <div class="info" style="padding:15px;">
                         <h3 style="margin:0 0 10px; font-size:1.05em; color:#fff; height: 56px; overflow: hidden;">${displayTitle}</h3>
                         <p style="font-size:0.85em; color:#ccc; margin:0; line-height: 1.3; height: 70px; overflow: hidden;">${(course.course_description || 'Sem descrição disponível.').substring(0, 100)}...</p>
+                        ${userToken ? `<button class="access-course-button" data-course-id="${course.course_id}">Acessar</button>` : ''}
                     </div>`;
-                card.onclick = () => {
-                    promptCurate(course);
-                    closeSidebar(); // Adicionado para fechar a sidebar após iniciar o acesso ao curso
-                };
+
+                if (userToken) {
+                    // Se o usuário está logado, o clique no card não faz nada,
+                    // e a ação de acesso é via o botão "Acessar".
+                    // card.onclick = null; // Já é null por padrão se não for atribuído
+                    const accessButton = card.querySelector('.access-course-button');
+                    if (accessButton) {
+                        accessButton.addEventListener('click', (e) => {
+                            e.stopPropagation(); // Impede que o clique no botão propague para o card
+                            if (course.course_id && parentOrigin) {
+                                window.parent.postMessage({ action: 'acessarItem', itemId: course.course_id }, parentOrigin);
+                            }
+                            closeSidebar(); // Fechar sidebar após iniciar o acesso ao curso
+                        });
+                    }
+                } else {
+                    // Se o usuário NÃO está logado, o clique no card abre o modal de curadoria.
+                    card.onclick = () => {
+                        promptCurate(course);
+                        closeSidebar(); // Fechar sidebar após iniciar o acesso ao curso
+                    };
+                }
                 carouselTrack.appendChild(card);
             });
             container.appendChild(carouselTrack);
