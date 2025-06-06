@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FNW - Custom Edtech 4.0 - GERiAH</title>
+    <title>FNW - Custom Edtech 4.1.1 - GERiAH</title>
     <style>
         /* Reset de overflow para layout fixo */
         html, body { height: 100%; margin: 0; padding: 0; }
@@ -50,6 +50,17 @@
             overflow-y: auto; 
             padding: 15px 15px 20px 15px; /* REINTRODUZIDO padding-top de 15px na aside */
             z-index: 990; /* Abaixo do header mas acima do main */
+        }
+        /* Adicionado para espaçar a primeira categoria do topo da sidebar */
+        aside .accordion-item:first-of-type {
+            margin-top: 20px; /* Espaço do topo da sidebar */
+        }
+        /* Novo estilo para o separador cego */
+        .category-separator {
+            height: 15px; /* Altura do espaçador */
+            background-color: rgba(26, 15, 33, 0.3); /* AJUSTADO: Púrpura mais escuro com 30% de transparência */
+            margin: 15px 0; /* Margem vertical para espaçar */
+            border-radius: 3px;
         }
         aside h2 { 
             margin-top: 0; /* Garante que o h2 respeite o margin-bottom do botão acima */
@@ -349,8 +360,8 @@
 
         /* Estilos para Acordeão na Sidebar */
         aside .accordion-item {
-            border-bottom: 1px solid rgba(80, 48, 96, 0.7); 
-            margin-bottom: 10px; 
+            border-bottom: 1px solid rgba(80, 48, 96, 0.7);
+            margin-bottom: 25px; /* AJUSTADO: Maior espaçamento entre os itens principais */
         }
 
         aside .accordion-header { /* Estilo para os H2 que são cabeçalhos de acordeão */
@@ -359,9 +370,9 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            padding-bottom: 10px; 
-            margin-bottom: 0; 
-            font-size: 1.1em; 
+            padding-bottom: 15px; /* AJUSTADO: Mais espaço abaixo do cabeçalho */
+            margin-bottom: 0;
+            font-size: 1.1em;
             color: #fff; 
             font-weight: bold;
             margin-top: 0; /* Garante que não haja margem superior extra */
@@ -385,6 +396,9 @@
             padding: 0; 
             margin:0;
             list-style: none; /* Garante que não haja marcadores de lista padrão */
+        }
+        aside .accordion-content ul li {
+            margin-bottom: 15px; /* AJUSTADO: Espaçamento entre itens das subcategorias */
         }
         /* Fim Estilos Acordeão */
 
@@ -496,12 +510,14 @@
                 <ul id="categoriesList"><li>Carregando...</li></ul>
             </div>
         </div>
+        <div class="category-separator"></div>
         <div class="accordion-item">
             <h2 class="accordion-header">Ferramentas - Acesso Imediato <span class="accordion-icon">▼</span></h2>
             <div class="accordion-content">
                 <ul id="paiItemsList"><li>Nenhuma categoria F.A.I. configurada.</li></ul>
             </div>
         </div>
+        <div class="category-separator"></div>
         <div class="accordion-item">
             <h2 class="accordion-header">Suporte - Inteligencia Artificial <span class="accordion-icon">▼</span></h2>
             <div class="accordion-content">
@@ -594,8 +610,9 @@
             {
                 name: "Assistentes",
                 items: [
-                    { name: "London Lord", url: "https://sobralfreenat.github.io/agb_gabriel_bourne_master/", image: "https://api.iconify.design/tabler/user-hexagon.svg?color=%23e5e5e5" },
-                    { name: "HumanIA", url: "https://dash.superagentes.ai/@humania", image: "https://api.iconify.design/tabler/users-group.svg?color=%23e5e5e5" }
+                    { name: "Chat Rosio Livia Geriah", url: "https://sobralfreenat.github.io/chat_rosio_livia_geriah/", image: "https://api.iconify.design/tabler/message-dots.svg?color=%23e5e5e5" },
+                    { name: "HumanIA", url: "https://dash.superagentes.ai/@humania", image: "https://api.iconify.design/tabler/users-group.svg?color=%23e5e5e5" },
+                    { name: "London Lord", url: "https://sobralfreenat.github.io/agb_gabriel_bourne_master/", image: "https://api.iconify.design/tabler/user-hexagon.svg?color=%23e5e5e5" }
                 ]
             },
             {
