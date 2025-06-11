@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FNW - Custom Edtech 5.1.2 - GERiAH</title>
+    <title>FNW - Custom Edtech 5.2 - GERiAH</title>
     <style>
         /* Reset de overflow para layout fixo */
         html, body { height: 100%; margin: 0; padding: 0; }
@@ -118,7 +118,7 @@
             color: #d3d3d3; /* Lightgray para itens não ativos */
             cursor: pointer; 
             border-radius: 4px; 
-            font-size: 0.95em;
+            font-size: 1.125em;
             transition: background-color 0.2s ease, color 0.2s ease;
         }
         aside .accordion-content ul li button:hover,
@@ -580,6 +580,13 @@
                 <ul id="suporteIaItemsList"><li>Carregando subcategorias...</li></ul> 
             </div>
         </div>
+        <div class="category-separator"></div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">Participe <span class="accordion-icon">▼</span></h2>
+            <div class="accordion-content">
+                <ul id="participeItemsList"><li>Carregando...</li></ul>
+            </div>
+        </div>
     </aside>
     <main>
         <h1 id="mainTitle"></h1>
@@ -646,7 +653,8 @@
             {
                 name: "FNW Assessoria",
                 items: [
-                    { name: "Plataforma FNW Assessoria", url: "https://app.appsmith.com/app/fnw-sie-agent/fnw-labv2-0-67b63bcfdfec372b51540618", image: "https://api.iconify.design/tabler/briefcase.svg?color=%23e5e5e5" },
+                    { name: "Plataforma FNW Assessoria", url: "https://sobralfreenat.github.io/menu_fixo_replica/", image: "https://api.iconify.design/tabler/briefcase.svg?color=%23e5e5e5" },
+                    { name: "FNW - Formulário Estratégico", url: "https://websim.com/@shiningrainbow72249063/formul-rio-estrat-gico", image: "https://api.iconify.design/tabler/file-text.svg?color=%23e5e5e5" },
                     { name: "FNW - ROI Maker", url: "https://sobralfreenat.github.io/fnw_clevel_roi-maker/", image: "https://api.iconify.design/tabler/calculator.svg?color=%23e5e5e5" },
                     { name: "Painel ETO", url: "https://sobralfreenat.github.io/fnw_connect_panel/", image: "https://api.iconify.design/tabler/layout-dashboard.svg?color=%23e5e5e5" },
                     { name: "Mapa Tatico SP MG", url: "https://sobralfreenat.github.io/mapa150_sp-106_mg/", image: "https://api.iconify.design/tabler/map-2.svg?color=%23e5e5e5" }
@@ -686,6 +694,23 @@
                     { name: "Automação Exemplo 2", url: "#", image: "https://api.iconify.design/simple-icons/make.svg?color=%23e5e5e5" }
                 ],
                 statusMessage: "" // Limpa a mensagem pois agora temos itens
+            }
+        ];
+
+        // Nova estrutura para categoria "Participe"
+        const participeCategoriesData = [
+            {
+                name: "Parcerias",
+                items: [
+                    { name: "IDEIA21", url: "https://websim.com/@shiningrainbow72249063/ideia21-instituto-de-design-estilo-imagem-e-arte", image: "https://api.iconify.design/tabler/user.svg?color=%23e5e5e5" },
+                    { name: "IPSOLON", url: "https://websim.com/@shiningrainbow72249063/ipsolon-instituto-de-promo-o-da-sa-de-orientada-lo", image: "https://api.iconify.design/tabler/git-fork.svg?color=%23e5e5e5" }
+                ]
+            },
+            {
+                name: "Feito Por Você",
+                items: [
+                    { name: "Feito Por Você", url: "https://forms.gle/kFdaEY5L9gDYCUpC8", image: "https://api.iconify.design/tabler/edit.svg?color=%23e5e5e5" } // Use um ícone relevante
+                ]
             }
         ];
 
@@ -914,7 +939,7 @@
                     // Se o usuário NÃO está logado, o clique no card abre o modal de curadoria.
                     card.onclick = () => {
                         promptCurate(course);
-                        closeSidebar(); // Fechar sidebar após iniciar o acesso ao curso
+                        // closeSidebar(); // REMOVIDO: Permitir que o menu hambúrguer funcione com o modal aberto
                     };
                 }
                 carouselTrack.appendChild(card);
@@ -1286,7 +1311,7 @@
 
             const paiSectionTitle = document.createElement('h2');
             paiSectionTitle.className = 'category-title-header';
-            paiSectionTitle.textContent = `F.A.I. - ${paiCategory.name}`;
+            paiSectionTitle.textContent = `Participe - ${paiCategory.name}`; // AJUSTADO: Titulo da seção para 'Participe'
             container.appendChild(paiSectionTitle);
 
             if ((!paiCategory.items || paiCategory.items.length === 0)) {
@@ -1317,7 +1342,7 @@
                     <img src="${paiItem.image || 'https://via.placeholder.com/308x196.png?text=Recurso'}" alt="${paiItem.name}" style="width:100%; height:196px; object-fit:cover; border-bottom: 1px solid rgba(80, 48, 96, 0.9);">
                     <div class="info" style="padding:15px;">
                         <h3 style="margin:0 0 10px; font-size:1.05em; color:#fff; height: 56px; overflow: hidden;">${paiItem.name}</h3>
-                        <p style="font-size:0.85em; color:#ccc; margin:0; line-height: 1.3; height: 70px; overflow: hidden;">Clique para abrir este recurso.</p>
+                        <p style="font-size:0.85em; color:#ccc; margin:0; line-height: 1.3; height: 70px; overflow: hidden;">Acesse Aqui</p>
                     </div>
                 `;
                 carouselTrack.appendChild(card);
@@ -1411,6 +1436,7 @@
             fetchCategories();
             renderPaiCategoriesSidebar(); 
             renderSuporteIaSubcategoriesSidebar(); // Re-adicionando esta chamada
+            renderParticipeCategoriesSidebar(); // Adicionando chamada para renderizar a nova categoria 'Participe'
 
             const paiModal = document.getElementById('paiModal');
             const paiModalClose = document.getElementById('paiModalClose');
@@ -1430,6 +1456,7 @@
                     const icon = header.querySelector('.accordion-icon');
                     const isFaiHeader = header.textContent.trim().startsWith('Ferramentas - Acesso Imediato');
                     const isSuporteIaHeader = header.textContent.trim().startsWith('Suporte - Inteligencia Artificial');
+                    const isParticipeHeader = header.textContent.trim().startsWith('Participe'); // Nova verificação
                     
                     if (!content) return;
 
@@ -1461,6 +1488,10 @@
                         document.getElementById('coursesContainer').innerHTML = '<p style="color: #ccc; text-align: center; margin-top: 50px; font-size: 1.2em;">Selecione uma subcategoria de Suporte - IA na lista.</p>';
                     } else if (isSuporteIaHeader && isVisible) {
                         // Acordeão Suporte - IA foi fechado
+                        document.getElementById('coursesContainer').innerHTML = '<p style="color: #ccc; text-align: center; margin-top: 50px; font-size: 1.2em;">Selecione um conteúdo ou ferramenta ao lado.</p>';
+                    } else if (isParticipeHeader && !isVisible) { // Lógica para a nova categoria 'Participe'
+                        document.getElementById('coursesContainer').innerHTML = '<p style="color: #ccc; text-align: center; margin-top: 50px; font-size: 1.2em;">Selecione uma opção da categoria Participe na lista.</p>';
+                    } else if (isParticipeHeader && isVisible) {
                         document.getElementById('coursesContainer').innerHTML = '<p style="color: #ccc; text-align: center; margin-top: 50px; font-size: 1.2em;">Selecione um conteúdo ou ferramenta ao lado.</p>';
                     } else if (!isFaiHeader && !isSuporteIaHeader && !isVisible) {
                         // Acordeão de Conteúdo de Apoio (ou outro) foi aberto
@@ -1503,6 +1534,34 @@
 
                 li.appendChild(btn);
                 paiListUl.appendChild(li);
+            });
+        }
+
+        function renderParticipeCategoriesSidebar() {
+            const participeListUl = document.getElementById('participeItemsList');
+            participeListUl.innerHTML = '';
+
+            if (!participeCategoriesData || participeCategoriesData.length === 0) {
+                const li = document.createElement('li');
+                li.textContent = 'Nenhuma categoria de Participação configurada.';
+                participeListUl.appendChild(li);
+                return;
+            }
+
+            participeCategoriesData.forEach(participeCategory => {
+                const li = document.createElement('li');
+                const btn = document.createElement('button');
+                btn.textContent = participeCategory.name;
+
+                btn.addEventListener('click', () => {
+                    participeListUl.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    displayPaiCategoryItems(participeCategory); // Reutiliza a função de exibição de itens
+                    closeSidebar();
+                });
+
+                li.appendChild(btn);
+                participeListUl.appendChild(li);
             });
         }
     </script>
