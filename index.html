@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GERIiAH - USER 7.0.0</title>
+    <title>GERIiAH - INDIVIDUAL 7.0.0</title>
     
     <!-- Favicon e PWA Icons -->
     <link rel="icon" type="image/png" sizes="32x32" href="https://d1yei2z3i6k35z.cloudfront.net/12974529/684d9ab360bc7_GERiAHLOGO8SQUARE2donwload.png">
@@ -56,9 +56,10 @@
             color: #fff; 
             display: flex; 
             align-items: center; 
-            padding: 0 20px; 
+            padding: 0 30px; /* Aumentado de 20px para 30px para mais espaçamento */
             z-index: 9999 !important; /* Z-index alto */
             border-bottom: 1px solid rgba(255,255,255,0.1); /* Linha sutil de separação */
+            gap: 15px; /* Adiciona espaçamento entre elementos do header */
         }
         header h3 { /* Ajuste no título do header */
             margin: 0; 
@@ -140,6 +141,12 @@
             color: #ffcc80;
         }
         
+        /* Ajuste de font-size para o headerTitle - aumentado 50% */
+        #headerTitle {
+            font-size: 1.05em; /* 50% maior que o padrão original */
+            margin: 0 15px; /* Mais espaçamento lateral */
+        }
+        
         body.edit-mode aside {
             background: rgba(74, 47, 22, 0.8);
             border-right: 1px solid rgba(107, 68, 35, 0.7);
@@ -175,12 +182,32 @@
             background: transparent;
             border: none;
             font-size: 2em;
+            color: #ffffff !important; /* Cor branca para contraste */
             cursor: pointer;
             padding: 5px 10px;
             z-index: 10000 !important; /* Garante que fique acima de outros elementos do header */
             margin-right: 15px;
             line-height: 1;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Sombra para melhor legibilidade */
+            transition: color 0.3s ease, text-shadow 0.3s ease;
         }
+        
+        .menu-toggle:hover {
+            color: #e0e0e0 !important; /* Cor ligeiramente mais escura no hover */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        /* Cor específica para modo de edição */
+        body.edit-mode .menu-toggle {
+            color: #ffffff !important; /* Mantém branco no modo de edição */
+            text-shadow: 0 1px 3px rgba(255, 107, 53, 0.5); /* Sombra laranja no modo de edição */
+        }
+        
+        body.edit-mode .menu-toggle:hover {
+            color: #fff3e0 !important; /* Tom mais quente no hover do modo de edição */
+            text-shadow: 0 2px 4px rgba(255, 107, 53, 0.8);
+        }
+        
         /* Sidebar abaixo do header */
         aside { 
             position: fixed; 
@@ -662,6 +689,8 @@
             }
             .menu-toggle {
                 display: block; /* Mostra o botão hamburger no mobile */
+                color: #ffffff !important; /* Cor branca para contraste no mobile */
+                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Sombra para melhor legibilidade */
             }
             aside {
                 transform: translateX(-100%); /* Esconde a sidebar por padrão no mobile */
@@ -748,7 +777,7 @@
         .support-logo {
             width: 48px;
             height: 48px;
-            opacity: 0.4;
+            opacity: 1.0; /* Totalmente opaco/aceso */
             cursor: pointer;
             transition: opacity 0.3s ease, transform 0.3s ease;
             overflow: hidden;
@@ -763,7 +792,7 @@
         }
         
         .support-logo:hover {
-            opacity: 0.8;
+            opacity: 1.0; /* Mantém totalmente opaco no hover */
             transform: scale(1.1);
         }
         
@@ -776,13 +805,13 @@
         
         /* Quando o toggle está visível, logo fica mais visível */
         .support-logo.toggle-visible {
-            opacity: 0.8;
+            opacity: 1.0; /* Totalmente visível */
             background: rgba(255, 107, 53, 0.2);
             border: 2px solid rgba(255, 107, 53, 0.5);
         }
         
         .support-logo.toggle-visible:hover {
-            opacity: 1;
+            opacity: 1.0; /* Mantém totalmente visível */
             background: rgba(255, 107, 53, 0.3);
         }
         
@@ -791,14 +820,14 @@
             position: relative;
         }
         
-        /* Esconder logo no modo de edição ativo */
+        /* Logo visível mesmo no modo de edição */
         body.edit-mode .support-logo {
-            opacity: 0.3;
+            opacity: 0.8; /* Mais visível no modo de edição */
             background: rgba(255, 107, 53, 0.1);
         }
         
         body.edit-mode .support-logo:hover {
-            opacity: 0.6;
+            opacity: 1.0; /* Totalmente visível no hover do modo de edição */
         }
         
         /* Estilos para itens personalizados */
@@ -965,22 +994,25 @@
 
         .add-favorite-btn {
             width: 100%;
-            background: linear-gradient(135deg, #4CAF50, #45a049);
+            background: linear-gradient(135deg, #4A148C, #6A1B9A); /* Roxo mais escuro para melhor contraste */
             border: none;
             padding: 12px 15px;
             cursor: pointer;
             font-size: 0.9rem;
+            color: #ffffff; /* Texto branco para contraste */
+            font-weight: 500; /* Texto mais destacado */
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            border-radius: 6px; /* Bordas arredondadas */
         }
 
         .add-favorite-btn:hover {
-            background: linear-gradient(135deg, #45a049, #3d8b40);
+            background: linear-gradient(135deg, #6A1B9A, #7B1FA2); /* Roxo mais claro no hover */
             transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(74, 20, 140, 0.4); /* Sombra roxa */
         }
 
         .add-favorite-btn:disabled {
@@ -1085,18 +1117,18 @@
                 <input type="checkbox" id="editModeToggle">
                 <span class="toggle-slider"></span>
             </label>
-            <span id="toggleLabel">Modo de Edição</span>
+            <span id="toggleLabel">Editar</span>
         </div>
         <button id="myCoursesBtn">iA</button>
     </header>
     <aside>
         <div class="sidebar-user-header">
-            🎯 VERSÃO USER
+            🎯 INDIVIDUAL
         </div>
         <div class="accordion-item">
             <h2 class="accordion-header">
                 <img src="https://api.iconify.design/tabler/apps.svg?color=%23e5e5e5" alt="MeusApps Logo" style="width: 24px; height: 24px; margin-right: 10px; vertical-align: middle;">
-                Meus Apps 
+                CEL APPS 
                 <span class="apps-counter">45</span>
                 <span class="accordion-icon">►</span>
             </h2>
@@ -1267,7 +1299,7 @@
         <div class="accordion-item">
             <h2 class="accordion-header">
                 <img src="https://api.iconify.design/tabler/users.svg?color=%23e5e5e5" alt="Participe Logo" style="width: 24px; height: 24px; margin-right: 10px; vertical-align: middle;">
-                Participe 
+                PARTICIPE 
                 <span class="accordion-icon">►</span>
             </h2>
             <div class="accordion-content">
@@ -1278,7 +1310,7 @@
         <div class="accordion-item">
             <h2 class="accordion-header">
                 <img src="https://api.iconify.design/tabler/star.svg?color=%23FFD700" alt="Favoritos Logo" style="width: 24px; height: 24px; margin-right: 10px; vertical-align: middle;">
-                ⭐ MEUS FAVORITOS 
+                MEUS FAVORITOS 
                 <span class="apps-counter" id="favoritosCounter">0/7</span>
                 <span class="accordion-icon">►</span>
             </h2>
@@ -1497,11 +1529,28 @@
                 </label>
                 <textarea id="addFavoriteDescription" style="width: 100%; padding: 10px; border: 1px solid #666; border-radius: 4px; background: #2a2a2a; color: white; font-size: 16px; resize: vertical;" rows="3" placeholder="Breve descrição do site ou ferramenta"></textarea>
                 
-                <div style="margin: 20px 0; padding: 15px; background: rgba(76, 175, 80, 0.1); border: 1px solid rgba(76, 175, 80, 0.3); border-radius: 4px;">
-                    <p style="margin: 0; color: #81C784; font-size: 14px;">
-                        ⭐ <strong>Versão USER:</strong> Você pode adicionar até <strong>7 favoritos</strong> personalizados.<br>
-                        🚀 <strong>ENTERPRISE:</strong> Favoritos ilimitados + categorias personalizadas!
+                <div style="margin: 25px 0; padding: 20px; background: rgba(76, 175, 80, 0.1); border: 1px solid rgba(76, 175, 80, 0.3); border-radius: 8px;">
+                    <p style="margin: 0 0 15px 0; color: #81C784; font-size: 15px; line-height: 1.6;">
+                          ⭐ <strong>Versão INDIVIDUAL:</strong> Você pode adicionar até <strong>7 favoritos</strong> personalizados.<br><br>
+                          🚀 <strong>PERSONALIZADO:</strong> Favoritos ilimitados + categorias personalizadas!
                     </p>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <button onclick="showContactAlert()" style="
+                            background: linear-gradient(135deg, #ff6b35, #e55a2b);
+                            color: white;
+                            border: none;
+                            padding: 10px 20px;
+                            border-radius: 6px;
+                            font-weight: bold;
+                            font-size: 13px;
+                            cursor: pointer;
+                            text-transform: uppercase;
+                            transition: all 0.3s ease;
+                            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+                        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            🚀 FAZER UPGRADE
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -3515,7 +3564,7 @@
 
             if (activate) {
                 body.classList.add('edit-mode');
-                headerTitle.textContent = 'Modo de Edição [USER]';
+                headerTitle.textContent = 'Edição... [INDIVIDUAL]';
                 if (editToggle) editToggle.checked = true;
                 
                 // Adiciona classes editáveis aos elementos
@@ -3593,9 +3642,9 @@
                     });
                     
                     // Adiciona indicador visual
-                    if (!btn.querySelector('.enterprise-mini-indicator')) {
+                    if (!btn.querySelector('.PERSONALIZADO-mini-indicator')) {
                         const miniIndicator = document.createElement('span');
-                        miniIndicator.className = 'enterprise-mini-indicator';
+                        miniIndicator.className = 'PERSONALIZADO-mini-indicator';
                         miniIndicator.innerHTML = '🚀';
                         miniIndicator.style.cssText = `
                             position: absolute;
@@ -3624,7 +3673,7 @@
                 item.classList.remove('editable-item');
                 
                 // Remove indicadores mini de upgrade
-                const miniIndicator = item.querySelector('.enterprise-mini-indicator');
+                const miniIndicator = item.querySelector('.PERSONALIZADO-mini-indicator');
                 if (miniIndicator) {
                     miniIndicator.remove();
                 }
@@ -4146,8 +4195,8 @@
 
         // Inicialização quando a página carrega
         document.addEventListener('DOMContentLoaded', function() {
-            // VERSÃO USER: SEM limpeza automática - dados são persistidos
-            console.log('🔧 Versão USER inicializada - dados persistidos');
+            // VERSÃO INDIVIDUAL: SEM limpeza automática - dados são persistidos
+            console.log('🔧 Versão INDIVIDUAL inicializada - dados persistidos');
             
             // Carrega dados existentes
             loadCustomItemData();
@@ -4161,7 +4210,7 @@
             window.exportUserConfig = exportUserConfig;
             window.importUserConfig = importUserConfig;
             
-            console.log('🔧 Sistema de edição USER inicializado');
+            console.log('🔧 Sistema de edição INDIVIDUAL inicializado');
             console.log('💡 Funções disponíveis:');
             console.log('   - exportUserConfig() - Exporta configurações');
             console.log('   - importUserConfig(jsonData) - Importa configurações');
@@ -4174,13 +4223,16 @@
         // Função para exportar configurações do usuário
         function exportUserConfig() {
             const config = {
-                version: "1.0",
+                version: "7.0.0",
                 timestamp: new Date().toISOString(),
-                type: "USER",
-                customItemData: customItemData,
-                customCardData: customCardData,
+                type: "INDIVIDUAL",
+                customizations: customCardData,
+                itemCustomizations: customItemData,
                 userFavorites: userFavorites,
-                editMode: localStorage.getItem('editMode') || 'false'
+                metadata: {
+                    totalCustomizations: Object.keys(customCardData).length + Object.keys(customItemData).length,
+                    totalFavorites: userFavorites.length
+                }
             };
             
             const jsonString = JSON.stringify(config, null, 2);
@@ -4212,7 +4264,7 @@
                 }
                 
                 // Validação básica
-                if (!config.type || config.type !== 'USER') {
+                if (!config.type || config.type !== 'INDIVIDUAL') {
                     throw new Error('Arquivo não é uma configuração USER válida');
                 }
                 
@@ -4349,13 +4401,13 @@
             
             modalContent.innerHTML = `
                 <div style="color: #ff6b35; font-size: 3rem; margin-bottom: 15px;">🚀</div>
-                <h2 style="color: #ffcc80; margin-bottom: 15px; font-size: 1.5rem;">Recurso ENTERPRISE</h2>
+                <h2 style="color: #ffcc80; margin-bottom: 15px; font-size: 1.5rem;">Recurso PERSONALIZADO</h2>
                 <p style="color: #e5e5e5; margin-bottom: 20px; line-height: 1.5;">
-                    <strong>${feature}</strong> está disponível apenas na versão <strong>ENTERPRISE</strong>.
+                    <strong>${feature}</strong> está disponível apenas na versão <strong>PERSONALIZADO</strong>.
                 </p>
                 <div style="background: rgba(255, 107, 53, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
                     <p style="color: #ffcc80; margin: 0; font-size: 0.9rem;">
-                        ✨ <strong>ENTERPRISE inclui:</strong><br>
+                        ✨ <strong>PERSONALIZADO inclui:</strong><br>
                         • Criar/editar categorias<br>
                         • Personalizar cores e logo<br>
                         • Configurações avançadas<br>
@@ -4386,7 +4438,7 @@
             
             // Event listeners
             document.getElementById('upgradeBtn').onclick = function() {
-                alert('🚀 Entre em contato para upgrade ENTERPRISE!\n\n📧 Email: novosnegocios@geriah.com\n📱 WhatsApp: +55 11 91159-5028');
+                alert('🚀 Entre em contato para upgrade PERSONALIZADO!\n\n📧 Email: novosnegocios@geriah.com\n📱 WhatsApp: +55 11 91159-5028');
                 document.body.removeChild(upgradeModal);
             };
             
@@ -4441,9 +4493,9 @@
                 // Adiciona indicadores nas categorias principais
                 const categoryHeaders = document.querySelectorAll('.accordion-header');
                 categoryHeaders.forEach(header => {
-                    if (!header.querySelector('.enterprise-indicator')) {
+                    if (!header.querySelector('.PERSONALIZADO-indicator')) {
                         const indicator = document.createElement('span');
-                        indicator.className = 'enterprise-indicator';
+                        indicator.className = 'PERSONALIZADO-indicator';
                         indicator.innerHTML = '🚀';
                         indicator.style.cssText = `
                             position: absolute;
@@ -4456,7 +4508,7 @@
                             cursor: pointer;
                             z-index: 100;
                         `;
-                        indicator.title = 'Clique para upgrade ENTERPRISE';
+                        indicator.title = 'Clique para upgrade PERSONALIZADO';
                         indicator.onclick = function(e) {
                             e.preventDefault();
                             e.stopPropagation();
@@ -4468,7 +4520,7 @@
                 });
             } else {
                 // Remove indicadores quando sair do modo de edição
-                document.querySelectorAll('.enterprise-indicator').forEach(indicator => {
+                document.querySelectorAll('.PERSONALIZADO-indicator').forEach(indicator => {
                     indicator.remove();
                 });
             }
@@ -4538,7 +4590,7 @@
                 li.className = 'add-favorite-placeholder';
                 li.innerHTML = `
                     <button class="add-favorite-btn" disabled onclick="showUpgradeAlert('Adicionar mais de ${MAX_USER_FAVORITES} favoritos')">
-                        🚀 Limite atingido - ENTERPRISE para mais
+                        🚀 Limite atingido - PERSONALIZADO para mais
                     </button>
                 `;
                 list.appendChild(li);
@@ -4634,6 +4686,84 @@
         });
 
         // ========== FIM DAS FUN��ES DE FAVORITOS ==========
+
+        // Função para mostrar aviso de contato para upgrade
+        function showContactAlert() {
+            const contactModal = document.createElement('div');
+            contactModal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: linear-gradient(135deg, #2d1810, #4a2f16);
+                padding: 30px;
+                border-radius: 15px;
+                text-align: center;
+                max-width: 450px;
+                border: 2px solid #ff6b35;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            `;
+            
+            modalContent.innerHTML = `
+                <div style="color: #ff6b35; font-size: 3rem; margin-bottom: 15px;">🚀</div>
+                <h2 style="color: #ffcc80; margin-bottom: 15px; font-size: 1.5rem;">Upgrade para PERSONALIZADO</h2>
+                <p style="color: #e5e5e5; margin-bottom: 20px; line-height: 1.5;">
+                    Entre em contato conosco para fazer o upgrade e desbloquear todos os recursos!
+                </p>
+                <div style="background: rgba(255, 107, 53, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <p style="color: #ffcc80; margin: 0; font-size: 0.9rem; text-align: left;">
+                        ✨ <strong>PERSONALIZADO inclui:</strong><br>
+                        • Favoritos ilimitados<br>
+                        • Criar/editar categorias personalizadas<br>
+                        • Personalizar cores e logo<br>
+                        • Configurações avançadas<br>
+                        • Suporte prioritário
+                    </p>
+                </div>
+                <div style="background: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <p style="color: #81C784; margin: 0; font-size: 0.9rem;">
+                        📧 <strong>Email:</strong> novosnegocios@geriah.com<br>
+                        📱 <strong>WhatsApp:</strong> +55 11 91159-5028
+                    </p>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button id="closeContactModal" style="
+                        background: linear-gradient(135deg, #ff6b35, #e55a2b);
+                        color: white;
+                        border: none;
+                        padding: 12px 20px;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        font-weight: bold;
+                        transition: all 0.3s ease;
+                    ">Entendi</button>
+                </div>
+            `;
+            
+            contactModal.appendChild(modalContent);
+            document.body.appendChild(contactModal);
+            
+            // Event listeners
+            document.getElementById('closeContactModal').onclick = function() {
+                document.body.removeChild(contactModal);
+            };
+            
+            contactModal.onclick = function(e) {
+                if (e.target === contactModal) {
+                    document.body.removeChild(contactModal);
+                }
+            };
+        }
     </script>
 </body>
 </html>
