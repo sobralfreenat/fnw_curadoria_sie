@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FNW - Custom Edtech 6.0.0 - GERiAH</title>
+    <title>GERIiAH - USER 7.0.0</title>
     
     <!-- Favicon e PWA Icons -->
     <link rel="icon" type="image/png" sizes="32x32" href="https://d1yei2z3i6k35z.cloudfront.net/12974529/684d9ab360bc7_GERiAHLOGO8SQUARE2donwload.png">
@@ -122,7 +122,6 @@
         }
         
         #toggleLabel {
-            color: white;
             font-size: 0.9em;
             font-weight: normal;
             white-space: nowrap;
@@ -175,7 +174,6 @@
             display: block !important; /* Força a exibição do botão hamburger */
             background: transparent;
             border: none;
-            color: white;
             font-size: 2em;
             cursor: pointer;
             padding: 5px 10px;
@@ -189,13 +187,13 @@
             top: 70px !important; /* Abaixo do header GERiAH */
             bottom: 0; 
             left: 0; 
-            width: 180px; 
+            width: 250px; 
             background: rgba(42, 26, 58, 0.8); /* Tom de roxo GERiAH com transparência */
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
             border-right: 1px solid rgba(80, 48, 96, 0.7); 
             overflow-y: auto; 
-            padding: 15px 15px 20px 15px; /* REINTRODUZIDO padding-top de 15px na aside */
+            padding: 0 15px 20px 15px; /* Removido padding-top para o header fixo */
             z-index: 990; /* Abaixo do header mas acima do main */
             transition: transform 0.3s ease-in-out; /* Transição para o slide-in/out */
         }
@@ -217,7 +215,6 @@
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 1px solid rgba(80, 48, 96, 0.7);
-            font-weight: bold;
         }
         #categoriesList {
             list-style: none; 
@@ -239,7 +236,6 @@
         #categoriesList button.active, #categoriesList button:hover { 
             background: rgba(80, 48, 96, 0.9); 
             color: #fff; 
-            font-weight: bold;
         } */
 
         /* Novo seletor genérico para botões dentro dos acordeões da sidebar */
@@ -259,7 +255,6 @@
         aside .accordion-content ul li button.active { /* .active ainda é útil para categorias */
             background: rgba(80, 48, 96, 0.9); /* Roxo mais forte para ativo/hover */
             color: #fff; 
-            font-weight: bold;
         }
 
         #myCoursesBtn { 
@@ -277,7 +272,6 @@
             margin-left: auto; /* Empurra o botão para a direita do header */
             margin-right: 10px; /* Pequena margem da borda direita do header */
             /* margin-bottom removido pois não é mais relevante para o fluxo da aside */
-            font-weight: bold;
             font-size: 0.9em; /* Levemente reduzido para o header */
             transition: background-color 0.2s ease, color 0.2s ease;
         }
@@ -287,7 +281,7 @@
         }
         /* Conteúdo ao lado da sidebar, abaixo do header */
         main { 
-            margin-left: 180px; /* Largura da sidebar */
+            margin-left: 250px; /* Largura da sidebar */
             padding: 70px 30px 20px 30px; /* AJUSTADO padding-top para 70px (era 8px) */
             background-color: #100818; /* MAIS ESCURO: Fundo sólido para o main, próximo ao preto */
             transition: margin-left 0.3s ease-in-out; /* Transição para o push/pull */
@@ -524,7 +518,6 @@
             margin-bottom: 0;
             font-size: 0.99em;
             color: #fff; 
-            font-weight: bold;
             margin-top: 0; /* Garante que não haja margem superior extra */
             border-radius: 6px;
             padding-left: 10px;
@@ -593,7 +586,6 @@
         .sub-accordion-header.active {
             background: rgba(80, 48, 96, 0.7);
             color: #fff;
-            font-weight: bold;
         }
         
         .sub-accordion-content {
@@ -638,13 +630,11 @@
         }
         #curationConfirm button, #curationReview button {
             background-color: rgba(100, 68, 116, 0.9); /* Roxo GERiAH para botões */
-            color: white;
             border: 1px solid rgba(120, 88, 136, 1);
             padding: 10px 15px;
             margin: 5px;
             border-radius: 4px;
             cursor: pointer;
-            font-weight: bold;
             transition: background-color 0.2s ease, border-color 0.2s ease;
         }
         #curationConfirm button:hover, #curationReview button:hover {
@@ -687,7 +677,7 @@
                 transform: translateX(0); /* Mostra a sidebar */
             }
             body.sidebar-open main {
-                margin-left: 180px; /* Main é empurrado para a direita pela sidebar */
+                margin-left: 250px; /* Main é empurrado para a direita pela sidebar */
             }
             /* Opcional: Adicionar um overlay escuro quando a sidebar estiver aberta */
             body.sidebar-open::after {
@@ -727,13 +717,11 @@
 
         .access-course-button {
             background-color: #804C9A; /* Roxo GERiAH */
-            color: white;
             border: none;
             padding: 8px 15px;
             margin-top: 10px;
             border-radius: 4px;
             cursor: pointer;
-            font-weight: bold;
             transition: background-color 0.2s ease;
             display: block; /* Ocupa a largura total */
             width: calc(100% - 0px); /* Ajusta para preencher o info div */
@@ -763,7 +751,6 @@
             opacity: 0.4;
             cursor: pointer;
             transition: opacity 0.3s ease, transform 0.3s ease;
-            border-radius: 8px;
             overflow: hidden;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
@@ -840,43 +827,57 @@
         }
         
         /* Estilos para badges do menu Meus Apps */
-        .new-badge {
-            background: linear-gradient(45deg, #ff6b35, #ff8c42);
-            color: white;
-            font-size: 0.6em;
-            font-weight: bold;
-            padding: 2px 6px;
-            border-radius: 8px;
-            margin-left: 8px;
-            margin-right: 5px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 2px 4px rgba(255, 107, 53, 0.3);
-            animation: pulse-badge 2s infinite;
+        .check-icon {
+            background: linear-gradient(45deg, #4CAF50, #66BB6A);
+            font-size: 0.8em;
+            padding: 2px 5px;
+            border-radius: 50%;
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+            animation: check-glow 3s infinite;
+        }
+        
+        /* Ícone de check para apps individuais funcionais */
+        .app-check {
+            color: #4CAF50;
+            font-size: 0.9em;
+            margin-right: 6px;
+            text-shadow: 0 1px 2px rgba(76, 175, 80, 0.3);
+        }
+        
+        /* Ícone de pendente para apps não testados ainda */
+        .app-pending {
+            color: #FF9800;
+            font-size: 0.9em;
+            margin-right: 6px;
+            text-shadow: 0 1px 2px rgba(255, 152, 0, 0.3);
         }
         
         .apps-counter {
-            background: rgba(76, 175, 80, 0.9);
-            color: white;
-            font-size: 0.65em;
-            font-weight: bold;
-            padding: 2px 5px;
-            border-radius: 10px;
-            margin-right: 8px;
-            min-width: 20px;
-            text-align: center;
-            display: inline-block;
-            box-shadow: 0 1px 3px rgba(76, 175, 80, 0.4);
+            color: #4CAF50;
+            font-size: 0.9em;
+            margin-right: 100px !important;
         }
         
-        @keyframes pulse-badge {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.9; }
+        @keyframes check-glow {
+            0%, 100% { 
+                box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 2px 8px rgba(76, 175, 80, 0.6);
+                transform: scale(1.05);
+            }
         }
         
         /* Hover effect para o header Meus Apps */
-        .accordion-header:has(.new-badge):hover .new-badge {
-            background: linear-gradient(45deg, #ff8c42, #ffab5e);
+        .accordion-header:has(.check-icon):hover .check-icon {
+            background: linear-gradient(45deg, #66BB6A, #81C784);
             transform: scale(1.1);
         }
         
@@ -884,7 +885,191 @@
             background: rgba(76, 175, 80, 1);
             transform: scale(1.05);
         }
+        
+        /* Indicadores de status das subcategorias */
+        .subcat-status {
+            font-size: 0.8em;
+            margin-right: 6px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subcat-status.complete {
+            color: #4CAF50; /* Verde - todos os apps funcionam */
+        }
+        
+        .subcat-status.partial {
+            color: #FF9800; /* Laranja - alguns apps reservados */
+        }
+        
+        .subcat-status.empty {
+            color: #757575; /* Cinza - nenhum app funcional */
+        }
+        
+        /* Estilo para subcategorias não implementadas - visual desbotado */
+        .sub-accordion-header:has(.subcat-status.empty) {
+            opacity: 0.5;
+            color: #999999 !important;
+        }
+        
+        .sub-accordion-header:has(.subcat-status.empty) img {
+            opacity: 0.4;
+            filter: grayscale(50%);
+        }
+        
+        .sub-accordion-header:has(.subcat-status.empty):hover {
+            opacity: 0.7;
+            background: rgba(80, 48, 96, 0.3) !important;
+        }
+
+        /* Esconder contadores quando modo de edição está inativo */
+        body:not(.edit-mode) .apps-counter {
+            display: none !important;
+        }
+        
+        /* Mostrar contadores apenas quando modo de edição está ativo */
+        body.edit-mode .apps-counter {
+            display: inline !important;
+        }
+
+        /* Badge USER */
+        .user-badge {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: rgba(76, 175, 80, 0.9);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .user-badge:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+
+        /* Estilos para categoria MEUS FAVORITOS */
+        .add-favorite-placeholder {
+            list-style: none;
+            margin: 10px 0;
+        }
+
+        .add-favorite-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border: none;
+            padding: 12px 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .add-favorite-btn:hover {
+            background: linear-gradient(135deg, #45a049, #3d8b40);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .add-favorite-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Favoritos individuais */
+        .favorite-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            margin: 8px 0;
+            padding: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .favorite-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+
+        .favorite-item .favorite-link {
+            color: #e5e5e5;
+            text-decoration: none;
+            display: block;
+            font-weight: 500;
+        }
+
+        .favorite-item .favorite-link:hover {
+            color: #FFD700;
+        }
+
+        .favorite-delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 0, 0, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: none;
+        }
+
+        body.edit-mode .favorite-delete-btn {
+            display: block;
+        }
+
+        /* Estilos para o botão de toggle do menu (hamburger) */
+
+        /* Badge USER integrado no sidebar */
+        .sidebar-user-header {
+            background: linear-gradient(135deg, #4A148C, #6A1B9A);
+            color: white;
+            padding: 12px 15px;
+            margin: 0;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .sidebar-user-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Remover badge fixo */
+        .user-badge {
+            display: none;
+        }
     </style>
+
 </head>
 <body>
     <header>
@@ -905,12 +1090,14 @@
         <button id="myCoursesBtn">iA</button>
     </header>
     <aside>
+        <div class="sidebar-user-header">
+            🎯 VERSÃO USER
+        </div>
         <div class="accordion-item">
             <h2 class="accordion-header">
                 <img src="https://api.iconify.design/tabler/apps.svg?color=%23e5e5e5" alt="MeusApps Logo" style="width: 24px; height: 24px; margin-right: 10px; vertical-align: middle;">
                 Meus Apps 
-                <span class="new-badge">NOVO</span>
-                <span class="apps-counter">30+</span>
+                <span class="apps-counter">45</span>
                 <span class="accordion-icon">►</span>
             </h2>
             <div class="accordion-content">
@@ -919,7 +1106,9 @@
                         <div class="sub-accordion-item">
                             <button class="sub-accordion-header">
                                 <img src="https://api.iconify.design/tabler/health-recognition.svg?color=%23e5e5e5" alt="Saúde Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                <span class="subcat-status partial">●</span>
                                 Saúde
+                                <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">4</span>
                                 <span class="sub-accordion-icon">►</span>
                             </button>
                             <div class="sub-accordion-content" style="display: none;">
@@ -931,7 +1120,9 @@
                         <div class="sub-accordion-item">
                             <button class="sub-accordion-header">
                                 <img src="https://api.iconify.design/tabler/message.svg?color=%23e5e5e5" alt="Comunicar Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                <span class="subcat-status partial">●</span>
                                 Comunicar
+                                <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">6</span>
                                 <span class="sub-accordion-icon">►</span>
                             </button>
                             <div class="sub-accordion-content" style="display: none;">
@@ -943,7 +1134,9 @@
                         <div class="sub-accordion-item">
                             <button class="sub-accordion-header">
                                 <img src="https://api.iconify.design/tabler/credit-card.svg?color=%23e5e5e5" alt="Banco Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                <span class="subcat-status partial">●</span>
                                 Banco
+                                <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">6</span>
                                 <span class="sub-accordion-icon">►</span>
                             </button>
                             <div class="sub-accordion-content" style="display: none;">
@@ -954,8 +1147,24 @@
                     <li>
                         <div class="sub-accordion-item">
                             <button class="sub-accordion-header">
+                                <img src="https://api.iconify.design/tabler/pizza.svg?color=%23e5e5e5" alt="Alimentação Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                <span class="subcat-status partial">●</span>
+                                Alimentação
+                                <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">2</span>
+                                <span class="sub-accordion-icon">►</span>
+                            </button>
+                            <div class="sub-accordion-content" style="display: none;">
+                                <ul id="alimentacaoItemsList"><li>Carregando...</li></ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="sub-accordion-item">
+                            <button class="sub-accordion-header">
                                 <img src="https://api.iconify.design/tabler/tool.svg?color=%23e5e5e5" alt="Utilidades Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                <span class="subcat-status partial">●</span>
                                 Utilidades
+                                <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">20</span>
                                 <span class="sub-accordion-icon">►</span>
                             </button>
                             <div class="sub-accordion-content" style="display: none;">
@@ -967,11 +1176,27 @@
                         <div class="sub-accordion-item">
                             <button class="sub-accordion-header">
                                 <img src="https://api.iconify.design/tabler/device-gamepad.svg?color=%23e5e5e5" alt="Lazer Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                <span class="subcat-status partial">●</span>
                                 Lazer
+                                <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">5</span>
                                 <span class="sub-accordion-icon">►</span>
                             </button>
                             <div class="sub-accordion-content" style="display: none;">
                                 <ul id="lazerItemsList"><li>Carregando...</li></ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="sub-accordion-item">
+                            <button class="sub-accordion-header">
+                                <img src="https://api.iconify.design/tabler/car.svg?color=%23e5e5e5" alt="Transporte Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                <span class="subcat-status partial">●</span>
+                                Transporte
+                                <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">4</span>
+                                <span class="sub-accordion-icon">►</span>
+                            </button>
+                            <div class="sub-accordion-content" style="display: none;">
+                                <ul id="transporteItemsList"><li>Carregando...</li></ul>
                             </div>
                         </div>
                     </li>
@@ -1047,6 +1272,25 @@
             </h2>
             <div class="accordion-content">
                 <ul id="participeItemsList"><li>Carregando...</li></ul>
+            </div>
+        </div>
+        <div class="category-separator"></div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <img src="https://api.iconify.design/tabler/star.svg?color=%23FFD700" alt="Favoritos Logo" style="width: 24px; height: 24px; margin-right: 10px; vertical-align: middle;">
+                ⭐ MEUS FAVORITOS 
+                <span class="apps-counter" id="favoritosCounter">0/7</span>
+                <span class="accordion-icon">►</span>
+            </h2>
+            <div class="accordion-content">
+                <ul id="favoritosItemsList">
+                    <li class="add-favorite-placeholder">
+                        <button class="add-favorite-btn" id="addFavoriteBtn">
+                            <span style="font-size: 1.2em;">➕</span>
+                            Adicionar Favorito
+                        </button>
+                    </li>
+                </ul>
             </div>
         </div>
     </aside>
@@ -1164,12 +1408,9 @@
                 </div>
                 <button id="openAppButton" style="
                     background: linear-gradient(45deg, #4CAF50, #45a049);
-                    color: white;
                     border: none;
                     padding: 15px 30px;
                     font-size: 16px;
-                    font-weight: bold;
-                    border-radius: 8px;
                     cursor: pointer;
                     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
                     transition: transform 0.2s ease;
@@ -1183,9 +1424,108 @@
         </div>
     </div>
 
+    <!-- Modal de Edição de Cards -->
+    <div id="cardEditModal" class="modal hidden">
+        <div class="modal-content">
+            <span id="cardEditModalClose" class="close">&times;</span>
+            <h2>Editar Card</h2>
+            <form id="cardEditForm">
+                <div style="margin-bottom: 15px;">
+                    <label for="editCardTitle" style="display: block; margin-bottom: 5px; color: #fff;">Título:</label>
+                    <input type="text" id="editCardTitle" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="editCardImage" style="display: block; margin-bottom: 5px; color: #fff;">URL da Imagem:</label>
+                    <input type="url" id="editCardImage" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="editCardUrl" style="display: block; margin-bottom: 5px; color: #fff;">URL de Acesso:</label>
+                    <input type="url" id="editCardUrl" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="editCardDescription" style="display: block; margin-bottom: 5px; color: #fff;">Descrição:</label>
+                    <textarea id="editCardDescription" rows="3" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"></textarea>
+                </div>
+                <div style="text-align: right;">
+                    <button type="button" id="cancelCardEdit" style="margin-right: 10px; padding: 8px 16px; background: #666; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancelar</button>
+                    <button type="button" id="saveCardEdit" style="padding: 8px 16px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Edição de Itens Simples -->
+    <div id="simpleItemEditModal" class="modal hidden">
+        <div class="modal-content">
+            <span id="simpleItemEditModalClose" class="close">&times;</span>
+            <h2>Editar Item</h2>
+            <form id="simpleItemEditForm">
+                <div style="margin-bottom: 15px;">
+                    <label for="editSimpleItemName" style="display: block; margin-bottom: 5px; color: #fff;">Nome:</label>
+                    <input type="text" id="editSimpleItemName" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="editSimpleItemUrl" style="display: block; margin-bottom: 5px; color: #fff;">URL de Acesso:</label>
+                    <input type="url" id="editSimpleItemUrl" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <div style="text-align: right;">
+                    <button type="button" id="cancelSimpleItemEdit" style="margin-right: 10px; padding: 8px 16px; background: #666; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancelar</button>
+                    <button type="button" id="saveSimpleItemEdit" style="padding: 8px 16px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Adicionar Favorito -->
+    <div id="addFavoriteModal" class="modal hidden">
+        <div class="modal-content">
+            <span id="addFavoriteModalClose" class="close">&times;</span>
+            <h2>⭐ Adicionar aos Meus Favoritos</h2>
+            <div style="margin: 20px 0;">
+                <label style="display: block; margin-bottom: 10px; color: #e0e0e0; font-weight: bold;">
+                    📝 Nome do Favorito:
+                </label>
+                <input type="text" id="addFavoriteName" style="width: 100%; padding: 10px; border: 1px solid #666; border-radius: 4px; background: #2a2a2a; color: white; font-size: 16px;" placeholder="Ex: Meu Site Favorito">
+                
+                <label style="display: block; margin: 20px 0 10px 0; color: #e0e0e0; font-weight: bold;">
+                    🔗 URL de Destino:
+                </label>
+                <input type="url" id="addFavoriteUrl" style="width: 100%; padding: 10px; border: 1px solid #666; border-radius: 4px; background: #2a2a2a; color: white; font-size: 16px;" placeholder="https://exemplo.com">
+                
+                <label style="display: block; margin: 20px 0 10px 0; color: #e0e0e0; font-weight: bold;">
+                    📄 Descrição (opcional):
+                </label>
+                <textarea id="addFavoriteDescription" style="width: 100%; padding: 10px; border: 1px solid #666; border-radius: 4px; background: #2a2a2a; color: white; font-size: 16px; resize: vertical;" rows="3" placeholder="Breve descrição do site ou ferramenta"></textarea>
+                
+                <div style="margin: 20px 0; padding: 15px; background: rgba(76, 175, 80, 0.1); border: 1px solid rgba(76, 175, 80, 0.3); border-radius: 4px;">
+                    <p style="margin: 0; color: #81C784; font-size: 14px;">
+                        ⭐ <strong>Versão USER:</strong> Você pode adicionar até <strong>7 favoritos</strong> personalizados.<br>
+                        🚀 <strong>ENTERPRISE:</strong> Favoritos ilimitados + categorias personalizadas!
+                    </p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 25px; text-align: right;">
+                <button id="cancelAddFavorite" style="background-color: #666; color: white; border: none; padding: 12px 20px; margin: 5px; border-radius: 4px; cursor: pointer;">Cancelar</button>
+                <button id="saveAddFavorite" style="background-color: #4CAF50; color: white; border: none; padding: 12px 20px; margin: 5px; border-radius: 4px; cursor: pointer; font-weight: bold;">⭐ Adicionar Favorito</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Variáveis para controle do modo de edição - DEFINIDAS NO INÍCIO
+        let isEditMode = false;
+        let isToggleVisible = false;
+        let currentEditingItem = null;
+        let customItemData = {};
+        
         const curationList = [];
         const MAX_CURATION = 4;
+
+        // Variáveis para MEUS FAVORITOS (USER)
+        let userFavorites = [];
+        const MAX_USER_FAVORITES = 7;
+        let customCardData = {};
 
         // Nova estrutura para categorias P.A.I.
         const paiCategoriesData = [
@@ -1308,8 +1648,8 @@
         let parentOrigin = urlParams.get('origin');
         let userToken = urlParams.get('userToken');
         let userId = urlParams.get('userId'); // Pode ser usado futuramente se necessário
-        console.log('fnw_curadoria_sie: userToken from URL params:', userToken);
-        console.log('fnw_curadoria_sie: embeddedMode from URL params:', embeddedMode);
+        console.log('GERIiAH_USER: userToken from URL params:', userToken);
+        console.log('GERIiAH_USER: embeddedMode from URL params:', embeddedMode);
 
         // Usa o token da URL se disponível, senão usa o fallback
         const apiToken = userToken || 'dbb2c4d19a5ef0fec48e363618611614b4e0dfce'; 
@@ -2161,6 +2501,9 @@
             renderSuporteIaSubcategoriesSidebar(); // Re-adicionando esta chamada
             renderParticipeCategoriesSidebar(); // Adicionando chamada para renderizar a nova categoria 'Participe'
             renderVideosCategoriesSidebar(); // Adicionando chamada para renderizar a nova categoria 'Videos'
+            
+            // Inicializar favoritos do usuário
+            loadUserFavorites();
 
             const paiModal = document.getElementById('paiModal');
             const paiModalClose = document.getElementById('paiModalClose');
@@ -2307,6 +2650,48 @@
 
             // Carrega dados personalizados salvos
             loadCustomItemData();
+
+            // Event listeners para modal de edição de cards
+            document.getElementById('cardEditModalClose').addEventListener('click', closeCardEditModal);
+            document.getElementById('cancelCardEdit').addEventListener('click', closeCardEditModal);
+            document.getElementById('saveCardEdit').addEventListener('click', saveCardEdit);
+
+            // Fecha modal de edição de cards ao clicar fora
+            document.getElementById('cardEditModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeCardEditModal();
+                }
+            });
+
+            // Carrega dados personalizados
+            loadCustomItemData();
+
+            // Event listeners para modal de edição de itens simples
+            document.getElementById('simpleItemEditModalClose').addEventListener('click', closeSimpleItemEditModal);
+            document.getElementById('cancelSimpleItemEdit').addEventListener('click', closeSimpleItemEditModal);
+            document.getElementById('saveSimpleItemEdit').addEventListener('click', saveSimpleItemEdit);
+
+            // Fecha modal de edição de itens simples ao clicar fora
+            document.getElementById('simpleItemEditModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeSimpleItemEditModal();
+                }
+            });
+
+            // Carrega dados personalizados
+            loadCustomItemData();
+            
+            // Event listeners para modal de adicionar favorito
+            document.getElementById('addFavoriteModalClose').addEventListener('click', closeAddFavoriteModal);
+            document.getElementById('cancelAddFavorite').addEventListener('click', closeAddFavoriteModal);
+            document.getElementById('saveAddFavorite').addEventListener('click', saveNewFavorite);
+
+            // Fecha modal de adicionar favorito ao clicar fora
+            document.getElementById('addFavoriteModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeAddFavoriteModal();
+                }
+            });
         });
 
         function renderPaiCategoriesSidebar() {
@@ -2371,6 +2756,7 @@
         }
 
         function renderMeusAppsCategoriesSidebar() {
+            console.log('renderMeusAppsCategoriesSidebar chamada, isEditMode:', isEditMode); // Debug
             // Agora os sub-acordeões são renderizados diretamente no HTML
             // Esta função renderiza os conteúdos de cada sub-acordeão
 
@@ -2388,6 +2774,16 @@
             const bancoUl = document.getElementById('bancoItemsList');
             const bancoData = meusAppsCategoriesData.find(cat => cat.name === "Banco");
             renderSubCategoryItems(bancoUl, bancoData);
+
+            // Renderizar Alimentação
+            const alimentacaoUl = document.getElementById('alimentacaoItemsList');
+            const alimentacaoData = meusAppsCategoriesData.find(cat => cat.name === "Alimentação");
+            renderSubCategoryItems(alimentacaoUl, alimentacaoData);
+
+            // Renderizar Transporte
+            const transporteUl = document.getElementById('transporteItemsList');
+            const transporteData = meusAppsCategoriesData.find(cat => cat.name === "Transporte");
+            renderSubCategoryItems(transporteUl, transporteData);
 
             // Renderizar Utilidades
             const utilidadesUl = document.getElementById('utilidadesItemsList');
@@ -2407,6 +2803,13 @@
             }
 
             ul.innerHTML = '';
+            
+            // Lista dos apps testados e funcionando
+            const testedApps = ['Bradesco', 'Banco do Brasil', 'Caixa', 'Nubank', 'Santander', 'WhatsApp', 'Telegram', 'PlutoTV', 'YouTube', 'Google Meet', 'WhatsApp Business', 'iFood', 'Pão de Açúcar', 'Uber', '99'];
+            
+            // Lista dos apps implementados (mas podem não estar testados)
+            const implementedApps = ['Bradesco', 'Banco do Brasil', 'Caixa', 'Nubank', 'Santander', 'Itaú', 'WhatsApp', 'Telegram', 'PlutoTV', 'YouTube', 'Google Meet', 'WhatsApp Business', 'iFood', 'Pão de Açúcar', 'Uber', '99'];
+            
             categoryData.items.forEach(item => {
                 const li = document.createElement('li');
                 const btn = document.createElement('button');
@@ -2414,19 +2817,119 @@
                 // Verifica se há dados personalizados para este item
                 const itemKey = generateItemKey(item);
                 const customData = customItemData[itemKey];
-                const displayName = customData ? customData.name : item.name;
+                let displayName = customData ? customData.name : item.name;
                 const targetUrl = customData ? customData.url : item.url;
                 
-                btn.textContent = displayName;
+                // Adiciona ícone baseado no status real
+                const isReserved = item.disabled || item.name === "Reservado";
+                const isTested = testedApps.includes(item.name);
+                const isImplemented = implementedApps.includes(item.name);
+                let statusIcon = '';
+                
+                if (!isReserved && isTested) {
+                    statusIcon = '<span class="app-check">✓</span> ';
+                } else if (!isReserved && isImplemented && !isTested) {
+                    statusIcon = '<span class="app-pending">●</span> ';
+                }
+                // Apps não implementados ficam sem ícone
+                
+                // Se o item tem subitens, adiciona um indicador visual
+                if (item.hasSubItems) {
+                    // Conta quantos subitens não são "Reservado" ou disabled
+                    const activeSubItems = item.subItems ? item.subItems.filter(subItem => 
+                        !subItem.disabled && subItem.name !== "Reservado"
+                    ).length : 0;
+                    
+                    statusIcon += `<span style="color: #4CAF50; margin-right: 4px;">📋</span> `;
+                    // O contador será adicionado depois do nome APENAS no modo edição
+                    console.log(`Verificando contador para ${item.name}:`, { 
+                        isEditMode: isEditMode, 
+                        activeSubItems: activeSubItems,
+                        shouldShowCounter: isEditMode 
+                    }); // Debug detalhado
+                    
+                    if (isEditMode) {
+                        console.log(`✅ Adicionando contador ${activeSubItems} para ${item.name} (modo edição ativo)`); // Debug
+                        displayName += ` <span style="color: #4CAF50; font-size: 0.8em; font-weight: bold;">${activeSubItems}</span>`;
+                    } else {
+                        console.log(`❌ NÃO adicionando contador para ${item.name} (modo edição inativo)`); // Debug
+                    }
+                }
+                
+                btn.innerHTML = statusIcon + displayName;
 
                 // Tratamento especial para itens reservados
-                if (item.disabled || item.name === "Reservado") {
-                    btn.style.opacity = '0.4';
+                if (isReserved) {
+                    if (isEditMode) {
+                        // No modo de edição, itens reservados ficam editáveis
+                        btn.style.opacity = '0.7';
+                        btn.style.cursor = 'pointer';
+                        btn.style.color = '#cccccc';
+                        btn.disabled = false;
+                        btn.title = 'Clique para personalizar este espaço reservado';
+                        
+                        btn.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            console.log('Editando item reservado:', item.name);
+                            openSimpleItemEditModal(categoryData.name, item.name);
+                        });
+                        
+                        // Adiciona botão de edição para itens reservados
+                        li.style.position = 'relative';
+                        
+                        const editBtn = document.createElement('button');
+                        editBtn.className = 'edit-simple-item-btn';
+                        editBtn.innerHTML = '✏️';
+                        editBtn.style.cssText = `
+                            position: absolute;
+                            right: 8px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            background: rgba(101, 31, 57, 0.9);
+                            border: none;
+                            border-radius: 50%;
+                            width: 22px;
+                            height: 22px;
+                            cursor: pointer;
+                            font-size: 11px;
+                            z-index: 10;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+                        `;
+                        
+                        editBtn.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            console.log('Editando item reservado via botão:', item.name);
+                            openSimpleItemEditModal(categoryData.name, item.name);
+                        });
+                        
+                        li.appendChild(editBtn);
+                    } else {
+                        // No modo normal, itens reservados ficam desabilitados
+                        btn.style.opacity = '0.4';
+                        btn.style.cursor = 'not-allowed';
+                        btn.style.color = '#666666';
+                        btn.disabled = true;
+                        btn.title = 'Espaço reservado para futuras funcionalidades';
+                    }
+                } else if (!isImplemented && !item.hasSubItems) {
+                    // Apps não implementados ainda (mas permite subitens mesmo sem implementação)
+                    btn.style.opacity = '0.5';
+                    btn.style.color = '#999999';
                     btn.style.cursor = 'not-allowed';
-                    btn.style.color = '#666666';
                     btn.disabled = true;
-                    btn.title = 'Espaço reservado para futuras funcionalidades';
+                    btn.title = 'App ainda não implementado';
+                } else if (isImplemented && !isTested && !item.hasSubItems) {
+                    // Apps implementados mas não testados ainda (apenas Itaú)
+                    btn.style.opacity = '0.7';
+                    btn.style.color = '#cccccc';
+                    btn.title = 'App implementado mas ainda não testado';
                 } else {
+                    // Apps testados e funcionais OU itens com subitens
                     // Adiciona classe se foi personalizado
                     if (customData) {
                         btn.classList.add('customized-item');
@@ -2436,6 +2939,7 @@
                         console.log('Botão clicado:', { 
                             itemName: item.name, 
                             isEditMode: isEditMode,
+                            hasSubItems: item.hasSubItems,
                             hasEditableClass: btn.classList.contains('editable-item')
                         }); // Debug
                         
@@ -2450,25 +2954,180 @@
                         
                         console.log('Abrindo item normalmente:', item.name); // Debug
                         
+                        
                         // Comportamento normal - abre o item
                         ul.querySelectorAll('button:not([disabled])').forEach(b => b.classList.remove('active'));
                         btn.classList.add('active');
                         
-                        // Usa a URL personalizada se existir
-                        const itemToOpen = {
-                            ...item,
-                            name: displayName,
-                            url: targetUrl
-                        };
-                        
-                        openPaiItemInModal(itemToOpen);
+                        // Se o item tem subitens, exibe os cards
+                        if (item.hasSubItems && item.subItems) {
+                            displaySubItemsAsCards(item, categoryData.name);
+                        } else {
+                            // Usa a URL personalizada se existir
+                            const itemToOpen = {
+                                ...item,
+                                name: displayName,
+                                url: targetUrl
+                            };
+                            
+                            openPaiItemInModal(itemToOpen);
+                        }
                         closeSidebar();
                     });
+                    
+                    // Adiciona botão de edição para itens simples no modo de edição
+                    if (isEditMode && !item.hasSubItems) {
+                        li.style.position = 'relative';
+                        
+                        const editBtn = document.createElement('button');
+                        editBtn.className = 'edit-simple-item-btn';
+                        editBtn.innerHTML = '✏️';
+                        editBtn.style.cssText = `
+                            position: absolute;
+                            right: 8px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            background: rgba(101, 31, 57, 0.9);
+                            border: none;
+                            border-radius: 50%;
+                            width: 22px;
+                            height: 22px;
+                            cursor: pointer;
+                            font-size: 11px;
+                            z-index: 10;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+                        `;
+                        
+                        editBtn.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            console.log('Editando item simples:', item.name);
+                            openSimpleItemEditModal(categoryData.name, item.name);
+                        });
+                        
+                        li.appendChild(editBtn);
+                    }
                 }
 
                 li.appendChild(btn);
                 ul.appendChild(li);
             });
+        }
+
+        // Nova função para exibir subitens como cards no carrossel
+        function displaySubItemsAsCards(parentItem, categoryName) {
+            const container = document.getElementById('coursesContainer');
+            container.innerHTML = '';
+
+            // Cria o título da subcategoria
+            const categoryHeader = document.createElement('h2');
+            categoryHeader.className = 'category-title-header';
+            categoryHeader.textContent = `${categoryName} - ${parentItem.name}`;
+            container.appendChild(categoryHeader);
+
+            if (!parentItem.subItems || parentItem.subItems.length === 0) {
+                const noItemsMessage = document.createElement('p');
+                noItemsMessage.textContent = `Nenhum recurso encontrado em ${parentItem.name}.`;
+                noItemsMessage.style.color = '#ccc';
+                noItemsMessage.style.marginTop = '20px';
+                container.appendChild(noItemsMessage);
+                return;
+            }
+
+            // Cria o trilho do carrossel
+            const carouselTrack = document.createElement('div');
+            carouselTrack.className = 'carousel-track';
+
+            parentItem.subItems.forEach((subItem, index) => {
+                const card = document.createElement('div');
+                card.className = 'course-card';
+                
+                // Verifica se há dados personalizados para este card
+                const cardKey = generateCardKey(categoryName, parentItem.name, index);
+                const customData = customCardData[cardKey];
+                
+                // Usa dados personalizados se disponíveis, senão usa os originais
+                const displayName = customData ? customData.name : subItem.name;
+                const displayDescription = customData ? customData.description : (subItem.description || 'Clique para acessar');
+                const displayUrl = customData ? customData.url : subItem.url;
+                
+                // Verifica se é um card editável
+                if (subItem.isCard) {
+                    // Card editável com imagem personalizada
+                    const cardImage = customData ? customData.cardImage : (subItem.cardImage || subItem.image || 'https://via.placeholder.com/308x196.png?text=AudioLivro');
+                    
+                    console.log(`Renderizando card editável: ${displayName}`, {
+                        isEditMode: isEditMode,
+                        shouldShowButton: isEditMode,
+                        parentItemName: parentItem.name,
+                        cardIndex: index
+                    });
+                    
+                    card.innerHTML = `
+                        <div class="card-image-container" style="position: relative;">
+                            <img src="${cardImage}" alt="${displayName}" style="width:100%; height:196px; object-fit:cover; border-bottom: 1px solid rgba(80, 48, 96, 0.9);">
+                            ${isEditMode ? `<button class="edit-card-btn" onclick="openCardEditModal('${parentItem.name}', ${index})" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 14px;">✏️</button>` : ''}
+                        </div>
+                        <div class="info" style="padding:15px;">
+                            <h3 style="margin:0 0 10px; font-size:1.05em; color:#fff; height: 56px; overflow: hidden;">${displayName}</h3>
+                            <p style="font-size:0.85em; color:#ccc; margin:0; line-height: 1.3; height: 70px; overflow: hidden;">${displayDescription}</p>
+                        </div>
+                    `;
+                } else {
+                    // Card padrão
+                    card.innerHTML = `
+                        <img src="${subItem.image || 'https://via.placeholder.com/308x196.png?text=Recurso'}" alt="${subItem.name}" style="width:100%; height:196px; object-fit:cover; border-bottom: 1px solid rgba(80, 48, 96, 0.9);">
+                        <div class="info" style="padding:15px;">
+                            <h3 style="margin:0 0 10px; font-size:1.05em; color:#fff; height: 56px; overflow: hidden;">${subItem.name}</h3>
+                            <p style="font-size:0.85em; color:#ccc; margin:0; line-height: 1.3; height: 70px; overflow: hidden;">${subItem.description || 'Clique para acessar'}</p>
+                        </div>
+                    `;
+                }
+
+                card.addEventListener('click', (e) => {
+                    // Não abrir se clicou no botão de editar
+                    if (e.target.classList.contains('edit-card-btn')) {
+                        return;
+                    }
+                    
+                    // Cria objeto com dados personalizados se disponíveis
+                    const itemToOpen = {
+                        name: displayName,
+                        url: displayUrl,
+                        description: displayDescription
+                    };
+                    
+                    // Detecta se é URL da Play Store para mostrar modal específico
+                    if (displayUrl.includes('play.google.com/store/apps')) {
+                        showAppModal(itemToOpen);
+                    } else {
+                        // Para URLs web, abre em modal iframe
+                        openPaiItemInModal(itemToOpen);
+                    }
+                });
+
+                carouselTrack.appendChild(card);
+            });
+
+            container.appendChild(carouselTrack);
+
+            // Adiciona funcionalidade de carrossel
+            const debouncedUpdateFocus = debounce(() => updateCarouselFocus(carouselTrack), 50);
+            let scrollEndTimer = null;
+            carouselTrack.addEventListener('scroll', () => {
+                debouncedUpdateFocus();
+                clearTimeout(scrollEndTimer);
+                scrollEndTimer = setTimeout(() => {
+                    snapToNearestCard(carouselTrack);
+                }, 150);
+            });
+
+            setTimeout(() => {
+                updateCarouselFocus(carouselTrack);
+            }, 0);
         }
 
         function renderVideosCategoriesSidebar() {
@@ -2504,7 +3163,44 @@
             {
                 name: "Saúde",
                 items: [
-                    { name: "Prevenção", url: "https://www.gov.br/saude/pt-br", image: "https://api.iconify.design/tabler/shield-check.svg?color=%23e5e5e5" },
+                    { 
+                        name: "Prevenção", 
+                        hasSubItems: true,
+                        subItems: [
+                            { 
+                                name: "Drogasil", 
+                                url: "https://play.google.com/store/apps/details?id=br.com.drogasil", 
+                                image: "https://api.iconify.design/tabler/pill.svg?color=%23e5e5e5", 
+                                description: "Drogaria Online 24h - App oficial",
+                                isCard: true,
+                                cardImage: "https://logoeps.com/wp-content/uploads/2013/03/drogasil-vector-logo.png"
+                            },
+                            { 
+                                name: "SUS Digital", 
+                                url: "https://play.google.com/store/apps/details?id=br.gov.datasus.cnsdigital", 
+                                image: "https://api.iconify.design/tabler/id-badge.svg?color=%23e5e5e5", 
+                                description: "Cartão Nacional de Saúde Digital",
+                                isCard: true,
+                                cardImage: "https://www.gov.br/saude/pt-br/assuntos/saude-digital/cartao-nacional-de-saude/sus-digital.png"
+                            },
+                            { 
+                                name: "Conecte SUS", 
+                                url: "https://play.google.com/store/apps/details?id=br.gov.datasus.conectesus", 
+                                image: "https://api.iconify.design/tabler/heart-handshake.svg?color=%23e5e5e5", 
+                                description: "Aplicativo oficial do SUS",
+                                isCard: true,
+                                cardImage: "https://conectesus.saude.gov.br/static/media/logo-conecte-sus.png"
+                            },
+                            { 
+                                name: "Naturais", 
+                                url: "#", 
+                                image: "https://api.iconify.design/tabler/leaf.svg?color=%23e5e5e5", 
+                                description: "Produtos naturais e fitoterápicos",
+                                isCard: true,
+                                cardImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=250&fit=crop"
+                            }
+                        ]
+                    },
                     { name: "Nutrição", url: "https://www.dietbox.me/", image: "https://api.iconify.design/tabler/apple.svg?color=%23e5e5e5" },
                     { name: "Atividades", url: "https://www.smartfit.com.br/", image: "https://api.iconify.design/tabler/barbell.svg?color=%23e5e5e5" },
                     { name: "Convênio", url: "https://www.unimed.coop.br/", image: "https://api.iconify.design/tabler/shield-heart.svg?color=%23e5e5e5" },
@@ -2516,12 +3212,12 @@
             {
                 name: "Comunicar",
                 items: [
-                    { name: "WhatsApp Web", url: "https://web.whatsapp.com/", image: "https://api.iconify.design/logos/whatsapp-icon.svg?color=%23e5e5e5" },
-                    { name: "Telegram Web", url: "https://web.telegram.org/", image: "https://api.iconify.design/logos/telegram.svg?color=%23e5e5e5" },
+                    { name: "WhatsApp", url: "https://play.google.com/store/apps/details?id=com.whatsapp", image: "https://api.iconify.design/logos/whatsapp-icon.svg?color=%23e5e5e5" },
+                    { name: "Telegram", url: "https://play.google.com/store/apps/details?id=org.telegram.messenger", image: "https://api.iconify.design/logos/telegram.svg?color=%23e5e5e5" },
                     { name: "Email Gmail", url: "https://mail.google.com/", image: "https://api.iconify.design/logos/google-gmail.svg?color=%23e5e5e5" },
-                    { name: "Skype", url: "https://web.skype.com/", image: "https://api.iconify.design/logos/skype.svg?color=%23e5e5e5" },
+                    { name: "Google Meet", url: "https://meet.google.com/", image: "https://api.iconify.design/logos/google-meet.svg?color=%23e5e5e5" },
                     { name: "Zoom", url: "https://zoom.us/", image: "https://api.iconify.design/logos/zoom-icon.svg?color=%23e5e5e5" },
-                    { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true },
+                    { name: "WhatsApp Business", url: "https://play.google.com/store/apps/details?id=com.whatsapp.w4b", image: "https://api.iconify.design/logos/whatsapp-icon.svg?color=%23e5e5e5" },
                     { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true }
                 ]
             },
@@ -2540,11 +3236,196 @@
             {
                 name: "Utilidades",
                 items: [
-                    { name: "Calculadora", url: "https://www.google.com/search?q=calculator", image: "https://api.iconify.design/tabler/calculator.svg?color=%23e5e5e5" },
-                    { name: "Clima", url: "https://weather.com/", image: "https://api.iconify.design/tabler/cloud.svg?color=%23e5e5e5" },
-                    { name: "Tradutor", url: "https://translate.google.com/", image: "https://api.iconify.design/tabler/language.svg?color=%23e5e5e5" },
-                    { name: "Mapas", url: "https://maps.google.com/", image: "https://api.iconify.design/tabler/map.svg?color=%23e5e5e5" },
-                    { name: "Calendário", url: "https://calendar.google.com/", image: "https://api.iconify.design/tabler/calendar.svg?color=%23e5e5e5" },
+                    { 
+                        name: "Calculadora", 
+                        hasSubItems: true,
+                        subItems: [
+                            { 
+                                name: "Calculadora Google", 
+                                url: "https://www.google.com/search?q=calculator", 
+                                image: "https://api.iconify.design/tabler/calculator.svg?color=%23e5e5e5", 
+                                description: "Calculadora online do Google",
+                                isCard: true,
+                                cardImage: "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+                            },
+                            { 
+                                name: "Calculadora Científica", 
+                                url: "https://web2.0calc.com/", 
+                                image: "https://api.iconify.design/tabler/math-function.svg?color=%23e5e5e5", 
+                                description: "Calculadora científica avançada",
+                                isCard: true,
+                                cardImage: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=250&fit=crop"
+                            },
+                            { 
+                                name: "Conversor de Unidades", 
+                                url: "https://www.convertworld.com/pt/", 
+                                image: "https://api.iconify.design/tabler/arrows-exchange.svg?color=%23e5e5e5", 
+                                description: "Conversor de medidas e unidades",
+                                isCard: true,
+                                cardImage: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=250&fit=crop"
+                            },
+                            { 
+                                name: "Calculadora Financeira", 
+                                url: "https://www.calculadorafinanceira.com.br/", 
+                                image: "https://api.iconify.design/tabler/coin.svg?color=%23e5e5e5", 
+                                description: "Cálculos financeiros e investimentos",
+                                isCard: true,
+                                cardImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=250&fit=crop"
+                            }
+                        ]
+                    },
+                    { 
+                        name: "Clima", 
+                        hasSubItems: true,
+                        subItems: [
+                            { 
+                                name: "Weather.com", 
+                                url: "https://weather.com/pt-BR", 
+                                image: "https://api.iconify.design/tabler/cloud.svg?color=%23e5e5e5", 
+                                description: "Previsão do tempo detalhada",
+                                isCard: true,
+                                cardImage: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=250&fit=crop"
+                            },
+                            { 
+                                name: "ClimaTempo", 
+                                url: "https://www.climatempo.com.br/", 
+                                image: "https://api.iconify.design/tabler/sun.svg?color=%23e5e5e5", 
+                                description: "Previsão do tempo no Brasil",
+                                isCard: true,
+                                cardImage: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=250&fit=crop"
+                            },
+                            { 
+                                name: "INMET", 
+                                url: "https://portal.inmet.gov.br/", 
+                                image: "https://api.iconify.design/tabler/cloud-rain.svg?color=%23e5e5e5", 
+                                description: "Instituto Nacional de Meteorologia",
+                                isCard: true,
+                                cardImage: "https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=400&h=250&fit=crop"
+                            },
+                            { 
+                                name: "AccuWeather", 
+                                url: "https://www.accuweather.com/pt/br/brazil-weather", 
+                                image: "https://api.iconify.design/tabler/temperature.svg?color=%23e5e5e5", 
+                                description: "Previsão meteorológica global",
+                                isCard: true,
+                                cardImage: "https://images.unsplash.com/photo-1592210454359-9043f067919b?w=400&h=250&fit=crop"
+                            }
+                        ]
+                    },
+                    { 
+                        name: "Tradutor", 
+                        hasSubItems: true,
+                        subItems: [
+                            { 
+                                name: "Google Tradutor", 
+                                url: "https://translate.google.com/", 
+                                image: "https://api.iconify.design/logos/google-translate.svg?color=%23e5e5e5", 
+                                description: "Tradutor do Google",
+                                isCard: true,
+                                cardImage: "https://ssl.gstatic.com/translate/community/backgrounds/globe_small.png"
+                            },
+                            { 
+                                name: "DeepL", 
+                                url: "https://www.deepl.com/translator", 
+                                image: "https://api.iconify.design/tabler/language.svg?color=%23e5e5e5", 
+                                description: "Tradutor com IA avançada",
+                                isCard: true,
+                                cardImage: "https://static.deepl.com/img/logo/deepl-logo-blue.svg"
+                            },
+                            { 
+                                name: "Reverso", 
+                                url: "https://www.reverso.net/text-translation", 
+                                image: "https://api.iconify.design/tabler/abc.svg?color=%23e5e5e5", 
+                                description: "Tradutor com contexto e exemplos",
+                                isCard: true,
+                                cardImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=250&fit=crop"
+                            },
+                            { 
+                                name: "Linguee", 
+                                url: "https://www.linguee.com.br/", 
+                                image: "https://api.iconify.design/tabler/book.svg?color=%23e5e5e5", 
+                                description: "Dicionário e tradutor bilíngue",
+                                isCard: true,
+                                cardImage: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=250&fit=crop"
+                            }
+                        ]
+                    },
+                    { 
+                        name: "Mapas", 
+                        hasSubItems: true,
+                        subItems: [
+                            { 
+                                name: "Google Maps", 
+                                url: "https://maps.google.com/", 
+                                image: "https://api.iconify.design/logos/google-maps.svg?color=%23e5e5e5", 
+                                description: "Mapas e navegação do Google",
+                                isCard: true,
+                                cardImage: "https://developers.google.com/static/maps/images/maps-icon.svg"
+                            },
+                            { 
+                                name: "Waze", 
+                                url: "https://www.waze.com/pt-BR/live-map", 
+                                image: "https://api.iconify.design/tabler/route.svg?color=%23e5e5e5", 
+                                description: "Navegação com trânsito em tempo real",
+                                isCard: true,
+                                cardImage: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=400&h=250&fit=crop"
+                            },
+                            { 
+                                name: "OpenStreetMap", 
+                                url: "https://www.openstreetmap.org/", 
+                                image: "https://api.iconify.design/tabler/map-2.svg?color=%23e5e5e5", 
+                                description: "Mapa colaborativo mundial",
+                                isCard: true,
+                                cardImage: "https://wiki.openstreetmap.org/w/images/thumb/b/b0/Openstreetmap_logo.svg/256px-Openstreetmap_logo.svg.png"
+                            },
+                            { 
+                                name: "Here Maps", 
+                                url: "https://wego.here.com/", 
+                                image: "https://api.iconify.design/tabler/map-pin.svg?color=%23e5e5e5", 
+                                description: "Mapas e navegação Here",
+                                isCard: true,
+                                cardImage: "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=400&h=250&fit=crop"
+                            }
+                        ]
+                    },
+                    { 
+                        name: "Calendário", 
+                        hasSubItems: true,
+                        subItems: [
+                            { 
+                                name: "Google Calendar", 
+                                url: "https://calendar.google.com/", 
+                                image: "https://api.iconify.design/logos/google-calendar.svg?color=%23e5e5e5", 
+                                description: "Calendário do Google",
+                                isCard: true,
+                                cardImage: "https://ssl.gstatic.com/calendar/images/dynamiclogo_2020q4/calendar_31_2x.png"
+                            },
+                            { 
+                                name: "Outlook Calendar", 
+                                url: "https://outlook.live.com/calendar/", 
+                                image: "https://api.iconify.design/logos/microsoft-outlook.svg?color=%23e5e5e5", 
+                                description: "Calendário do Outlook",
+                                isCard: true,
+                                cardImage: "https://res-1.cdn.office.net/files/fabric-cdn-prod_20230815.002/assets/brand-icons/product/svg/outlook_48x1.svg"
+                            },
+                            { 
+                                name: "Calendário Online", 
+                                url: "https://www.calendario.com.br/", 
+                                image: "https://api.iconify.design/tabler/calendar-event.svg?color=%23e5e5e5", 
+                                description: "Calendário brasileiro online",
+                                isCard: true,
+                                cardImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop"
+                            },
+                            { 
+                                name: "TimeAndDate", 
+                                url: "https://www.timeanddate.com/calendar/", 
+                                image: "https://api.iconify.design/tabler/clock.svg?color=%23e5e5e5", 
+                                description: "Calendário mundial com fusos",
+                                isCard: true,
+                                cardImage: "https://images.unsplash.com/photo-1495364141860-b0d03eccd065?w=400&h=250&fit=crop"
+                            }
+                        ]
+                    },
                     { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true },
                     { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true }
                 ]
@@ -2552,24 +3433,73 @@
             {
                 name: "Lazer",
                 items: [
-                    { name: "YouTube", url: "https://www.youtube.com/", image: "https://api.iconify.design/logos/youtube-icon.svg?color=%23e5e5e5" },
+                    { 
+                        name: "AudioLivros", 
+                        hasSubItems: true,
+                        subItems: [
+                            { 
+                                name: "Audible", 
+                                url: "https://www.audible.com.br/", 
+                                image: "https://api.iconify.design/tabler/headphones.svg?color=%23e5e5e5", 
+                                description: "Plataforma de audiolivros da Amazon",
+                                isCard: true,
+                                cardImage: "https://m.media-amazon.com/images/G/32/audible/web/logo-audible-white._CB1565125222_.png"
+                            },
+                            { 
+                                name: "Storytel", 
+                                url: "https://www.storytel.com/br/pt/", 
+                                image: "https://api.iconify.design/tabler/book-2.svg?color=%23e5e5e5", 
+                                description: "Streaming de audiolivros e e-books",
+                                isCard: true,
+                                cardImage: "https://cdn.storytel.com/web/assets/storytel-logo-white.svg"
+                            }
+                        ]
+                    },
                     { name: "Netflix", url: "https://www.netflix.com/", image: "https://api.iconify.design/logos/netflix-icon.svg?color=%23e5e5e5" },
-                    { name: "Spotify", url: "https://open.spotify.com/", image: "https://api.iconify.design/logos/spotify-icon.svg?color=%23e5e5e5" },
-                    { name: "Globoplay", url: "https://globoplay.globo.com/", image: "https://api.iconify.design/tabler/device-tv.svg?color=%23e5e5e5" },
+                    { name: "PlutoTV", url: "https://pluto.tv/br/", image: "https://api.iconify.design/tabler/device-tv.svg?color=%23e5e5e5" },
                     { name: "Prime Video", url: "https://www.primevideo.com/", image: "https://api.iconify.design/tabler/video.svg?color=%23e5e5e5" },
+                    { name: "Spotify", url: "https://open.spotify.com/", image: "https://api.iconify.design/logos/spotify-icon.svg?color=%23e5e5e5" },
+                    { name: "YouTube", url: "https://play.google.com/store/apps/details?id=com.google.android.youtube", image: "https://api.iconify.design/logos/youtube-icon.svg?color=%23e5e5e5" },
                     { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true },
                     { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true }
                 ]
-            }
-        ];
+            },
+            {
+                name: "Alimentação",
+                items: [
+                    { name: "iFood", url: "https://play.google.com/store/apps/details?id=br.com.brainweb.ifood", image: "https://api.iconify.design/tabler/tools-kitchen-2.svg?color=%23e5e5e5" },
+                    { name: "Pão de Açúcar", url: "https://play.google.com/store/apps/details?id=br.com.paodeacucar.mobile", image: "https://api.iconify.design/tabler/shopping-cart.svg?color=%23e5e5e5" },
+                    { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true },
+                    { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true },
+                    { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true },
+                    { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true },
+                    { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true },
+                    { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true },
+                    { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true }
+                ]
+            },
+            {
+                name: "Transporte",
+                items: [
+        { name: "Uber", url: "https://play.google.com/store/apps/details?id=com.ubercab", image: "https://api.iconify.design/tabler/car.svg?color=%23e5e5e5" },
+        { name: "99", url: "https://play.google.com/store/apps/details?id=com.taxis99", image: "https://api.iconify.design/tabler/taxi.svg?color=%23e5e5e5" },
+        { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true },
+        { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true },
+        { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true },
+        { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true },
+        { name: "Reservado", url: "#", image: "https://api.iconify.design/tabler/dots.svg?color=%23666666", disabled: true }
+            ]
+        },   
+    ];
+        
 
         // Nova estrutura para categoria "Participe"
 
-        // Variáveis para controle do modo de edição
-        let isEditMode = false;
-        let isToggleVisible = false;
-        let currentEditingItem = null; // Para rastrear qual item está sendo editado
-        let customItemData = {}; // Para armazenar dados personalizados dos itens
+        // Variáveis para controle do modo de edição - MOVIDAS PARA O TOPO
+        // let isEditMode = false; // REMOVIDO - já definido no início
+        // let isToggleVisible = false; // REMOVIDO - já definido no início  
+        // let currentEditingItem = null; // REMOVIDO - já definido no início
+        // let customItemData = {}; // REMOVIDO - já definido no início
         
         // Função para ativar/desativar modo de edição
         function toggleEditMode(activate) {
@@ -2578,29 +3508,65 @@
             const headerTitle = document.getElementById('headerTitle');
             const editToggle = document.getElementById('editModeToggle');
             
-            console.log('toggleEditMode chamado:', { activate, isEditMode }); // Debug
-            
+            console.log(`Modo de edição ${activate ? 'ATIVADO' : 'DESATIVADO'}:`, {
+                isEditMode: isEditMode,
+                bodyHasClass: body.classList.contains('edit-mode')
+            });
+
             if (activate) {
                 body.classList.add('edit-mode');
-                headerTitle.textContent = 'Modo de Edição';
-                editToggle.checked = true;
-                // Adicionar classe editable aos botões de Meus Apps
+                headerTitle.textContent = 'Modo de Edição [USER]';
+                if (editToggle) editToggle.checked = true;
+                
+                // Adiciona classes editáveis aos elementos
                 addEditableClasses();
-                // Re-renderizar os botões para incluir a lógica de edição
-                reRenderMeusAppsButtons();
-                // NÃO salvar estado ativo no localStorage - sempre força reativação manual
-                // localStorage.setItem('editMode', 'true'); // REMOVIDO
+                
+                // Adiciona indicadores de upgrade
+                addUpgradeIndicators();
+                
+                // Ativa interceptação de edição de categorias
+                interceptCategoryEdit();
             } else {
                 body.classList.remove('edit-mode');
                 headerTitle.textContent = 'Acessos';
-                editToggle.checked = false;
-                // Remover classe editable
+                if (editToggle) editToggle.checked = false;
+                
+                // Remove classes editáveis
                 removeEditableClasses();
-                // Re-renderizar os botões para remover a lógica de edição
-                reRenderMeusAppsButtons();
-                // Limpar estado no localStorage quando desativado
-                localStorage.removeItem('editMode');
+                
+                // Remove indicadores de upgrade
+                addUpgradeIndicators();
             }
+
+            // Re-renderiza a sidebar para atualizar contadores
+            renderMeusAppsCategoriesSidebar();
+            
+            // Re-renderiza cards se estiver visualizando qualquer subcategoria com cards
+            const currentTitle = document.querySelector('.category-title-header');
+            if (currentTitle) {
+                const titleText = currentTitle.textContent;
+                
+                // Extrai o nome da categoria e subcategoria do título (formato: "Categoria - Subcategoria")
+                const titleParts = titleText.split(' - ');
+                if (titleParts.length === 2) {
+                    const categoryName = titleParts[0].trim();
+                    const subCategoryName = titleParts[1].trim();
+                    
+                    // Encontra a categoria nos dados
+                    const category = meusAppsCategoriesData.find(cat => cat.name === categoryName);
+                    if (category) {
+                        // Encontra o item/subcategoria
+                        const subCategoryItem = category.items.find(item => item.name === subCategoryName);
+                        if (subCategoryItem && subCategoryItem.hasSubItems) {
+                            console.log(`Re-renderizando cards para: ${categoryName} - ${subCategoryName}`);
+                            displaySubItemsAsCards(subCategoryItem, categoryName);
+                        }
+                    }
+                }
+            }
+            
+            // Salva o estado no localStorage
+            localStorage.setItem('editMode', activate.toString());
         }
         
         // Função para re-renderizar os botões de Meus Apps
@@ -2617,6 +3583,37 @@
             meusAppsSubButtons.forEach((btn, index) => {
                 btn.classList.add('editable-item');
                 console.log(`Classe editable-item adicionada ao botão ${index + 1}:`, btn.textContent); // Debug
+                
+                // Intercepta cliques em botões "Reservado"
+                if (btn.textContent.trim() === 'Reservado') {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        showUpgradeAlert('Adicionar novos aplicativos');
+                    });
+                    
+                    // Adiciona indicador visual
+                    if (!btn.querySelector('.enterprise-mini-indicator')) {
+                        const miniIndicator = document.createElement('span');
+                        miniIndicator.className = 'enterprise-mini-indicator';
+                        miniIndicator.innerHTML = '🚀';
+                        miniIndicator.style.cssText = `
+                            position: absolute;
+                            top: -5px;
+                            right: -5px;
+                            background: #ff6b35;
+                            border-radius: 50%;
+                            width: 16px;
+                            height: 16px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            z-index: 10;
+                        `;
+                        btn.style.position = 'relative';
+                        btn.appendChild(miniIndicator);
+                    }
+                }
             });
         }
         
@@ -2625,6 +3622,12 @@
             const editableItems = document.querySelectorAll('.editable-item');
             editableItems.forEach(item => {
                 item.classList.remove('editable-item');
+                
+                // Remove indicadores mini de upgrade
+                const miniIndicator = item.querySelector('.enterprise-mini-indicator');
+                if (miniIndicator) {
+                    miniIndicator.remove();
+                }
             });
         }
         
@@ -2749,12 +3752,9 @@
                 position: fixed;
                 top: 20px;
                 right: 20px;
-                background: #4CAF50;
-                color: white;
                 padding: 15px 20px;
                 border-radius: 4px;
                 z-index: 10000;
-                font-weight: bold;
                 box-shadow: 0 4px 8px rgba(0,0,0,0.3);
             `;
             feedback.textContent = '✅ Alterações salvas com sucesso!';
@@ -2777,8 +3777,863 @@
                     customItemData = {};
                 }
             }
+            
+            // Carrega também os dados de cards
+            loadCustomCardData();
+            
+            // Migra dados antigos para novo formato se necessário
+            migrateOldDataFormat();
         }
+
+        // Função para migrar dados antigos para novo formato
+        function migrateOldDataFormat() {
+            let needsSave = false;
+            
+            // Migra dados de cards
+            const oldCardKeys = Object.keys(customCardData).filter(key => !key.startsWith('card_') && !key.startsWith('item_'));
+            oldCardKeys.forEach(oldKey => {
+                const parts = oldKey.split('_');
+                if (parts.length === 3) {
+                    const [categoryName, parentItemName, cardIndex] = parts;
+                    const newKey = generateCardKey(categoryName, parentItemName, cardIndex);
+                    
+                    // Move dados para nova chave se não existir
+                    if (!customCardData[newKey]) {
+                        customCardData[newKey] = customCardData[oldKey];
+                        needsSave = true;
+                    }
+                    
+                    // Remove chave antiga
+                    delete customCardData[oldKey];
+                    needsSave = true;
+                }
+            });
+            
+            // Migra dados de itens simples
+            const oldItemKeys = Object.keys(customItemData).filter(key => !key.startsWith('item_'));
+            oldItemKeys.forEach(oldKey => {
+                const parts = oldKey.split('_');
+                if (parts.length === 2) {
+                    const [categoryName, itemName] = parts;
+                    const newKey = generateItemKey(categoryName, itemName);
+                    
+                    // Move dados para nova chave se não existir
+                    if (!customItemData[newKey]) {
+                        customItemData[newKey] = customItemData[oldKey];
+                        needsSave = true;
+                    }
+                    
+                    // Remove chave antiga
+                    delete customItemData[oldKey];
+                    needsSave = true;
+                }
+            });
+            
+            // Salva se houve mudanças
+            if (needsSave) {
+                localStorage.setItem('customCardData', JSON.stringify(customCardData));
+                localStorage.setItem('customItemData', JSON.stringify(customItemData));
+                console.log('Dados migrados para novo formato de chaves');
+            }
+        }
+
+        // Variáveis para controle da edição de cards
+        let currentEditingCard = null;
+
+        // Função para abrir modal de edição de card
+        function openCardEditModal(parentItemName, cardIndex) {
+            // Encontra o item pai e o card específico
+            const category = meusAppsCategoriesData.find(cat => 
+                cat.items.some(item => item.name === parentItemName)
+            );
+            
+            if (!category) return;
+            
+            const parentItem = category.items.find(item => item.name === parentItemName);
+            if (!parentItem || !parentItem.subItems || !parentItem.subItems[cardIndex]) return;
+            
+            const card = parentItem.subItems[cardIndex];
+            currentEditingCard = { 
+                categoryName: category.name,
+                parentItemName: parentItemName, 
+                cardIndex: cardIndex,
+                originalCard: card 
+            };
+            
+            // Carrega dados personalizados se existirem
+            const cardKey = generateCardKey(category.name, parentItemName, cardIndex);
+            const customData = customCardData[cardKey] || {};
+            
+            // Preenche os campos do modal
+            document.getElementById('editCardTitle').value = customData.name || card.name;
+            document.getElementById('editCardImage').value = customData.cardImage || card.cardImage || card.image;
+            document.getElementById('editCardUrl').value = customData.url || card.url;
+            document.getElementById('editCardDescription').value = customData.description || card.description || '';
+            
+            // Mostra o modal
+            document.getElementById('cardEditModal').classList.remove('hidden');
+        }
+
+        // Função para fechar modal de edição de card
+        function closeCardEditModal() {
+            document.getElementById('cardEditModal').classList.add('hidden');
+            currentEditingCard = null;
+        }
+
+        // Função para salvar edição de card
+        function saveCardEdit() {
+            if (!currentEditingCard) return;
+            
+            const newTitle = document.getElementById('editCardTitle').value.trim();
+            const newImage = document.getElementById('editCardImage').value.trim();
+            const newUrl = document.getElementById('editCardUrl').value.trim();
+            const newDescription = document.getElementById('editCardDescription').value.trim();
+            
+            // Validação básica
+            if (!newTitle) {
+                alert('Por favor, digite um título para o card.');
+                return;
+            }
+            
+            if (!newUrl) {
+                alert('Por favor, digite uma URL de acesso válida.');
+                return;
+            }
+            
+            // Adiciona https:// se não tiver protocolo
+            let finalUrl = newUrl;
+            if (!newUrl.startsWith('http://') && !newUrl.startsWith('https://')) {
+                finalUrl = 'https://' + newUrl;
+            }
+            
+            // Salva os dados personalizados
+            const cardKey = generateCardKey(
+                currentEditingCard.categoryName, 
+                currentEditingCard.parentItemName, 
+                currentEditingCard.cardIndex
+            );
+            
+            customCardData[cardKey] = {
+                name: newTitle,
+                cardImage: newImage,
+                url: finalUrl,
+                description: newDescription,
+                originalName: currentEditingCard.originalCard.name,
+                originalCardImage: currentEditingCard.originalCard.cardImage,
+                originalUrl: currentEditingCard.originalCard.url,
+                originalDescription: currentEditingCard.originalCard.description
+            };
+            
+            // Salva no localStorage
+            localStorage.setItem('customCardData', JSON.stringify(customCardData));
+            
+            // Re-renderiza os cards para mostrar as mudanças
+            const category = meusAppsCategoriesData.find(cat => cat.name === currentEditingCard.categoryName);
+            const parentItem = category.items.find(item => item.name === currentEditingCard.parentItemName);
+            displaySubItemsAsCards(parentItem, currentEditingCard.categoryName);
+            
+            // Fecha o modal
+            closeCardEditModal();
+            
+            // Feedback visual
+            showSaveConfirmation();
+        }
+
+        // Função para gerar chave única do card
+        function generateCardKey(categoryName, parentItemName, cardIndex) {
+            // Encontra o índice da categoria para garantir unicidade absoluta
+            const categoryIndex = meusAppsCategoriesData.findIndex(cat => cat.name === categoryName);
+            // Inclui mais informações para garantir unicidade absoluta
+            return `card_${categoryIndex}_${categoryName}_${parentItemName}_${cardIndex}`.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+        }
+
+        // Função para carregar dados personalizados de cards
+        function loadCustomCardData() {
+            const saved = localStorage.getItem('customCardData');
+            if (saved) {
+                try {
+                    customCardData = JSON.parse(saved);
+                } catch (e) {
+                    console.error('Erro ao carregar dados personalizados de cards:', e);
+                    customCardData = {};
+                }
+            }
+        }
+
+        // Função para aplicar dados personalizados aos cards
+        function applyCustomCardData() {
+            Object.keys(customCardData).forEach(cardKey => {
+                const customData = customCardData[cardKey];
+                
+                // Novo formato: card_index_categoria_subcategoria_cardindex
+                if (cardKey.startsWith('card_')) {
+                    const parts = cardKey.substring(5).split('_'); // Remove 'card_' e divide
+                    if (parts.length >= 4) {
+                        const cardIndex = parts.pop(); // Último elemento é o índice do card
+                        const parentItemName = parts.pop(); // Penúltimo é o item pai
+                        const categoryIndex = parts.shift(); // Primeiro é o índice da categoria
+                        const categoryName = parts.join('_'); // Resto é a categoria
+                        
+                        // Usa o índice da categoria para encontrar a categoria correta
+                        const category = meusAppsCategoriesData[parseInt(categoryIndex)];
+                        
+                        if (category && category.name.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '') === categoryName) {
+                            const parentItem = category.items.find(item => 
+                                item.name.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '') === parentItemName
+                            );
+                            
+                            if (parentItem && parentItem.subItems && parentItem.subItems[parseInt(cardIndex)]) {
+                                const card = parentItem.subItems[parseInt(cardIndex)];
+                                // Aplica os dados personalizados temporariamente para renderização
+                                card._customName = customData.name;
+                                card._customCardImage = customData.cardImage;
+                                card._customUrl = customData.url;
+                                card._customDescription = customData.description;
+                            }
+                        }
+                    }
+                } else {
+                    // Formato antigo para compatibilidade (será removido gradualmente)
+                    const [categoryName, parentItemName, cardIndex] = cardKey.split('_');
+                    
+                    const category = meusAppsCategoriesData.find(cat => 
+                        cat.name.toLowerCase().replace(/\s+/g, '_') === categoryName
+                    );
+                    
+                    if (category) {
+                        const parentItem = category.items.find(item => 
+                            item.name.toLowerCase().replace(/\s+/g, '_') === parentItemName
+                        );
+                        
+                        if (parentItem && parentItem.subItems && parentItem.subItems[parseInt(cardIndex)]) {
+                            const card = parentItem.subItems[parseInt(cardIndex)];
+                            // Aplica os dados personalizados temporariamente para renderização
+                            card._customName = customData.name;
+                            card._customCardImage = customData.cardImage;
+                            card._customUrl = customData.url;
+                            card._customDescription = customData.description;
+                        }
+                    }
+                }
+            });
+        }
+
+        // Variáveis para controle da edição de itens simples
+        let currentEditingSimpleItem = null;
+
+        // Função para abrir modal de edição de item simples
+        function openSimpleItemEditModal(categoryName, itemName) {
+            // Encontra o item específico
+            const category = meusAppsCategoriesData.find(cat => cat.name === categoryName);
+            if (!category) return;
+            
+            const item = category.items.find(i => i.name === itemName);
+            if (!item || item.hasSubItems) return; // Só para itens simples
+            
+            currentEditingSimpleItem = { 
+                categoryName: categoryName,
+                itemName: itemName,
+                originalItem: item 
+            };
+            
+            // Carrega dados personalizados se existirem
+            const itemKey = generateItemKey(categoryName, itemName);
+            const customData = customItemData[itemKey] || {};
+            
+            // Preenche os campos do modal
+            document.getElementById('editSimpleItemName').value = customData.name || item.name;
+            document.getElementById('editSimpleItemUrl').value = customData.url || item.url;
+            
+            // Mostra o modal
+            document.getElementById('simpleItemEditModal').classList.remove('hidden');
+        }
+
+        // Função para fechar modal de edição de item simples
+        function closeSimpleItemEditModal() {
+            document.getElementById('simpleItemEditModal').classList.add('hidden');
+            currentEditingSimpleItem = null;
+        }
+
+        // Função para salvar edição de item simples
+        function saveSimpleItemEdit() {
+            if (!currentEditingSimpleItem) return;
+            
+            const newName = document.getElementById('editSimpleItemName').value.trim();
+            const newUrl = document.getElementById('editSimpleItemUrl').value.trim();
+            
+            // Validação básica
+            if (!newName) {
+                alert('Por favor, digite um nome para o item.');
+                return;
+            }
+            
+            if (!newUrl) {
+                alert('Por favor, digite uma URL de acesso válida.');
+                return;
+            }
+            
+            // Adiciona https:// se não tiver protocolo
+            let finalUrl = newUrl;
+            if (!newUrl.startsWith('http://') && !newUrl.startsWith('https://')) {
+                finalUrl = 'https://' + newUrl;
+            }
+            
+            // Salva os dados personalizados
+            const itemKey = generateItemKey(
+                currentEditingSimpleItem.categoryName, 
+                currentEditingSimpleItem.itemName
+            );
+            
+            customItemData[itemKey] = {
+                name: newName,
+                url: finalUrl,
+                originalName: currentEditingSimpleItem.originalItem.name,
+                originalUrl: currentEditingSimpleItem.originalItem.url
+            };
+            
+            // Salva no localStorage
+            localStorage.setItem('customItemData', JSON.stringify(customItemData));
+            
+            // Re-renderiza a sidebar para mostrar as mudanças
+            renderMeusAppsCategoriesSidebar();
+            
+            // Fecha o modal
+            closeSimpleItemEditModal();
+            
+            // Feedback visual
+            showSaveConfirmation();
+        }
+
+        // Função para gerar chave única do item simples
+        function generateItemKey(categoryName, itemName) {
+            // Encontra o índice da categoria para garantir unicidade absoluta
+            const categoryIndex = meusAppsCategoriesData.findIndex(cat => cat.name === categoryName);
+            // Inclui prefixo, índice da categoria e sanitização para garantir unicidade absoluta
+            return `item_${categoryIndex}_${categoryName}_${itemName}`.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+        }
+
+        function loadCustomItemData() {
+            // Carrega dados personalizados do localStorage
+            const saved = localStorage.getItem('customItemData');
+            if (saved) {
+                try {
+                    customItemData = JSON.parse(saved);
+                } catch (e) {
+                    console.error('Erro ao carregar dados personalizados:', e);
+                    customItemData = {};
+                }
+            }
+            
+            // Carrega também os dados de cards
+            loadCustomCardData();
+        }
+
+        // Função para limpar dados conflitantes (usar apenas em caso de emergência)
+        function clearConflictingData() {
+            if (confirm('ATENÇÃO: Isso irá limpar TODAS as personalizações. Tem certeza?')) {
+                customCardData = {};
+                customItemData = {};
+                localStorage.removeItem('customCardData');
+                localStorage.removeItem('customItemData');
+                
+                // Re-renderiza tudo
+                renderMeusAppsCategoriesSidebar();
+                
+                alert('Dados limpos com sucesso! Todas as personalizações foram removidas.');
+                console.log('Dados conflitantes limpos pelo usuário');
+            }
+        }
+
+        // Inicialização quando a página carrega
+        document.addEventListener('DOMContentLoaded', function() {
+            // VERSÃO USER: SEM limpeza automática - dados são persistidos
+            console.log('🔧 Versão USER inicializada - dados persistidos');
+            
+            // Carrega dados existentes
+            loadCustomItemData();
+            renderMeusAppsCategoriesSidebar();
+            renderVideosCategoriesSidebar();
+            
+            // Função global para emergência (acessível via console)
+            window.clearAllCustomData = clearConflictingData;
+            
+            // Funções de Export/Import disponíveis globalmente
+            window.exportUserConfig = exportUserConfig;
+            window.importUserConfig = importUserConfig;
+            
+            console.log('🔧 Sistema de edição USER inicializado');
+            console.log('💡 Funções disponíveis:');
+            console.log('   - exportUserConfig() - Exporta configurações');
+            console.log('   - importUserConfig(jsonData) - Importa configurações');
+            console.log('   - clearAllCustomData() - Limpa todas as personalizações');
+            
+            // Adiciona botões de Export/Import
+            setTimeout(addExportImportButtons, 1000);
+        });
+
+        // Função para exportar configurações do usuário
+        function exportUserConfig() {
+            const config = {
+                version: "1.0",
+                timestamp: new Date().toISOString(),
+                type: "USER",
+                customItemData: customItemData,
+                customCardData: customCardData,
+                userFavorites: userFavorites,
+                editMode: localStorage.getItem('editMode') || 'false'
+            };
+            
+            const jsonString = JSON.stringify(config, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `geriah_user_config_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            console.log('✅ Configurações exportadas com sucesso!');
+            alert(`✅ Configurações exportadas!\n\n📊 Incluído:\n• ${Object.keys(customItemData).length} personalizações de itens\n• ${Object.keys(customCardData).length} personalizações de cards\n• ${userFavorites.length} favoritos pessoais`);
+        }
+
+        // Função para importar configurações do usuário
+        function importUserConfig(jsonData) {
+            try {
+                let config;
+                
+                // Se recebeu string, faz parse
+                if (typeof jsonData === 'string') {
+                    config = JSON.parse(jsonData);
+                } else {
+                    config = jsonData;
+                }
+                
+                // Validação básica
+                if (!config.type || config.type !== 'USER') {
+                    throw new Error('Arquivo não é uma configuração USER válida');
+                }
+                
+                // Confirma importação
+                const itemCount = Object.keys(config.customItemData || {}).length;
+                const cardCount = Object.keys(config.customCardData || {}).length;
+                const favCount = (config.userFavorites || []).length;
+                
+                if (!confirm(`Importar configurações de ${config.timestamp}?\n\n📊 Será importado:\n• ${itemCount} personalizações de itens\n• ${cardCount} personalizações de cards\n• ${favCount} favoritos pessoais\n\nIsso substituirá suas configurações atuais.`)) {
+                    return;
+                }
+                
+                // Importa dados
+                if (config.customItemData) {
+                    customItemData = config.customItemData;
+                    localStorage.setItem('customItemData', JSON.stringify(customItemData));
+                }
+                
+                if (config.customCardData) {
+                    customCardData = config.customCardData;
+                    localStorage.setItem('customCardData', JSON.stringify(customCardData));
+                }
+                
+                if (config.userFavorites) {
+                    userFavorites = config.userFavorites;
+                    saveUserFavorites();
+                    renderUserFavorites();
+                }
+                
+                // Re-renderiza tudo
+                renderMeusAppsCategoriesSidebar();
+                
+                console.log('✅ Configurações importadas com sucesso!');
+                alert('✅ Configurações importadas com sucesso!');
+                
+            } catch (error) {
+                console.error('❌ Erro ao importar configurações:', error);
+                alert('❌ Erro ao importar configurações: ' + error.message);
+            }
+        }
+
+        // Função para criar input de arquivo para importação
+        function createImportFileInput() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        importUserConfig(e.target.result);
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+
+        // Adiciona botões de Export/Import ao DOM
+        function addExportImportButtons() {
+            if (!document.getElementById('exportImportButtons')) {
+                const buttonsContainer = document.createElement('div');
+                buttonsContainer.id = 'exportImportButtons';
+                buttonsContainer.style.cssText = `
+                    position: fixed;
+                    bottom: 80px;
+                    right: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    z-index: 1000;
+                `;
+                
+                const exportBtn = document.createElement('button');
+                exportBtn.textContent = '📤 Exportar';
+                exportBtn.style.cssText = `
+                    border: none;
+                    padding: 8px 12px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-size: 12px;
+                    transition: all 0.3s ease;
+                `;
+                exportBtn.onclick = exportUserConfig;
+                
+                const importBtn = document.createElement('button');
+                importBtn.textContent = '📥 Importar';
+                importBtn.style.cssText = `
+                    background: #2196F3;
+                    border: none;
+                    padding: 8px 12px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-size: 12px;
+                    transition: all 0.3s ease;
+                `;
+                importBtn.onclick = createImportFileInput;
+                
+                buttonsContainer.appendChild(exportBtn);
+                buttonsContainer.appendChild(importBtn);
+                document.body.appendChild(buttonsContainer);
+                
+                console.log('✅ Botões Export/Import adicionados');
+            }
+        }
+
+        // Função para mostrar aviso de upgrade
+        function showUpgradeAlert(feature) {
+            const upgradeModal = document.createElement('div');
+            upgradeModal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: linear-gradient(135deg, #2d1810, #4a2f16);
+                padding: 30px;
+                border-radius: 15px;
+                text-align: center;
+                max-width: 400px;
+                border: 2px solid #ff6b35;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            `;
+            
+            modalContent.innerHTML = `
+                <div style="color: #ff6b35; font-size: 3rem; margin-bottom: 15px;">🚀</div>
+                <h2 style="color: #ffcc80; margin-bottom: 15px; font-size: 1.5rem;">Recurso ENTERPRISE</h2>
+                <p style="color: #e5e5e5; margin-bottom: 20px; line-height: 1.5;">
+                    <strong>${feature}</strong> está disponível apenas na versão <strong>ENTERPRISE</strong>.
+                </p>
+                <div style="background: rgba(255, 107, 53, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <p style="color: #ffcc80; margin: 0; font-size: 0.9rem;">
+                        ✨ <strong>ENTERPRISE inclui:</strong><br>
+                        • Criar/editar categorias<br>
+                        • Personalizar cores e logo<br>
+                        • Configurações avançadas<br>
+                        • Suporte prioritário
+                    </p>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button id="upgradeBtn" style="
+                        background: linear-gradient(135deg, #ff6b35, #e55a2b);
+                        border: none;
+                        padding: 12px 20px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    ">🚀 FAZER UPGRADE</button>
+                    <button id="closeUpgradeModal" style="
+                        background: transparent;
+                        color: #e5e5e5;
+                        border: 1px solid #666;
+                        padding: 12px 20px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    ">Fechar</button>
+                </div>
+            `;
+            
+            upgradeModal.appendChild(modalContent);
+            document.body.appendChild(upgradeModal);
+            
+            // Event listeners
+            document.getElementById('upgradeBtn').onclick = function() {
+                alert('🚀 Entre em contato para upgrade ENTERPRISE!\n\n📧 Email: contato@geriah.com\n📱 WhatsApp: (11) 99999-9999');
+                document.body.removeChild(upgradeModal);
+            };
+            
+            document.getElementById('closeUpgradeModal').onclick = function() {
+                document.body.removeChild(upgradeModal);
+            };
+            
+            upgradeModal.onclick = function(e) {
+                if (e.target === upgradeModal) {
+                    document.body.removeChild(upgradeModal);
+                }
+            };
+        }
+
+        // Função para interceptar tentativas de edição de categoria
+        function interceptCategoryEdit() {
+            // Intercepta cliques nos headers das categorias principais
+            document.addEventListener('click', function(e) {
+                // Se estiver em modo de edição e clicar em header de categoria
+                if (isEditMode && e.target.closest('.accordion-header')) {
+                    const header = e.target.closest('.accordion-header');
+                    const categoryName = header.textContent.trim().split('\n')[0].trim();
+                    
+                    // Verifica se é uma categoria principal (não subcategoria)
+                    if (header.parentElement.classList.contains('accordion-item')) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        showUpgradeAlert(`Editar categoria "${categoryName}"`);
+                        return false;
+                    }
+                }
+                
+                // Intercepta tentativas de adicionar nova categoria/subcategoria
+                if (isEditMode && e.target.closest('.sub-accordion-header')) {
+                    const subHeader = e.target.closest('.sub-accordion-header');
+                    const subCategoryName = subHeader.textContent.trim().split('\n')[0].trim();
+                    
+                    // Se clicar com Ctrl ou Alt (indicando intenção de adicionar)
+                    if (e.ctrlKey || e.altKey) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        showUpgradeAlert(`Adicionar nova subcategoria em "${subCategoryName}"`);
+                        return false;
+                    }
+                }
+            });
+        }
+
+        // Função para adicionar indicadores visuais de upgrade
+        function addUpgradeIndicators() {
+            if (isEditMode) {
+                // Adiciona indicadores nas categorias principais
+                const categoryHeaders = document.querySelectorAll('.accordion-header');
+                categoryHeaders.forEach(header => {
+                    if (!header.querySelector('.enterprise-indicator')) {
+                        const indicator = document.createElement('span');
+                        indicator.className = 'enterprise-indicator';
+                        indicator.innerHTML = '🚀';
+                        indicator.style.cssText = `
+                            position: absolute;
+                            right: 30px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            background: linear-gradient(135deg, #ff6b35, #e55a2b);
+                            border-radius: 10px;
+                            font-size: 0.7rem;
+                            cursor: pointer;
+                            z-index: 100;
+                        `;
+                        indicator.title = 'Clique para upgrade ENTERPRISE';
+                        indicator.onclick = function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            showUpgradeAlert('Editar estrutura de categorias');
+                        };
+                        header.style.position = 'relative';
+                        header.appendChild(indicator);
+                    }
+                });
+            } else {
+                // Remove indicadores quando sair do modo de edição
+                document.querySelectorAll('.enterprise-indicator').forEach(indicator => {
+                    indicator.remove();
+                });
+            }
+        }
+
+        // ========== FUNÇÕES PARA MEUS FAVORITOS (USER) ==========
+
+        // Função para carregar favoritos do localStorage
+        function loadUserFavorites() {
+            const saved = localStorage.getItem('userFavorites');
+            if (saved) {
+                try {
+                    userFavorites = JSON.parse(saved);
+                } catch (e) {
+                    console.error('Erro ao carregar favoritos:', e);
+                    userFavorites = [];
+                }
+            }
+            renderUserFavorites();
+        }
+
+        // Função para salvar favoritos no localStorage
+        function saveUserFavorites() {
+            localStorage.setItem('userFavorites', JSON.stringify(userFavorites));
+        }
+
+        // Função para renderizar a lista de favoritos
+        function renderUserFavorites() {
+            const list = document.getElementById('favoritosItemsList');
+            const counter = document.getElementById('favoritosCounter');
+            
+            if (!list || !counter) return;
+            
+            // Atualiza contador
+            counter.textContent = `${userFavorites.length}/${MAX_USER_FAVORITES}`;
+            
+            // Limpa lista
+            list.innerHTML = '';
+            
+            // Adiciona favoritos existentes
+            userFavorites.forEach((favorite, index) => {
+                const li = document.createElement('li');
+                li.className = 'favorite-item';
+                li.innerHTML = `
+                    <a href="${favorite.url}" target="_blank" class="favorite-link" title="${favorite.description || favorite.name}">
+                        ${favorite.name}
+                    </a>
+                    <button class="favorite-delete-btn" onclick="deleteFavorite(${index})" title="Remover favorito">×</button>
+                `;
+                list.appendChild(li);
+            });
+            
+            // Adiciona botão "Adicionar" se não atingiu o limite
+            if (userFavorites.length < MAX_USER_FAVORITES) {
+                const li = document.createElement('li');
+                li.className = 'add-favorite-placeholder';
+                li.innerHTML = `
+                    <button class="add-favorite-btn" onclick="openAddFavoriteModal()">
+                        <span style="font-size: 1.2em;">➕</span>
+                        Adicionar Favorito (${userFavorites.length}/${MAX_USER_FAVORITES})
+                    </button>
+                `;
+                list.appendChild(li);
+            } else {
+                // Mostra botão desabilitado quando atingir limite
+                const li = document.createElement('li');
+                li.className = 'add-favorite-placeholder';
+                li.innerHTML = `
+                    <button class="add-favorite-btn" disabled onclick="showUpgradeAlert('Adicionar mais de ${MAX_USER_FAVORITES} favoritos')">
+                        🚀 Limite atingido - ENTERPRISE para mais
+                    </button>
+                `;
+                list.appendChild(li);
+            }
+        }
+
+        // Função para abrir modal de adicionar favorito
+        function openAddFavoriteModal() {
+            if (userFavorites.length >= MAX_USER_FAVORITES) {
+                showUpgradeAlert(`Adicionar mais de ${MAX_USER_FAVORITES} favoritos`);
+                return;
+            }
+            
+            // Limpa campos
+            document.getElementById('addFavoriteName').value = '';
+            document.getElementById('addFavoriteUrl').value = '';
+            document.getElementById('addFavoriteDescription').value = '';
+            
+            // Mostra modal
+            document.getElementById('addFavoriteModal').classList.remove('hidden');
+        }
+
+        // Função para fechar modal de adicionar favorito
+        function closeAddFavoriteModal() {
+            document.getElementById('addFavoriteModal').classList.add('hidden');
+        }
+
+        // Função para salvar novo favorito
+        function saveNewFavorite() {
+            const name = document.getElementById('addFavoriteName').value.trim();
+            const url = document.getElementById('addFavoriteUrl').value.trim();
+            const description = document.getElementById('addFavoriteDescription').value.trim();
+            
+            // Validação
+            if (!name) {
+                alert('Por favor, digite um nome para o favorito.');
+                return;
+            }
+            
+            if (!url) {
+                alert('Por favor, digite uma URL válida.');
+                return;
+            }
+            
+            // Adiciona https:// se necessário
+            let finalUrl = url;
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                finalUrl = 'https://' + url;
+            }
+            
+            // Verifica limite
+            if (userFavorites.length >= MAX_USER_FAVORITES) {
+                showUpgradeAlert(`Adicionar mais de ${MAX_USER_FAVORITES} favoritos`);
+                return;
+            }
+            
+            // Adiciona favorito
+            const newFavorite = {
+                id: Date.now(), // ID único
+                name: name,
+                url: finalUrl,
+                description: description,
+                createdAt: new Date().toISOString()
+            };
+            
+            userFavorites.push(newFavorite);
+            saveUserFavorites();
+            renderUserFavorites();
+            closeAddFavoriteModal();
+            
+            // Feedback
+            console.log('✅ Favorito adicionado:', newFavorite);
+            alert(`⭐ "${name}" foi adicionado aos seus favoritos!`);
+        }
+
+        // Função para deletar favorito
+        function deleteFavorite(index) {
+            if (index >= 0 && index < userFavorites.length) {
+                const favorite = userFavorites[index];
+                if (confirm(`Remover "${favorite.name}" dos favoritos?`)) {
+                    userFavorites.splice(index, 1);
+                    saveUserFavorites();
+                    renderUserFavorites();
+                    console.log('🗑️ Favorito removido:', favorite);
+                }
+            }
+        }
+
+        // Event listeners para modal de favoritos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar favoritos na inicializa��o
+            loadUserFavorites();
+        });
+
+        // ========== FIM DAS FUN��ES DE FAVORITOS ==========
     </script>
 </body>
-</html> 
-
+</html>
