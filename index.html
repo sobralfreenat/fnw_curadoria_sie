@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FNW - GERiAH Demo 6.1.1</title>
+    <title>GERIiAH - INDIVIDUAL 7.1.1</title>
     
     <!-- Favicon e PWA Icons -->
     <link rel="icon" type="image/png" sizes="32x32" href="https://d1yei2z3i6k35z.cloudfront.net/12974529/684d9ab360bc7_GERiAHLOGO8SQUARE2donwload.png">
@@ -56,9 +56,10 @@
             color: #fff; 
             display: flex; 
             align-items: center; 
-            padding: 0 20px; 
+            padding: 0 30px; /* Aumentado de 20px para 30px para mais espaçamento */
             z-index: 9999 !important; /* Z-index alto */
             border-bottom: 1px solid rgba(255,255,255,0.1); /* Linha sutil de separação */
+            gap: 15px; /* Adiciona espaçamento entre elementos do header */
         }
         header h3 { /* Ajuste no título do header */
             margin: 0; 
@@ -122,7 +123,6 @@
         }
         
         #toggleLabel {
-            color: white;
             font-size: 0.9em;
             font-weight: normal;
             white-space: nowrap;
@@ -139,6 +139,12 @@
         
         body.edit-mode #headerTitle {
             color: #ffcc80;
+        }
+        
+        /* Ajuste de font-size para o headerTitle - aumentado 50% */
+        #headerTitle {
+            font-size: 1.05em; /* 50% maior que o padrão original */
+            margin: 0 15px; /* Mais espaçamento lateral */
         }
         
         body.edit-mode aside {
@@ -175,29 +181,50 @@
             display: block !important; /* Força a exibição do botão hamburger */
             background: transparent;
             border: none;
-            color: white;
             font-size: 2em;
+            color: #ffffff !important; /* Cor branca para contraste */
             cursor: pointer;
             padding: 5px 10px;
             z-index: 10000 !important; /* Garante que fique acima de outros elementos do header */
             margin-right: 15px;
             line-height: 1;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Sombra para melhor legibilidade */
+            transition: color 0.3s ease, text-shadow 0.3s ease;
         }
+        
+        .menu-toggle:hover {
+            color: #e0e0e0 !important; /* Cor ligeiramente mais escura no hover */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        /* Cor específica para modo de edição */
+        body.edit-mode .menu-toggle {
+            color: #ffffff !important; /* Mantém branco no modo de edição */
+            text-shadow: 0 1px 3px rgba(255, 107, 53, 0.5); /* Sombra laranja no modo de edição */
+        }
+        
+        body.edit-mode .menu-toggle:hover {
+            color: #fff3e0 !important; /* Tom mais quente no hover do modo de edição */
+            text-shadow: 0 2px 4px rgba(255, 107, 53, 0.8);
+        }
+        
         /* Sidebar abaixo do header */
-        aside { 
-            position: fixed; 
-            top: 70px !important; /* Abaixo do header GERiAH */
-            bottom: 0; 
-            left: 0; 
-            width: 250px; 
-            background: rgba(42, 26, 58, 0.8); /* Tom de roxo GERiAH com transparência */
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border-right: 1px solid rgba(80, 48, 96, 0.7); 
-            overflow-y: auto; 
-            padding: 15px 15px 20px 15px; /* REINTRODUZIDO padding-top de 15px na aside */
-            z-index: 990; /* Abaixo do header mas acima do main */
-            transition: transform 0.3s ease-in-out; /* Transição para o slide-in/out */
+        aside {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 250px;
+            height: calc(100vh - 70px);
+            background: rgba(80, 48, 96, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #e5e5e5;
+            z-index: 990;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
         }
         /* Adicionado para espaçar a primeira categoria do topo da sidebar */
         aside .accordion-item:first-of-type {
@@ -217,7 +244,6 @@
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 1px solid rgba(80, 48, 96, 0.7);
-            font-weight: bold;
         }
         #categoriesList {
             list-style: none; 
@@ -239,7 +265,6 @@
         #categoriesList button.active, #categoriesList button:hover { 
             background: rgba(80, 48, 96, 0.9); 
             color: #fff; 
-            font-weight: bold;
         } */
 
         /* Novo seletor genérico para botões dentro dos acordeões da sidebar */
@@ -259,7 +284,6 @@
         aside .accordion-content ul li button.active { /* .active ainda é útil para categorias */
             background: rgba(80, 48, 96, 0.9); /* Roxo mais forte para ativo/hover */
             color: #fff; 
-            font-weight: bold;
         }
 
         #myCoursesBtn { 
@@ -277,7 +301,6 @@
             margin-left: auto; /* Empurra o botão para a direita do header */
             margin-right: 10px; /* Pequena margem da borda direita do header */
             /* margin-bottom removido pois não é mais relevante para o fluxo da aside */
-            font-weight: bold;
             font-size: 0.9em; /* Levemente reduzido para o header */
             transition: background-color 0.2s ease, color 0.2s ease;
         }
@@ -524,7 +547,6 @@
             margin-bottom: 0;
             font-size: 0.99em;
             color: #fff; 
-            font-weight: bold;
             margin-top: 0; /* Garante que não haja margem superior extra */
             border-radius: 6px;
             padding-left: 10px;
@@ -593,7 +615,6 @@
         .sub-accordion-header.active {
             background: rgba(80, 48, 96, 0.7);
             color: #fff;
-            font-weight: bold;
         }
         
         .sub-accordion-content {
@@ -638,13 +659,11 @@
         }
         #curationConfirm button, #curationReview button {
             background-color: rgba(100, 68, 116, 0.9); /* Roxo GERiAH para botões */
-            color: white;
             border: 1px solid rgba(120, 88, 136, 1);
             padding: 10px 15px;
             margin: 5px;
             border-radius: 4px;
             cursor: pointer;
-            font-weight: bold;
             transition: background-color 0.2s ease, border-color 0.2s ease;
         }
         #curationConfirm button:hover, #curationReview button:hover {
@@ -672,6 +691,8 @@
             }
             .menu-toggle {
                 display: block; /* Mostra o botão hamburger no mobile */
+                color: #ffffff !important; /* Cor branca para contraste no mobile */
+                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Sombra para melhor legibilidade */
             }
             aside {
                 transform: translateX(-100%); /* Esconde a sidebar por padrão no mobile */
@@ -723,17 +744,31 @@
             .carousel-track::after {
                 background: linear-gradient(to left, #100818 30%, rgba(16, 8, 24, 0.65) 75%, rgba(16, 8, 24, 0) 100%);
             }
+            
+            /* Ajustar posição da lista de resultados no mobile */
+            .search-results {
+                left: 260px !important;
+                width: 300px !important;
+                max-width: calc(100vw - 270px);
+                top: 75px !important;
+                max-height: 350px;
+            }
+            
+            /* Quando sidebar está fechada no mobile, lista fica mais à esquerda */
+            body:not(.sidebar-open) .search-results {
+                left: 10px !important;
+                width: 280px !important;
+                max-width: calc(100vw - 20px);
+            }
         }
 
         .access-course-button {
             background-color: #804C9A; /* Roxo GERiAH */
-            color: white;
             border: none;
             padding: 8px 15px;
             margin-top: 10px;
             border-radius: 4px;
             cursor: pointer;
-            font-weight: bold;
             transition: background-color 0.2s ease;
             display: block; /* Ocupa a largura total */
             width: calc(100% - 0px); /* Ajusta para preencher o info div */
@@ -760,10 +795,9 @@
         .support-logo {
             width: 48px;
             height: 48px;
-            opacity: 0.4;
+            opacity: 1.0; /* Totalmente opaco/aceso */
             cursor: pointer;
             transition: opacity 0.3s ease, transform 0.3s ease;
-            border-radius: 8px;
             overflow: hidden;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
@@ -776,7 +810,7 @@
         }
         
         .support-logo:hover {
-            opacity: 0.8;
+            opacity: 1.0; /* Mantém totalmente opaco no hover */
             transform: scale(1.1);
         }
         
@@ -789,13 +823,13 @@
         
         /* Quando o toggle está visível, logo fica mais visível */
         .support-logo.toggle-visible {
-            opacity: 0.8;
+            opacity: 1.0; /* Totalmente visível */
             background: rgba(255, 107, 53, 0.2);
             border: 2px solid rgba(255, 107, 53, 0.5);
         }
         
         .support-logo.toggle-visible:hover {
-            opacity: 1;
+            opacity: 1.0; /* Mantém totalmente visível */
             background: rgba(255, 107, 53, 0.3);
         }
         
@@ -804,14 +838,14 @@
             position: relative;
         }
         
-        /* Esconder logo no modo de edição ativo */
+        /* Logo visível mesmo no modo de edição */
         body.edit-mode .support-logo {
-            opacity: 0.3;
+            opacity: 0.8; /* Mais visível no modo de edição */
             background: rgba(255, 107, 53, 0.1);
         }
         
         body.edit-mode .support-logo:hover {
-            opacity: 0.6;
+            opacity: 1.0; /* Totalmente visível no hover do modo de edição */
         }
         
         /* Estilos para itens personalizados */
@@ -842,9 +876,7 @@
         /* Estilos para badges do menu Meus Apps */
         .check-icon {
             background: linear-gradient(45deg, #4CAF50, #66BB6A);
-            color: white;
             font-size: 0.8em;
-            font-weight: bold;
             padding: 2px 5px;
             border-radius: 50%;
             margin-right: 8px;
@@ -860,7 +892,6 @@
         /* Ícone de check para apps individuais funcionais */
         .app-check {
             color: #4CAF50;
-            font-weight: bold;
             font-size: 0.9em;
             margin-right: 6px;
             text-shadow: 0 1px 2px rgba(76, 175, 80, 0.3);
@@ -869,7 +900,6 @@
         /* Ícone de pendente para apps não testados ainda */
         .app-pending {
             color: #FF9800;
-            font-weight: bold;
             font-size: 0.9em;
             margin-right: 6px;
             text-shadow: 0 1px 2px rgba(255, 152, 0, 0.3);
@@ -878,7 +908,6 @@
         .apps-counter {
             color: #4CAF50;
             font-size: 0.9em;
-            font-weight: bold;
             margin-right: 100px !important;
         }
         
@@ -948,6 +977,323 @@
         body.edit-mode .apps-counter {
             display: inline !important;
         }
+
+        /* Badge USER */
+        .user-badge {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: rgba(76, 175, 80, 0.9);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .user-badge:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+
+        /* Estilos para categoria MEUS FAVORITOS */
+        .add-favorite-placeholder {
+            list-style: none;
+            margin: 10px 0;
+        }
+
+        .add-favorite-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #4A148C, #6A1B9A); /* Roxo mais escuro para melhor contraste */
+            border: none;
+            padding: 12px 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #ffffff; /* Texto branco para contraste */
+            font-weight: 500; /* Texto mais destacado */
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-radius: 6px; /* Bordas arredondadas */
+        }
+
+        .add-favorite-btn:hover {
+            background: linear-gradient(135deg, #6A1B9A, #7B1FA2); /* Roxo mais claro no hover */
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(74, 20, 140, 0.4); /* Sombra roxa */
+        }
+
+        .add-favorite-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Favoritos individuais */
+        .favorite-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            margin: 8px 0;
+            padding: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .favorite-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+
+        .favorite-item .favorite-link {
+            color: #e5e5e5;
+            text-decoration: none;
+            display: block;
+            font-weight: 500;
+        }
+
+        .favorite-item .favorite-link:hover {
+            color: #FFD700;
+        }
+
+        .favorite-delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 0, 0, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: none;
+        }
+
+        body.edit-mode .favorite-delete-btn {
+            display: block;
+        }
+
+        /* Estilos para o botão de toggle do menu (hamburger) */
+
+        /* Badge USER integrado no sidebar */
+        .sidebar-user-header {
+            position: sticky;
+            top: 0;
+            background: rgba(80, 48, 96, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 101;
+            margin: 0;
+        }
+
+        .sidebar-user-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Remover badge fixo */
+        .user-badge {
+            display: none;
+        }
+
+        /* Estilos para Sub-Acordeões dentro de EXCLUSIVO */
+
+        /* Estilos para o campo de busca do menu */
+        .menu-search-container {
+            position: sticky;
+            top: 0;
+            background: rgba(80, 48, 96, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            margin: 0;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100;
+        }
+        
+        /* Container do conteúdo do menu com scroll */
+        .menu-content {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 0 15px 20px 15px;
+        }
+        
+        .search-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        #menuSearchInput {
+            width: 100%;
+            padding: 10px 35px 10px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        #menuSearchInput:focus {
+            outline: none;
+            border-color: #804C9A;
+            background: rgba(128, 76, 154, 0.15);
+            box-shadow: 0 0 10px rgba(128, 76, 154, 0.3);
+        }
+        
+        #menuSearchInput::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .clear-search-btn {
+            position: absolute;
+            right: 8px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 3px;
+            transition: all 0.2s ease;
+        }
+        
+        .clear-search-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+        
+        .search-results {
+            position: fixed;
+            top: 70px;
+            left: 250px;
+            width: 350px;
+            background: rgba(59, 32, 74, 0.98);
+            border: 1px solid rgba(128, 76, 154, 0.4);
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 9999;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            margin: 10px;
+        }
+        
+        .search-result-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .search-result-item:hover {
+            background: rgba(128, 76, 154, 0.2);
+        }
+        
+        .search-result-item:active {
+            background: rgba(128, 76, 154, 0.4);
+            transform: translateX(2px);
+        }
+        
+        .search-result-item.clicked {
+            background: rgba(255, 215, 0, 0.2);
+            border-left: 3px solid #FFD700;
+            animation: itemClicked 0.3s ease;
+        }
+        
+        @keyframes itemClicked {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(4px); }
+            100% { transform: translateX(0); }
+        }
+        
+        .search-result-name {
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+        
+        .search-result-path {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8em;
+            font-style: italic;
+        }
+        
+        .search-no-results {
+            padding: 15px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+        }
+        
+        /* Highlight do termo pesquisado */
+        .search-highlight {
+            background: rgba(255, 235, 59, 0.3);
+            color: #fff;
+            padding: 1px 2px;
+            border-radius: 2px;
+        }
+        
+        /* Destaque dos itens encontrados no menu */
+        .search-highlighted-item {
+            background: rgba(255, 235, 59, 0.2) !important;
+            border-left: 3px solid #FFD700 !important;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.4) !important;
+            animation: searchPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes searchPulse {
+            0%, 100% { 
+                box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+            }
+            50% { 
+                box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+            }
+        }
+
+        /* Estilo para mensagens de instrução */
+        .instruction-message {
+            color: #ccc;
+            text-align: left;
+            margin: 80px 30px 50px 30px;
+            font-size: 1.2em;
+            line-height: 1.4;
+        }
     </style>
 
 </head>
@@ -965,193 +1311,231 @@
                 <input type="checkbox" id="editModeToggle">
                 <span class="toggle-slider"></span>
             </label>
-            <span id="toggleLabel">Modo de Edição</span>
+            <span id="toggleLabel">Editar</span>
         </div>
         <button id="myCoursesBtn">iA</button>
     </header>
     <aside>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <img src="https://api.iconify.design/tabler/apps.svg?color=%23e5e5e5" alt="MeusApps Logo" style="width: 24px; height: 24px; margin-right: 10px; vertical-align: middle;">
-                CEL APPS 
-                <span class="apps-counter">45</span>
-                <span class="accordion-icon">►</span>
-            </h2>
-            <div class="accordion-content">
-                <ul id="meusAppsMainItemsList">
-                    <li>
-                        <div class="sub-accordion-item">
-                            <button class="sub-accordion-header">
-                                <img src="https://api.iconify.design/tabler/health-recognition.svg?color=%23e5e5e5" alt="Saúde Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
-                                <span class="subcat-status partial">●</span>
-                                Saúde
-                                <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">4</span>
-                                <span class="sub-accordion-icon">►</span>
-                            </button>
-                            <div class="sub-accordion-content" style="display: none;">
-                                <ul id="saudeItemsList"><li>Carregando...</li></ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="sub-accordion-item">
-                            <button class="sub-accordion-header">
-                                <img src="https://api.iconify.design/tabler/message.svg?color=%23e5e5e5" alt="Comunicar Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
-                                <span class="subcat-status partial">●</span>
-                                Comunicar
-                                <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">6</span>
-                                <span class="sub-accordion-icon">►</span>
-                            </button>
-                            <div class="sub-accordion-content" style="display: none;">
-                                <ul id="comunicacaoItemsList"><li>Carregando...</li></ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="sub-accordion-item">
-                            <button class="sub-accordion-header">
-                                <img src="https://api.iconify.design/tabler/credit-card.svg?color=%23e5e5e5" alt="Banco Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
-                                <span class="subcat-status partial">●</span>
-                                Banco
-                                <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">6</span>
-                                <span class="sub-accordion-icon">►</span>
-                            </button>
-                            <div class="sub-accordion-content" style="display: none;">
-                                <ul id="bancoItemsList"><li>Carregando...</li></ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="sub-accordion-item">
-                            <button class="sub-accordion-header">
-                                <img src="https://api.iconify.design/tabler/pizza.svg?color=%23e5e5e5" alt="Alimentação Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
-                                <span class="subcat-status partial">●</span>
-                                Alimentação
-                                <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">2</span>
-                                <span class="sub-accordion-icon">►</span>
-                            </button>
-                            <div class="sub-accordion-content" style="display: none;">
-                                <ul id="alimentacaoItemsList"><li>Carregando...</li></ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="sub-accordion-item">
-                            <button class="sub-accordion-header">
-                                <img src="https://api.iconify.design/tabler/tool.svg?color=%23e5e5e5" alt="Utilidades Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
-                                <span class="subcat-status partial">●</span>
-                                Utilidades
-                                <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">20</span>
-                                <span class="sub-accordion-icon">►</span>
-                            </button>
-                            <div class="sub-accordion-content" style="display: none;">
-                                <ul id="utilidadesItemsList"><li>Carregando...</li></ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="sub-accordion-item">
-                            <button class="sub-accordion-header">
-                                <img src="https://api.iconify.design/tabler/device-gamepad.svg?color=%23e5e5e5" alt="Lazer Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
-                                <span class="subcat-status partial">●</span>
-                                Lazer
-                                <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">5</span>
-                                <span class="sub-accordion-icon">►</span>
-                            </button>
-                            <div class="sub-accordion-content" style="display: none;">
-                                <ul id="lazerItemsList"><li>Carregando...</li></ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="sub-accordion-item">
-                            <button class="sub-accordion-header">
-                                <img src="https://api.iconify.design/tabler/car.svg?color=%23e5e5e5" alt="Transporte Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
-                                <span class="subcat-status partial">●</span>
-                                Transporte
-                                <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">4</span>
-                                <span class="sub-accordion-icon">►</span>
-                            </button>
-                            <div class="sub-accordion-content" style="display: none;">
-                                <ul id="transporteItemsList"><li>Carregando...</li></ul>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+        <div class="sidebar-user-header">
+            🎯 INDIVIDUAL
+        </div>
+        
+        <!-- Campo de busca do menu -->
+        <div class="menu-search-container">
+            <div class="search-input-wrapper">
+                <input type="text" id="menuSearchInput" placeholder="🔍 Buscar no menu..." autocomplete="off">
+                <button id="clearSearchBtn" class="clear-search-btn" style="display: none;">&times;</button>
             </div>
         </div>
-        <div class="category-separator"></div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <img src="https://api.iconify.design/tabler/gift.svg?color=%23e5e5e5" alt="Exclusivo Logo" style="width: 24px; height: 24px; margin-right: 10px; vertical-align: middle;">
-                EXCLUSIVO 
-                <span class="accordion-icon">►</span>
-            </h2>
-            <div class="accordion-content">
-                <ul id="paiMainItemsList">
-                    <li>
-                        <div class="sub-accordion-item">
-                            <button class="sub-accordion-header">
-                                <img src="https://api.iconify.design/tabler/video.svg?color=%23e5e5e5" alt="Videos Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
-                                Videos Disponíveis
-                                <span class="sub-accordion-icon">►</span>
-                            </button>
-                            <div class="sub-accordion-content" style="display: none;">
-                                <ul id="videosItemsList"><li>Carregando...</li></ul>
+        
+        <!-- Conteúdo do menu com scroll -->
+        <div class="menu-content">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <img src="https://api.iconify.design/tabler/apps.svg?color=%23e5e5e5" alt="MeusApps Logo" style="width: 24px; height: 24px; margin-right: 10px; vertical-align: middle;">
+                    CEL APPS 
+                    <span class="apps-counter">45</span>
+                    <span class="accordion-icon">►</span>
+                </h2>
+                <div class="accordion-content">
+                    <ul id="meusAppsMainItemsList">
+                        <li>
+                            <div class="sub-accordion-item">
+                                <button class="sub-accordion-header">
+                                    <img src="https://api.iconify.design/tabler/health-recognition.svg?color=%23e5e5e5" alt="Saúde Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                    <span class="subcat-status partial">●</span>
+                                    Saúde
+                                    <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">4</span>
+                                    <span class="sub-accordion-icon">►</span>
+                                </button>
+                                <div class="sub-accordion-content" style="display: none;">
+                                    <ul id="saudeItemsList"><li>Carregando...</li></ul>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="sub-accordion-item">
-                            <button class="sub-accordion-header">
-                                <img src="https://api.iconify.design/tabler/school.svg?color=%23e5e5e5" alt="Conteudo de Apoio Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
-                                Conteúdo de Apoio
-                                <span class="sub-accordion-icon">►</span>
-                            </button>
-                            <div class="sub-accordion-content" style="display: none;">
-                                <ul id="categoriesList"><li>Carregando...</li></ul>
+                        </li>
+                        <li>
+                            <div class="sub-accordion-item">
+                                <button class="sub-accordion-header">
+                                    <img src="https://api.iconify.design/tabler/message.svg?color=%23e5e5e5" alt="Comunicar Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                    <span class="subcat-status partial">●</span>
+                                    Comunicar
+                                    <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">6</span>
+                                    <span class="sub-accordion-icon">►</span>
+                                </button>
+                                <div class="sub-accordion-content" style="display: none;">
+                                    <ul id="comunicacaoItemsList"><li>Carregando...</li></ul>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="sub-accordion-item">
-                            <button class="sub-accordion-header">
-                                <img src="https://api.iconify.design/tabler/tools.svg?color=%23e5e5e5" alt="Ferramentas Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
-                                Ferramentas & Negócios
-                                <span class="sub-accordion-icon">►</span>
-                            </button>
-                            <div class="sub-accordion-content" style="display: none;">
-                                <ul id="paiItemsList"><li>Nenhuma categoria F.A.I. configurada.</li></ul>
+                        </li>
+                        <li>
+                            <div class="sub-accordion-item">
+                                <button class="sub-accordion-header">
+                                    <img src="https://api.iconify.design/tabler/credit-card.svg?color=%23e5e5e5" alt="Banco Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                    <span class="subcat-status partial">●</span>
+                                    Banco
+                                    <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">6</span>
+                                    <span class="sub-accordion-icon">►</span>
+                                </button>
+                                <div class="sub-accordion-content" style="display: none;">
+                                    <ul id="bancoItemsList"><li>Carregando...</li></ul>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="sub-accordion-item">
-                            <button class="sub-accordion-header">
-                                <img src="https://api.iconify.design/tabler/brain.svg?color=%23e5e5e5" alt="Suporte IA Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
-                                Suporte - IA
-                                <span class="sub-accordion-icon">►</span>
-                            </button>
-                            <div class="sub-accordion-content" style="display: none;">
-                                <ul id="suporteIaItemsList"><li>Carregando subcategorias...</li></ul> 
+                        </li>
+                        <li>
+                            <div class="sub-accordion-item">
+                                <button class="sub-accordion-header">
+                                    <img src="https://api.iconify.design/tabler/pizza.svg?color=%23e5e5e5" alt="Alimentação Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                    <span class="subcat-status partial">●</span>
+                                    Alimentação
+                                    <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">2</span>
+                                    <span class="sub-accordion-icon">►</span>
+                                </button>
+                                <div class="sub-accordion-content" style="display: none;">
+                                    <ul id="alimentacaoItemsList"><li>Carregando...</li></ul>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                </ul>
+                        </li>
+                        <li>
+                            <div class="sub-accordion-item">
+                                <button class="sub-accordion-header">
+                                    <img src="https://api.iconify.design/tabler/tool.svg?color=%23e5e5e5" alt="Utilidades Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                    <span class="subcat-status partial">●</span>
+                                    Utilidades
+                                    <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">20</span>
+                                    <span class="sub-accordion-icon">►</span>
+                                </button>
+                                <div class="sub-accordion-content" style="display: none;">
+                                    <ul id="utilidadesItemsList"><li>Carregando...</li></ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="sub-accordion-item">
+                                <button class="sub-accordion-header">
+                                    <img src="https://api.iconify.design/tabler/device-gamepad.svg?color=%23e5e5e5" alt="Lazer Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                    <span class="subcat-status partial">●</span>
+                                    Lazer
+                                    <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">5</span>
+                                    <span class="sub-accordion-icon">►</span>
+                                </button>
+                                <div class="sub-accordion-content" style="display: none;">
+                                    <ul id="lazerItemsList"><li>Carregando...</li></ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="sub-accordion-item">
+                                <button class="sub-accordion-header">
+                                    <img src="https://api.iconify.design/tabler/car.svg?color=%23e5e5e5" alt="Transporte Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                    <span class="subcat-status partial">●</span>
+                                    Transporte
+                                    <span class="apps-counter" style="padding-right: 200px !important; margin-right: 0 !important;">4</span>
+                                    <span class="sub-accordion-icon">►</span>
+                                </button>
+                                <div class="sub-accordion-content" style="display: none;">
+                                    <ul id="transporteItemsList"><li>Carregando...</li></ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="category-separator"></div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <img src="https://api.iconify.design/tabler/users.svg?color=%23e5e5e5" alt="Participe Logo" style="width: 24px; height: 24px; margin-right: 10px; vertical-align: middle;">
-                Participe 
-                <span class="accordion-icon">►</span>
-            </h2>
-            <div class="accordion-content">
-                <ul id="participeItemsList"><li>Carregando...</li></ul>
+            <div class="category-separator"></div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <img src="https://api.iconify.design/tabler/gift.svg?color=%23e5e5e5" alt="Exclusivo Logo" style="width: 24px; height: 24px; margin-right: 10px; vertical-align: middle;">
+                    EXCLUSIVO 
+                    <span class="accordion-icon">►</span>
+                </h2>
+                <div class="accordion-content">
+                    <ul id="paiMainItemsList">
+                        <li>
+                            <div class="sub-accordion-item">
+                                <button class="sub-accordion-header">
+                                    <img src="https://api.iconify.design/tabler/video.svg?color=%23e5e5e5" alt="Videos Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                    Videos Disponíveis
+                                    <span class="sub-accordion-icon">►</span>
+                                </button>
+                                <div class="sub-accordion-content" style="display: none;">
+                                    <ul id="videosItemsList"><li>Carregando...</li></ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="sub-accordion-item">
+                                <button class="sub-accordion-header">
+                                    <img src="https://api.iconify.design/tabler/school.svg?color=%23e5e5e5" alt="Conteudo de Apoio Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                    Conteúdo de Apoio
+                                    <span class="sub-accordion-icon">►</span>
+                                </button>
+                                <div class="sub-accordion-content" style="display: none;">
+                                    <ul id="categoriesList"><li>Carregando...</li></ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="sub-accordion-item">
+                                <button class="sub-accordion-header">
+                                    <img src="https://api.iconify.design/tabler/tools.svg?color=%23e5e5e5" alt="Ferramentas Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                    Ferramentas & Negócios
+                                    <span class="sub-accordion-icon">►</span>
+                                </button>
+                                <div class="sub-accordion-content" style="display: none;">
+                                    <ul id="paiItemsList"><li>Nenhuma categoria F.A.I. configurada.</li></ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="sub-accordion-item">
+                                <button class="sub-accordion-header">
+                                    <img src="https://api.iconify.design/tabler/brain.svg?color=%23e5e5e5" alt="Suporte IA Logo" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;">
+                                    Suporte - IA
+                                    <span class="sub-accordion-icon">►</span>
+                                </button>
+                                <div class="sub-accordion-content" style="display: none;">
+                                    <ul id="suporteIaItemsList"><li>Carregando subcategorias...</li></ul> 
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="category-separator"></div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <img src="https://api.iconify.design/tabler/users.svg?color=%23e5e5e5" alt="Participe Logo" style="width: 24px; height: 24px; margin-right: 10px; vertical-align: middle;">
+                    PARTICIPE 
+                    <span class="accordion-icon">►</span>
+                </h2>
+                <div class="accordion-content">
+                    <ul id="participeItemsList"><li>Carregando...</li></ul>
+                </div>
+            </div>
+            <div class="category-separator"></div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <img src="https://api.iconify.design/tabler/star.svg?color=%23FFD700" alt="Favoritos Logo" style="width: 24px; height: 24px; margin-right: 10px; vertical-align: middle;">
+                    MEUS FAVORITOS 
+                    <span class="apps-counter" id="favoritosCounter">0/7</span>
+                    <span class="accordion-icon">►</span>
+                </h2>
+                <div class="accordion-content">
+                    <ul id="favoritosItemsList">
+                        <li class="add-favorite-placeholder">
+                            <button class="add-favorite-btn" id="addFavoriteBtn">
+                                <span style="font-size: 1.2em;">➕</span>
+                                Adicionar Favorito
+                            </button>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </aside>
+    
+    <!-- Lista de resultados de busca lateral (fora do sidebar) -->
+    <div id="searchResults" class="search-results" style="display: none;"></div>
+    
     <main>
         <h1 id="mainTitle"></h1>
         <div id="coursesContainer"><p class="instruction-message">Selecione uma categoria no Menu e acesse os recursos.</p></div>
@@ -1257,7 +1641,7 @@
             <div style="text-align: center; padding: 20px;">
                 <h2 id="appModalTitle" style="margin-bottom: 20px; color: #fff;"></h2>
                 <div style="background: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 20px; margin: 20px 0;">
-                    <p style="color: #e0e0e0; margin-bottom: 15px;">📱 Este é um aplicativo móvel oficial</p>
+                    <p style="color: #e0e5e5; margin-bottom: 15px;">📱 Este é um aplicativo móvel oficial</p>
                     <p style="color: #ccc; font-size: 0.9em; margin-bottom: 20px;">Clique no botão abaixo para:</p>
                     <ul style="color: #ccc; text-align: left; margin: 15px 0; padding-left: 20px;">
                         <li>✅ Abrir o app se já estiver instalado</li>
@@ -1266,12 +1650,9 @@
                 </div>
                 <button id="openAppButton" style="
                     background: linear-gradient(45deg, #4CAF50, #45a049);
-                    color: white;
                     border: none;
                     padding: 15px 30px;
                     font-size: 16px;
-                    font-weight: bold;
-                    border-radius: 8px;
                     cursor: pointer;
                     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
                     transition: transform 0.2s ease;
@@ -1337,6 +1718,59 @@
         </div>
     </div>
 
+    <!-- Modal para Adicionar Favorito -->
+    <div id="addFavoriteModal" class="modal hidden">
+        <div class="modal-content">
+            <span id="addFavoriteModalClose" class="close">&times;</span>
+            <h2>⭐ Adicionar aos Meus Favoritos</h2>
+            <div style="margin: 20px 0;">
+                <label style="display: block; margin-bottom: 10px; color: #e0e0e0; font-weight: bold;">
+                    📝 Nome do Favorito:
+                </label>
+                <input type="text" id="addFavoriteName" style="width: 100%; padding: 10px; border: 1px solid #666; border-radius: 4px; background: #2a2a2a; color: white; font-size: 16px;" placeholder="Ex: Meu Site Favorito">
+                
+                <label style="display: block; margin: 20px 0 10px 0; color: #e0e0e0; font-weight: bold;">
+                    🔗 URL de Destino:
+                </label>
+                <input type="url" id="addFavoriteUrl" style="width: 100%; padding: 10px; border: 1px solid #666; border-radius: 4px; background: #2a2a2a; color: white; font-size: 16px;" placeholder="https://exemplo.com">
+                
+                <label style="display: block; margin: 20px 0 10px 0; color: #e0e0e0; font-weight: bold;">
+                    📄 Descrição (opcional):
+                </label>
+                <textarea id="addFavoriteDescription" style="width: 100%; padding: 10px; border: 1px solid #666; border-radius: 4px; background: #2a2a2a; color: white; font-size: 16px; resize: vertical;" rows="3" placeholder="Breve descrição do site ou ferramenta"></textarea>
+                
+                <div style="margin: 25px 0; padding: 20px; background: rgba(76, 175, 80, 0.1); border: 1px solid rgba(76, 175, 80, 0.3); border-radius: 8px;">
+                    <p style="margin: 0 0 15px 0; color: #81C784; font-size: 15px; line-height: 1.6;">
+                          ⭐ <strong>Versão INDIVIDUAL:</strong> Você pode adicionar até <strong>7 favoritos</strong> personalizados.<br><br>
+                          🚀 <strong>PERSONALIZADO:</strong> Favoritos ilimitados + categorias personalizadas!
+                    </p>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <button onclick="showContactAlert()" style="
+                            background: linear-gradient(135deg, #ff6b35, #e55a2b);
+                            color: white;
+                            border: none;
+                            padding: 10px 20px;
+                            border-radius: 6px;
+                            font-weight: bold;
+                            font-size: 13px;
+                            cursor: pointer;
+                            text-transform: uppercase;
+                            transition: all 0.3s ease;
+                            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+                        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            🚀 FAZER UPGRADE
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 25px; text-align: right;">
+                <button id="cancelAddFavorite" style="background-color: #666; color: white; border: none; padding: 12px 20px; margin: 5px; border-radius: 4px; cursor: pointer;">Cancelar</button>
+                <button id="saveAddFavorite" style="background-color: #4CAF50; color: white; border: none; padding: 12px 20px; margin: 5px; border-radius: 4px; cursor: pointer; font-weight: bold;">⭐ Adicionar Favorito</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Variáveis para controle do modo de edição - DEFINIDAS NO INÍCIO
         let isEditMode = false;
@@ -1346,6 +1780,11 @@
         
         const curationList = [];
         const MAX_CURATION = 4;
+
+        // Variáveis para MEUS FAVORITOS (USER)
+        let userFavorites = [];
+        const MAX_USER_FAVORITES = 7;
+        let customCardData = {};
 
         // Nova estrutura para categorias P.A.I.
         const paiCategoriesData = [
@@ -1426,16 +1865,16 @@
         // Nova estrutura para categoria "Videos"
         const videosCategoriesData = [
             {
-                //name: "Entretenimento",
-                //items: [
-                   // { name: "Séries", url: "https://pluto.tv/br/live-tv/5f1212ad1728050007a523b8", image: "https://api.iconify.design/tabler/square.svg?color=%23e5e5e5" }, // Alterado para um ícone genérico para teste
-                   // { name: "Curiosidades", url: "https://pluto.tv/br/live-tv/5f1213ba0ecebc00070e170f", image: "https://api.iconify.design/tabler/circle.svg?color=%23e5e5e5" }, // Use um ícone relevante
-                  //  { name: "Estilo de Vida", url: "https://pluto.tv/br/live-tv/664df5221dc48600087592b1", image: "https://api.iconify.design/tabler/triangle.svg?color=%23e5e5e5" }, // Use um ícone relevante
+                name: "Entretenimento",
+                items: [
+                    { name: "Séries", url: "https://pluto.tv/br/live-tv/5f1212ad1728050007a523b8", image: "https://api.iconify.design/tabler/square.svg?color=%23e5e5e5" }, // Alterado para um ícone genérico para teste
+                    { name: "Curiosidades", url: "https://pluto.tv/br/live-tv/5f1213ba0ecebc00070e170f", image: "https://api.iconify.design/tabler/circle.svg?color=%23e5e5e5" }, // Use um ícone relevante
+                    { name: "Estilo de Vida", url: "https://pluto.tv/br/live-tv/664df5221dc48600087592b1", image: "https://api.iconify.design/tabler/triangle.svg?color=%23e5e5e5" }, // Use um ícone relevante
 					
-					//{ name: "Notícias de Europa", url: "https://www.youtube.com/embed/O9mOtdZ-nSk", image: "https://api.iconify.design/tabler/box.svg?color=%23e5e5e5" } // Use um ícone relevante
-              //  ]
-        //    },
-         //   {
+					{ name: "Notícias de Europa", url: "https://www.youtube.com/embed/O9mOtdZ-nSk", image: "https://api.iconify.design/tabler/box.svg?color=%23e5e5e5" } // Use um ícone relevante
+                ]
+            },
+            {
                 name: "Internos",
                 items: [
                 { name: "CNIS", url: "https://www.youtube.com/embed/OkqGQA-0XQU", image: "https://api.iconify.design/tabler/video.svg?color=%23e5e5e5" }, // Use um ícone relevante
@@ -1468,8 +1907,8 @@
         let parentOrigin = urlParams.get('origin');
         let userToken = urlParams.get('userToken');
         let userId = urlParams.get('userId'); // Pode ser usado futuramente se necessário
-        console.log('fnw_curadoria_sie: userToken from URL params:', userToken);
-        console.log('fnw_curadoria_sie: embeddedMode from URL params:', embeddedMode);
+        console.log('GERIiAH_USER: userToken from URL params:', userToken);
+        console.log('GERIiAH_USER: embeddedMode from URL params:', embeddedMode);
 
         // Usa o token da URL se disponível, senão usa o fallback
         const apiToken = userToken || 'dbb2c4d19a5ef0fec48e363618611614b4e0dfce'; 
@@ -2327,7 +2766,8 @@
             document.addEventListener('click', (event) => {
                 if (body.classList.contains('sidebar-open') &&
                     !aside.contains(event.target) &&
-                    !menuToggle.contains(event.target)) {
+                    !menuToggle.contains(event.target) &&
+                    !event.target.closest('#searchResults')) {
                     closeSidebar();
                 }
             });
@@ -2339,6 +2779,9 @@
             renderSuporteIaSubcategoriesSidebar(); // Re-adicionando esta chamada
             renderParticipeCategoriesSidebar(); // Adicionando chamada para renderizar a nova categoria 'Participe'
             renderVideosCategoriesSidebar(); // Adicionando chamada para renderizar a nova categoria 'Videos'
+            
+            // Inicializar favoritos do usuário
+            loadUserFavorites();
 
             const paiModal = document.getElementById('paiModal');
             const paiModalClose = document.getElementById('paiModalClose');
@@ -2515,6 +2958,18 @@
 
             // Carrega dados personalizados
             loadCustomItemData();
+            
+            // Event listeners para modal de adicionar favorito
+            document.getElementById('addFavoriteModalClose').addEventListener('click', closeAddFavoriteModal);
+            document.getElementById('cancelAddFavorite').addEventListener('click', closeAddFavoriteModal);
+            document.getElementById('saveAddFavorite').addEventListener('click', saveNewFavorite);
+
+            // Fecha modal de adicionar favorito ao clicar fora
+            document.getElementById('addFavoriteModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeAddFavoriteModal();
+                }
+            });
         });
 
         function renderPaiCategoriesSidebar() {
@@ -2710,7 +3165,6 @@
                             top: 50%;
                             transform: translateY(-50%);
                             background: rgba(101, 31, 57, 0.9);
-                            color: white;
                             border: none;
                             border-radius: 50%;
                             width: 22px;
@@ -2812,7 +3266,6 @@
                             top: 50%;
                             transform: translateY(-50%);
                             background: rgba(101, 31, 57, 0.9);
-                            color: white;
                             border: none;
                             border-radius: 50%;
                             width: 22px;
@@ -2918,12 +3371,19 @@
                         return;
                     }
                     
+                    // Cria objeto com dados personalizados se disponíveis
+                    const itemToOpen = {
+                        name: displayName,
+                        url: displayUrl,
+                        description: displayDescription
+                    };
+                    
                     // Detecta se é URL da Play Store para mostrar modal específico
-                    if (subItem.url.includes('play.google.com/store/apps')) {
-                        showAppModal(subItem);
+                    if (displayUrl.includes('play.google.com/store/apps')) {
+                        showAppModal(itemToOpen);
                     } else {
                         // Para URLs web, abre em modal iframe
-                        openPaiItemInModal(subItem);
+                        openPaiItemInModal(itemToOpen);
                     }
                 });
 
@@ -3333,11 +3793,17 @@
 
             if (activate) {
                 body.classList.add('edit-mode');
-                headerTitle.textContent = 'Modo de Edição';
+                headerTitle.textContent = 'Edição... [INDIVIDUAL]';
                 if (editToggle) editToggle.checked = true;
                 
                 // Adiciona classes editáveis aos elementos
                 addEditableClasses();
+                
+                // Adiciona indicadores de upgrade
+                addUpgradeIndicators();
+                
+                // Ativa interceptação de edição de categorias
+                interceptCategoryEdit();
             } else {
                 body.classList.remove('edit-mode');
                 headerTitle.textContent = 'Acessos';
@@ -3345,6 +3811,9 @@
                 
                 // Remove classes editáveis
                 removeEditableClasses();
+                
+                // Remove indicadores de upgrade
+                addUpgradeIndicators();
             }
 
             // Re-renderiza a sidebar para atualizar contadores
@@ -3392,6 +3861,37 @@
             meusAppsSubButtons.forEach((btn, index) => {
                 btn.classList.add('editable-item');
                 console.log(`Classe editable-item adicionada ao botão ${index + 1}:`, btn.textContent); // Debug
+                
+                // Intercepta cliques em botões "Reservado"
+                if (btn.textContent.trim() === 'Reservado') {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        showUpgradeAlert('Adicionar novos aplicativos');
+                    });
+                    
+                    // Adiciona indicador visual
+                    if (!btn.querySelector('.PERSONALIZADO-mini-indicator')) {
+                        const miniIndicator = document.createElement('span');
+                        miniIndicator.className = 'PERSONALIZADO-mini-indicator';
+                        miniIndicator.innerHTML = '🚀';
+                        miniIndicator.style.cssText = `
+                            position: absolute;
+                            top: -5px;
+                            right: -5px;
+                            background: #ff6b35;
+                            border-radius: 50%;
+                            width: 16px;
+                            height: 16px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            z-index: 10;
+                        `;
+                        btn.style.position = 'relative';
+                        btn.appendChild(miniIndicator);
+                    }
+                }
             });
         }
         
@@ -3400,6 +3900,12 @@
             const editableItems = document.querySelectorAll('.editable-item');
             editableItems.forEach(item => {
                 item.classList.remove('editable-item');
+                
+                // Remove indicadores mini de upgrade
+                const miniIndicator = item.querySelector('.PERSONALIZADO-mini-indicator');
+                if (miniIndicator) {
+                    miniIndicator.remove();
+                }
             });
         }
         
@@ -3524,12 +4030,9 @@
                 position: fixed;
                 top: 20px;
                 right: 20px;
-                background: #4CAF50;
-                color: white;
                 padding: 15px 20px;
                 border-radius: 4px;
                 z-index: 10000;
-                font-weight: bold;
                 box-shadow: 0 4px 8px rgba(0,0,0,0.3);
             `;
             feedback.textContent = '✅ Alterações salvas com sucesso!';
@@ -3614,7 +4117,6 @@
 
         // Variáveis para controle da edição de cards
         let currentEditingCard = null;
-        let customCardData = {};
 
         // Função para abrir modal de edição de card
         function openCardEditModal(parentItemName, cardIndex) {
@@ -3922,18 +4424,10 @@
 
         // Inicialização quando a página carrega
         document.addEventListener('DOMContentLoaded', function() {
-            // CORREÇÃO EMERGENCIAL: Limpa dados conflitantes automaticamente
-            console.log('🚨 Executando limpeza COMPLETA de dados conflitantes...');
+            // VERSÃO INDIVIDUAL: SEM limpeza automática - dados são persistidos
+            console.log('🔧 Versão INDIVIDUAL inicializada - dados persistidos');
             
-            // Remove TODOS os dados antigos que estão causando conflito
-            localStorage.clear(); // Limpa TUDO do localStorage
-            
-            // Reinicializa as variáveis
-            customCardData = {};
-            customItemData = {};
-            
-            console.log('✅ TODOS os dados conflitantes removidos - sistema resetado');
-            
+            // Carrega dados existentes
             loadCustomItemData();
             renderMeusAppsCategoriesSidebar();
             renderVideosCategoriesSidebar();
@@ -3941,10 +4435,954 @@
             // Função global para emergência (acessível via console)
             window.clearAllCustomData = clearConflictingData;
             
-            console.log('🔧 Sistema de edição inicializado com novo formato de chaves');
-            console.log('💡 Em caso de problemas com dados conflitantes, execute: clearAllCustomData()');
+            // Funções de Export/Import disponíveis globalmente
+            window.exportUserConfig = exportUserConfig;
+            window.importUserConfig = importUserConfig;
+            
+            console.log('🔧 Sistema de edição INDIVIDUAL inicializado');
+            console.log('💡 Funções disponíveis:');
+            console.log('   - exportUserConfig() - Exporta configurações');
+            console.log('   - importUserConfig(jsonData) - Importa configurações');
+            console.log('   - clearAllCustomData() - Limpa todas as personalizações');
+            
+            // Adiciona botões de Export/Import
+            setTimeout(addExportImportButtons, 1000);
         });
+
+        // Função para exportar configurações do usuário
+        function exportUserConfig() {
+            const config = {
+                version: "7.1.0",
+                timestamp: new Date().toISOString(),
+                type: "INDIVIDUAL",
+                customizations: customCardData,
+                itemCustomizations: customItemData,
+                userFavorites: userFavorites,
+                metadata: {
+                    totalCustomizations: Object.keys(customCardData).length + Object.keys(customItemData).length,
+                    totalFavorites: userFavorites.length
+                }
+            };
+            
+            const jsonString = JSON.stringify(config, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `geriah_user_config_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            console.log('✅ Configurações exportadas com sucesso!');
+            alert(`✅ Configurações exportadas!\n\n📊 Incluído:\n• ${Object.keys(customItemData).length} personalizações de itens\n• ${Object.keys(customCardData).length} personalizações de cards\n• ${userFavorites.length} favoritos pessoais`);
+        }
+
+        // Função para importar configurações do usuário
+        function importUserConfig(jsonData) {
+            try {
+                let config;
+                
+                // Se recebeu string, faz parse
+                if (typeof jsonData === 'string') {
+                    config = JSON.parse(jsonData);
+                } else {
+                    config = jsonData;
+                }
+                
+                // Validação básica
+                if (!config.type || config.type !== 'INDIVIDUAL') {
+                    throw new Error('Arquivo não é uma configuração USER válida');
+                }
+                
+                // Confirma importação
+                const itemCount = Object.keys(config.itemCustomizations || config.customItemData || {}).length;
+                const cardCount = Object.keys(config.customizations || config.customCardData || {}).length;
+                const favCount = (config.userFavorites || []).length;
+                
+                if (!confirm(`Importar configurações de ${config.timestamp}?\n\n📊 Será importado:\n• ${itemCount} personalizações de itens\n• ${cardCount} personalizações de cards\n• ${favCount} favoritos pessoais\n\nIsso substituirá suas configurações atuais.`)) {
+                    return;
+                }
+                
+                // Importa dados - suporta tanto formato novo quanto antigo
+                if (config.itemCustomizations || config.customItemData) {
+                    customItemData = config.itemCustomizations || config.customItemData;
+                    localStorage.setItem('customItemData', JSON.stringify(customItemData));
+                }
+                
+                if (config.customizations || config.customCardData) {
+                    customCardData = config.customizations || config.customCardData;
+                    localStorage.setItem('customCardData', JSON.stringify(customCardData));
+                }
+                
+                if (config.userFavorites) {
+                    userFavorites = config.userFavorites;
+                    saveUserFavorites();
+                    renderUserFavorites();
+                }
+                
+                // Re-renderiza tudo
+                renderMeusAppsCategoriesSidebar();
+                
+                console.log('✅ Configurações importadas com sucesso!');
+                alert('✅ Configurações importadas com sucesso!');
+                
+            } catch (error) {
+                console.error('❌ Erro ao importar configurações:', error);
+                alert('❌ Erro ao importar configurações: ' + error.message);
+            }
+        }
+
+        // Função para criar input de arquivo para importação
+        function createImportFileInput() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        importUserConfig(e.target.result);
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+
+        // Adiciona botões de Export/Import ao DOM
+        function addExportImportButtons() {
+            if (!document.getElementById('exportImportButtons')) {
+                const buttonsContainer = document.createElement('div');
+                buttonsContainer.id = 'exportImportButtons';
+                buttonsContainer.style.cssText = `
+                    position: fixed;
+                    bottom: 80px;
+                    right: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    z-index: 1000;
+                `;
+                
+                const exportBtn = document.createElement('button');
+                exportBtn.textContent = '📤 Exportar';
+                exportBtn.style.cssText = `
+                    border: none;
+                    padding: 8px 12px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-size: 12px;
+                    transition: all 0.3s ease;
+                `;
+                exportBtn.onclick = exportUserConfig;
+                
+                const importBtn = document.createElement('button');
+                importBtn.textContent = '📥 Importar';
+                importBtn.style.cssText = `
+                    background: #2196F3;
+                    border: none;
+                    padding: 8px 12px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-size: 12px;
+                    transition: all 0.3s ease;
+                `;
+                importBtn.onclick = createImportFileInput;
+                
+                buttonsContainer.appendChild(exportBtn);
+                buttonsContainer.appendChild(importBtn);
+                document.body.appendChild(buttonsContainer);
+                
+                console.log('✅ Botões Export/Import adicionados');
+            }
+        }
+
+        // Função para mostrar aviso de upgrade
+        function showUpgradeAlert(feature) {
+            const upgradeModal = document.createElement('div');
+            upgradeModal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: linear-gradient(135deg, #2d1810, #4a2f16);
+                padding: 30px;
+                border-radius: 15px;
+                text-align: center;
+                max-width: 400px;
+                border: 2px solid #ff6b35;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            `;
+            
+            modalContent.innerHTML = `
+                <div style="color: #ff6b35; font-size: 3rem; margin-bottom: 15px;">🚀</div>
+                <h2 style="color: #ffcc80; margin-bottom: 15px; font-size: 1.5rem;">Recurso PERSONALIZADO</h2>
+                <p style="color: #e5e5e5; margin-bottom: 20px; line-height: 1.5;">
+                    <strong>${feature}</strong> está disponível apenas na versão <strong>PERSONALIZADO</strong>.
+                </p>
+                <div style="background: rgba(255, 107, 53, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <p style="color: #ffcc80; margin: 0; font-size: 0.9rem;">
+                        ✨ <strong>PERSONALIZADO inclui:</strong><br>
+                        • Criar/editar categorias<br>
+                        • Personalizar cores e logo<br>
+                        • Configurações avançadas<br>
+                        • Suporte prioritário
+                    </p>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button id="upgradeBtn" style="
+                        background: linear-gradient(135deg, #ff6b35, #e55a2b);
+                        border: none;
+                        padding: 12px 20px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    ">🚀 FAZER UPGRADE</button>
+                    <button id="closeUpgradeModal" style="
+                        background: transparent;
+                        color: #e5e5e5;
+                        border: 1px solid #666;
+                        padding: 12px 20px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    ">Fechar</button>
+                </div>
+            `;
+            
+            upgradeModal.appendChild(modalContent);
+            document.body.appendChild(upgradeModal);
+            
+            // Event listeners
+            document.getElementById('upgradeBtn').onclick = function() {
+                alert('🚀 Entre em contato para upgrade PERSONALIZADO!\n\n📧 Email: novosnegocios@geriah.com\n📱 WhatsApp: +55 11 91159-5028');
+                document.body.removeChild(upgradeModal);
+            };
+            
+            document.getElementById('closeUpgradeModal').onclick = function() {
+                document.body.removeChild(upgradeModal);
+            };
+            
+            upgradeModal.onclick = function(e) {
+                if (e.target === upgradeModal) {
+                    document.body.removeChild(upgradeModal);
+                }
+            };
+        }
+
+        // Função para interceptar tentativas de edição de categoria
+        function interceptCategoryEdit() {
+            // Intercepta cliques nos headers das categorias principais
+            document.addEventListener('click', function(e) {
+                // Se estiver em modo de edição e clicar em header de categoria
+                if (isEditMode && e.target.closest('.accordion-header')) {
+                    const header = e.target.closest('.accordion-header');
+                    const categoryName = header.textContent.trim().split('\n')[0].trim();
+                    
+                    // Verifica se é uma categoria principal (não subcategoria)
+                    if (header.parentElement.classList.contains('accordion-item')) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        showUpgradeAlert(`Editar categoria "${categoryName}"`);
+                        return false;
+                    }
+                }
+                
+                // Intercepta tentativas de adicionar nova categoria/subcategoria
+                if (isEditMode && e.target.closest('.sub-accordion-header')) {
+                    const subHeader = e.target.closest('.sub-accordion-header');
+                    const subCategoryName = subHeader.textContent.trim().split('\n')[0].trim();
+                    
+                    // Se clicar com Ctrl ou Alt (indicando intenção de adicionar)
+                    if (e.ctrlKey || e.altKey) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        showUpgradeAlert(`Adicionar nova subcategoria em "${subCategoryName}"`);
+                        return false;
+                    }
+                }
+            });
+        }
+
+        // Função para adicionar indicadores visuais de upgrade
+        function addUpgradeIndicators() {
+            if (isEditMode) {
+                // Adiciona indicadores nas categorias principais
+                const categoryHeaders = document.querySelectorAll('.accordion-header');
+                categoryHeaders.forEach(header => {
+                    if (!header.querySelector('.PERSONALIZADO-indicator')) {
+                        const indicator = document.createElement('span');
+                        indicator.className = 'PERSONALIZADO-indicator';
+                        indicator.innerHTML = '🚀';
+                        indicator.style.cssText = `
+                            position: absolute;
+                            right: 30px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            background: linear-gradient(135deg, #ff6b35, #e55a2b);
+                            border-radius: 10px;
+                            font-size: 0.7rem;
+                            cursor: pointer;
+                            z-index: 100;
+                        `;
+                        indicator.title = 'Clique para upgrade PERSONALIZADO';
+                        indicator.onclick = function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            showUpgradeAlert('Editar estrutura de categorias');
+                        };
+                        header.style.position = 'relative';
+                        header.appendChild(indicator);
+                    }
+                });
+            } else {
+                // Remove indicadores quando sair do modo de edição
+                document.querySelectorAll('.PERSONALIZADO-indicator').forEach(indicator => {
+                    indicator.remove();
+                });
+            }
+        }
+
+        // ========== FUNÇÕES PARA MEUS FAVORITOS (USER) ==========
+
+        // Função para carregar favoritos do localStorage
+        function loadUserFavorites() {
+            const saved = localStorage.getItem('userFavorites');
+            if (saved) {
+                try {
+                    userFavorites = JSON.parse(saved);
+                } catch (e) {
+                    console.error('Erro ao carregar favoritos:', e);
+                    userFavorites = [];
+                }
+            }
+            renderUserFavorites();
+        }
+
+        // Função para salvar favoritos no localStorage
+        function saveUserFavorites() {
+            localStorage.setItem('userFavorites', JSON.stringify(userFavorites));
+        }
+
+        // Função para renderizar a lista de favoritos
+        function renderUserFavorites() {
+            const list = document.getElementById('favoritosItemsList');
+            const counter = document.getElementById('favoritosCounter');
+            
+            if (!list || !counter) return;
+            
+            // Atualiza contador
+            counter.textContent = `${userFavorites.length}/${MAX_USER_FAVORITES}`;
+            
+            // Limpa lista
+            list.innerHTML = '';
+            
+            // Adiciona favoritos existentes
+            userFavorites.forEach((favorite, index) => {
+                const li = document.createElement('li');
+                li.className = 'favorite-item';
+                li.innerHTML = `
+                    <a href="${favorite.url}" target="_blank" class="favorite-link" title="${favorite.description || favorite.name}">
+                        ${favorite.name}
+                    </a>
+                    <button class="favorite-delete-btn" onclick="deleteFavorite(${index})" title="Remover favorito">×</button>
+                `;
+                list.appendChild(li);
+            });
+            
+            // Adiciona botão "Adicionar" se não atingiu o limite
+            if (userFavorites.length < MAX_USER_FAVORITES) {
+                const li = document.createElement('li');
+                li.className = 'add-favorite-placeholder';
+                li.innerHTML = `
+                    <button class="add-favorite-btn" onclick="openAddFavoriteModal()">
+                        <span style="font-size: 1.2em;">➕</span>
+                        Adicionar Favorito (${userFavorites.length}/${MAX_USER_FAVORITES})
+                    </button>
+                `;
+                list.appendChild(li);
+            } else {
+                // Mostra botão desabilitado quando atingir limite
+                const li = document.createElement('li');
+                li.className = 'add-favorite-placeholder';
+                li.innerHTML = `
+                    <button class="add-favorite-btn" disabled onclick="showUpgradeAlert('Adicionar mais de ${MAX_USER_FAVORITES} favoritos')">
+                        🚀 Limite atingido - PERSONALIZADO para mais
+                    </button>
+                `;
+                list.appendChild(li);
+            }
+        }
+
+        // Função para abrir modal de adicionar favorito
+        function openAddFavoriteModal() {
+            if (userFavorites.length >= MAX_USER_FAVORITES) {
+                showUpgradeAlert(`Adicionar mais de ${MAX_USER_FAVORITES} favoritos`);
+                return;
+            }
+            
+            // Limpa campos
+            document.getElementById('addFavoriteName').value = '';
+            document.getElementById('addFavoriteUrl').value = '';
+            document.getElementById('addFavoriteDescription').value = '';
+            
+            // Mostra modal
+            document.getElementById('addFavoriteModal').classList.remove('hidden');
+        }
+
+        // Função para fechar modal de adicionar favorito
+        function closeAddFavoriteModal() {
+            document.getElementById('addFavoriteModal').classList.add('hidden');
+        }
+
+        // Função para salvar novo favorito
+        function saveNewFavorite() {
+            const name = document.getElementById('addFavoriteName').value.trim();
+            const url = document.getElementById('addFavoriteUrl').value.trim();
+            const description = document.getElementById('addFavoriteDescription').value.trim();
+            
+            // Validação
+            if (!name) {
+                alert('Por favor, digite um nome para o favorito.');
+                return;
+            }
+            
+            if (!url) {
+                alert('Por favor, digite uma URL válida.');
+                return;
+            }
+            
+            // Adiciona https:// se necessário
+            let finalUrl = url;
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                finalUrl = 'https://' + url;
+            }
+            
+            // Verifica limite
+            if (userFavorites.length >= MAX_USER_FAVORITES) {
+                showUpgradeAlert(`Adicionar mais de ${MAX_USER_FAVORITES} favoritos`);
+                return;
+            }
+            
+            // Adiciona favorito
+            const newFavorite = {
+                id: Date.now(), // ID único
+                name: name,
+                url: finalUrl,
+                description: description,
+                createdAt: new Date().toISOString()
+            };
+            
+            userFavorites.push(newFavorite);
+            saveUserFavorites();
+            renderUserFavorites();
+            closeAddFavoriteModal();
+            
+            // Feedback
+            console.log('✅ Favorito adicionado:', newFavorite);
+            alert(`⭐ "${name}" foi adicionado aos seus favoritos!`);
+        }
+
+        // Função para deletar favorito
+        function deleteFavorite(index) {
+            if (index >= 0 && index < userFavorites.length) {
+                const favorite = userFavorites[index];
+                if (confirm(`Remover "${favorite.name}" dos favoritos?`)) {
+                    userFavorites.splice(index, 1);
+                    saveUserFavorites();
+                    renderUserFavorites();
+                    console.log('🗑️ Favorito removido:', favorite);
+                }
+            }
+        }
+
+        // Event listeners para modal de favoritos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar favoritos na inicializa��o
+            loadUserFavorites();
+        });
+
+        // ========== FIM DAS FUN��ES DE FAVORITOS ==========
+
+        // Função para mostrar aviso de contato para upgrade
+        function showContactAlert() {
+            const contactModal = document.createElement('div');
+            contactModal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: linear-gradient(135deg, #2d1810, #4a2f16);
+                padding: 30px;
+                border-radius: 15px;
+                text-align: center;
+                max-width: 450px;
+                border: 2px solid #ff6b35;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            `;
+            
+            modalContent.innerHTML = `
+                <div style="color: #ff6b35; font-size: 3rem; margin-bottom: 15px;">🚀</div>
+                <h2 style="color: #ffcc80; margin-bottom: 15px; font-size: 1.5rem;">Upgrade para PERSONALIZADO</h2>
+                <p style="color: #e5e5e5; margin-bottom: 20px; line-height: 1.5;">
+                    Entre em contato conosco para fazer o upgrade e desbloquear todos os recursos!
+                </p>
+                <div style="background: rgba(255, 107, 53, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <p style="color: #ffcc80; margin: 0; font-size: 0.9rem; text-align: left;">
+                        ✨ <strong>PERSONALIZADO inclui:</strong><br>
+                        • Favoritos ilimitados<br>
+                        • Criar/editar categorias personalizadas<br>
+                        • Personalizar cores e logo<br>
+                        • Configurações avançadas<br>
+                        • Suporte prioritário
+                    </p>
+                </div>
+                <div style="background: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <p style="color: #81C784; margin: 0; font-size: 0.9rem;">
+                        📧 <strong>Email:</strong> novosnegocios@geriah.com<br>
+                        📱 <strong>WhatsApp:</strong> +55 11 91159-5028
+                    </p>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button id="closeContactModal" style="
+                        background: linear-gradient(135deg, #ff6b35, #e55a2b);
+                        color: white;
+                        border: none;
+                        padding: 12px 20px;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        font-weight: bold;
+                        transition: all 0.3s ease;
+                    ">Entendi</button>
+                </div>
+            `;
+            
+            contactModal.appendChild(modalContent);
+            document.body.appendChild(contactModal);
+            
+            // Event listeners
+            document.getElementById('closeContactModal').onclick = function() {
+                document.body.removeChild(contactModal);
+            };
+            
+            contactModal.onclick = function(e) {
+                if (e.target === contactModal) {
+                    document.body.removeChild(contactModal);
+                }
+            };
+        }
+        
+        // ========== FUNCIONALIDADE DE BUSCA DO MENU ==========
+        
+        // Variável global para armazenar índice de busca
+        let menuSearchIndex = [];
+        
+        // Função para criar índice de busca do menu
+        function createMenuSearchIndex() {
+            menuSearchIndex = [];
+            
+            // Função auxiliar para processar elementos recursivamente
+            function indexElement(element, path = []) {
+                const textContent = element.textContent?.trim();
+                if (!textContent) return;
+                
+                // Verifica se é um item clicável (botão, link, etc.)
+                const isClickable = element.tagName === 'BUTTON' || 
+                                  element.tagName === 'A' || 
+                                  element.onclick || 
+                                  element.classList.contains('sub-accordion-header') ||
+                                  element.classList.contains('accordion-header');
+                
+                if (isClickable && textContent.length > 1) {
+                    // Remove emojis e números de contadores para texto limpo
+                    const cleanText = textContent.replace(/[0-9]+\/[0-9]+|[0-9]+|\s+/g, ' ')
+                                                .replace(/[►▼●]/g, '')
+                                                .replace(/[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '')
+                                                .trim();
+                    
+                    if (cleanText.length > 2) {
+                        menuSearchIndex.push({
+                            name: cleanText,
+                            originalText: textContent,
+                            element: element,
+                            path: [...path],
+                            category: path.length > 0 ? path[0] : 'Raiz'
+                        });
+                    }
+                }
+                
+                // Processar sub-elementos se for um cabeçalho de categoria
+                if (element.classList.contains('accordion-header')) {
+                    const categoryName = textContent.replace(/[►▼●]/g, '').replace(/[0-9]+/g, '').trim();
+                    const nextElement = element.parentElement.querySelector('.accordion-content');
+                    if (nextElement) {
+                        const subElements = nextElement.querySelectorAll('button, a, .sub-accordion-header');
+                        subElements.forEach(subEl => {
+                            indexElement(subEl, [...path, categoryName]);
+                        });
+                    }
+                }
+                
+                if (element.classList.contains('sub-accordion-header')) {
+                    const subCategoryName = textContent.replace(/[►▼●]/g, '').replace(/[0-9]+/g, '').trim();
+                    const parentElement = element.closest('.sub-accordion-item');
+                    const contentElement = parentElement?.querySelector('.sub-accordion-content');
+                    if (contentElement) {
+                        const items = contentElement.querySelectorAll('button, a');
+                        items.forEach(item => {
+                            indexElement(item, [...path, subCategoryName]);
+                        });
+                    }
+                }
+            }
+            
+            // Indexar todos os elementos do sidebar
+            const sidebar = document.querySelector('aside');
+            if (sidebar) {
+                const mainElements = sidebar.querySelectorAll('.accordion-header, .sub-accordion-header, button, a');
+                mainElements.forEach(element => {
+                    indexElement(element);
+                });
+            }
+            
+            console.log('📋 Índice de busca criado:', menuSearchIndex.length, 'itens indexados');
+        }
+        
+        // Função para realizar busca
+        function searchMenu(query) {
+            if (!query || query.length < 2) {
+                return [];
+            }
+            
+            const searchTerm = query.toLowerCase().trim();
+            const results = [];
+            
+            menuSearchIndex.forEach(item => {
+                const itemName = item.name.toLowerCase();
+                const matchScore = calculateMatchScore(itemName, searchTerm);
+                
+                if (matchScore > 0) {
+                    results.push({
+                        ...item,
+                        matchScore: matchScore,
+                        highlightedName: highlightSearchTerm(item.name, searchTerm)
+                    });
+                }
+            });
+            
+            // Ordenar por relevância (score maior primeiro)
+            return results.sort((a, b) => b.matchScore - a.matchScore);
+        }
+        
+        // Função para calcular score de match
+        function calculateMatchScore(text, searchTerm) {
+            if (!text.includes(searchTerm)) {
+                // Busca por palavras individuais
+                const words = searchTerm.split(' ');
+                let score = 0;
+                words.forEach(word => {
+                    if (word.length > 1 && text.includes(word)) {
+                        score += word.length;
+                    }
+                });
+                return score;
+            }
+            
+            // Match exato tem score maior
+            if (text === searchTerm) return 100;
+            if (text.startsWith(searchTerm)) return 80;
+            return 50;
+        }
+        
+        // Função para destacar termo de busca
+        function highlightSearchTerm(text, searchTerm) {
+            const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            return text.replace(regex, '<span class="search-highlight">$1</span>');
+        }
+        
+        // Função para exibir resultados de busca
+        function displaySearchResults(results) {
+            const searchResults = document.getElementById('searchResults');
+            
+            if (results.length === 0) {
+                // Limpar destaques quando não há resultados
+                clearPreviousHighlights();
+                searchResults.innerHTML = '<div class="search-no-results">Nenhum resultado encontrado</div>';
+                searchResults.style.display = 'block';
+                return;
+            }
+            
+            // Expandir categorias e destacar itens no menu em tempo real
+            expandAndHighlightItems(results);
+            
+            // Adicionar cabeçalho da lista
+            let html = `
+                <div style="padding: 12px 15px; border-bottom: 2px solid rgba(128, 76, 154, 0.3); background: rgba(128, 76, 154, 0.1); margin-bottom: 5px;">
+                    <div style="color: #fff; font-weight: bold; font-size: 0.9em;">
+                        🔍 Resultados da Busca (${results.length})
+                    </div>
+                </div>
+            `;
+            
+            results.slice(0, 10).forEach((result, index) => { // Limita a 10 resultados
+                const pathText = result.path.length > 0 
+                    ? result.path.join(' › ') 
+                    : result.category;
+                
+                html += `
+                    <div class="search-result-item" onclick="navigateToMenuItemFromList(${index})" data-result-index="${index}">
+                        <div class="search-result-name">${result.highlightedName}</div>
+                        <div class="search-result-path">📍 ${pathText}</div>
+                    </div>
+                `;
+            });
+            
+            searchResults.innerHTML = html;
+            searchResults.style.display = 'block';
+        }
+        
+        // Função para expandir categorias pai
+        function expandParentCategories(element) {
+            let parent = element.closest('.accordion-item');
+            while (parent) {
+                const header = parent.querySelector('.accordion-header');
+                const content = parent.querySelector('.accordion-content');
+                
+                if (header && content && content.style.display === 'none') {
+                    header.click(); // Simula clique para expandir
+                }
+                
+                // Verificar se está dentro de um sub-acordeão
+                const subParent = element.closest('.sub-accordion-item');
+                if (subParent) {
+                    const subHeader = subParent.querySelector('.sub-accordion-header');
+                    const subContent = subParent.querySelector('.sub-accordion-content');
+                    
+                    if (subHeader && subContent && subContent.style.display === 'none') {
+                        subHeader.click();
+                    }
+                }
+                
+                parent = parent.parentElement?.closest('.accordion-item');
+            }
+        }
+        
+        // Função para destacar elemento temporariamente
+        function highlightElement(element) {
+            const originalStyle = element.style.cssText;
+            element.style.cssText += `
+                background: rgba(255, 235, 59, 0.3) !important;
+                border: 2px solid #FFD700 !important;
+                box-shadow: 0 0 10px rgba(255, 215, 0, 0.5) !important;
+                transition: all 0.3s ease !important;
+            `;
+            
+            setTimeout(() => {
+                element.style.cssText = originalStyle;
+            }, 2000);
+        }
+        
+        // Variável para armazenar últimos resultados
+        let lastSearchResults = [];
+        
+        // Event listeners para o campo de busca
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('menuSearchInput');
+            const clearBtn = document.getElementById('clearSearchBtn');
+            const searchResults = document.getElementById('searchResults');
+            
+            if (!searchInput) return;
+            
+            // Criar índice de busca após carregar o DOM
+            setTimeout(createMenuSearchIndex, 1000);
+            
+            // Event listener para digitação
+            searchInput.addEventListener('input', function() {
+                const query = this.value.trim();
+                
+                if (query.length === 0) {
+                    searchResults.style.display = 'none';
+                    clearBtn.style.display = 'none';
+                    clearPreviousHighlights(); // Limpar destaques quando não há busca
+                    return;
+                }
+                
+                clearBtn.style.display = 'block';
+                
+                if (query.length < 2) {
+                    clearPreviousHighlights(); // Limpar destaques para buscas muito curtas
+                    searchResults.innerHTML = '<div class="search-no-results">Digite pelo menos 2 caracteres</div>';
+                    searchResults.style.display = 'block';
+                    return;
+                }
+                
+                const results = searchMenu(query);
+                lastSearchResults = results;
+                displaySearchResults(results);
+            });
+            
+            // Event listener para limpar busca
+            clearBtn.addEventListener('click', function() {
+                searchInput.value = '';
+                searchResults.style.display = 'none';
+                clearBtn.style.display = 'none';
+                clearPreviousHighlights(); // Limpar destaques do menu
+                searchInput.focus();
+            });
+            
+            // Event listener para tecla ESC
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    this.value = '';
+                    searchResults.style.display = 'none';
+                    clearBtn.style.display = 'none';
+                    this.blur();
+                }
+            });
+            
+            // Fechar resultados ao clicar fora
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.menu-search-container') && !e.target.closest('#searchResults')) {
+                    searchResults.style.display = 'none';
+                }
+            });
+            
+            // Recriar índice quando novos itens forem carregados
+            const observer = new MutationObserver(function() {
+                setTimeout(createMenuSearchIndex, 500);
+            });
+            
+            const sidebar = document.querySelector('aside');
+            if (sidebar) {
+                observer.observe(sidebar, { 
+                    childList: true, 
+                    subtree: true 
+                });
+            }
+        });
+        
+        // Função para expandir categorias e destacar itens no menu em tempo real
+        function expandAndHighlightItems(results) {
+            // Limpar destaques anteriores
+            clearPreviousHighlights();
+            
+            // Processar todos os resultados para destacar
+            results.slice(0, 5).forEach(result => { // Processa os 5 primeiros resultados
+                if (result.element) {
+                    // Expandir categorias pai
+                    expandParentCategoriesForSearch(result.element);
+                    
+                    // Destacar o item no menu (sem foco ainda)
+                    result.element.classList.add('search-highlighted-item');
+                }
+            });
+            
+            // Focar apenas no primeiro resultado (melhor match)
+            if (results.length > 0 && results[0].element) {
+                setTimeout(() => {
+                    results[0].element.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }, 500); // Delay maior para permitir que todas as categorias se expandam
+            }
+        }
+        
+        // Função para expandir categorias pai (para busca)
+        function expandParentCategoriesForSearch(element) {
+            // Expandir acordeão principal se necessário
+            let parent = element.closest('.accordion-item');
+            if (parent) {
+                const header = parent.querySelector('.accordion-header');
+                const content = parent.querySelector('.accordion-content');
+                
+                if (header && content && content.style.display === 'none') {
+                    header.click(); // Simula clique para expandir
+                }
+            }
+            
+            // Expandir sub-acordeão se necessário
+            let subParent = element.closest('.sub-accordion-item');
+            if (subParent) {
+                const subHeader = subParent.querySelector('.sub-accordion-header');
+                const subContent = subParent.querySelector('.sub-accordion-content');
+                
+                if (subHeader && subContent && subContent.style.display === 'none') {
+                    subHeader.click(); // Simula clique para expandir
+                }
+            }
+        }
+        
+        // Função para destacar elemento no menu
+        function highlightElementInMenu(element) {
+            element.classList.add('search-highlighted-item');
+        }
+        
+        // Função para limpar destaques anteriores
+        function clearPreviousHighlights() {
+            const highlightedItems = document.querySelectorAll('.search-highlighted-item');
+            highlightedItems.forEach(item => {
+                item.classList.remove('search-highlighted-item');
+            });
+        }
+        
+        // Função para navegar até item clicado na lista de resultados
+        function navigateToMenuItemFromList(index) {
+            if (index >= 0 && index < lastSearchResults.length) {
+                const result = lastSearchResults[index];
+                
+                if (result && result.element) {
+                    // Feedback visual no item clicado da lista
+                    const clickedListItem = document.querySelector(`[data-result-index="${index}"]`);
+                    if (clickedListItem) {
+                        clickedListItem.classList.add('clicked');
+                        setTimeout(() => clickedListItem.classList.remove('clicked'), 300);
+                    }
+                    
+                    // Limpar destaques anteriores primeiro
+                    clearPreviousHighlights();
+                    
+                    // Expandir categorias pai se necessário
+                    expandParentCategoriesForSearch(result.element);
+                    
+                    // Destacar apenas este item
+                    result.element.classList.add('search-highlighted-item');
+                    
+                    // Fazer scroll suave até o elemento após delay
+                    setTimeout(() => {
+                        result.element.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }, 400);
+                    
+                    // Feedback visual de que foi clicado
+                    console.log(`🎯 Navegando para: ${result.name} em ${result.path.join(' › ')}`);
+                }
+            }
+        }
     </script>
 </body>
-</html> 
-
+</html>
