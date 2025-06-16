@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FNW - GERiAH Demo 6.1.0</title>
+    <title>FNW - GERiAH Demo 6.1.1</title>
     
-    <!-- Favicon e PWA Icons -->																																																															
+    <!-- Favicon e PWA Icons -->
     <link rel="icon" type="image/png" sizes="32x32" href="https://d1yei2z3i6k35z.cloudfront.net/12974529/684d9ab360bc7_GERiAHLOGO8SQUARE2donwload.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://d1yei2z3i6k35z.cloudfront.net/12974529/684d9ab360bc7_GERiAHLOGO8SQUARE2donwload.png">
     <link rel="shortcut icon" href="https://d1yei2z3i6k35z.cloudfront.net/12974529/684d9ab360bc7_GERiAHLOGO8SQUARE2donwload.png">
@@ -973,7 +973,7 @@
         <div class="accordion-item">
             <h2 class="accordion-header">
                 <img src="https://api.iconify.design/tabler/apps.svg?color=%23e5e5e5" alt="MeusApps Logo" style="width: 24px; height: 24px; margin-right: 10px; vertical-align: middle;">
-                Meus Apps 
+                CEL APPS 
                 <span class="apps-counter">45</span>
                 <span class="accordion-icon">►</span>
             </h2>
@@ -1426,16 +1426,16 @@
         // Nova estrutura para categoria "Videos"
         const videosCategoriesData = [
             {
-                name: "Entretenimento",
-                items: [
-                    { name: "Séries", url: "https://pluto.tv/br/live-tv/5f1212ad1728050007a523b8", image: "https://api.iconify.design/tabler/square.svg?color=%23e5e5e5" }, // Alterado para um ícone genérico para teste
-                    { name: "Curiosidades", url: "https://pluto.tv/br/live-tv/5f1213ba0ecebc00070e170f", image: "https://api.iconify.design/tabler/circle.svg?color=%23e5e5e5" }, // Use um ícone relevante
-                    { name: "Estilo de Vida", url: "https://pluto.tv/br/live-tv/664df5221dc48600087592b1", image: "https://api.iconify.design/tabler/triangle.svg?color=%23e5e5e5" }, // Use um ícone relevante
+                //name: "Entretenimento",
+                //items: [
+                   // { name: "Séries", url: "https://pluto.tv/br/live-tv/5f1212ad1728050007a523b8", image: "https://api.iconify.design/tabler/square.svg?color=%23e5e5e5" }, // Alterado para um ícone genérico para teste
+                   // { name: "Curiosidades", url: "https://pluto.tv/br/live-tv/5f1213ba0ecebc00070e170f", image: "https://api.iconify.design/tabler/circle.svg?color=%23e5e5e5" }, // Use um ícone relevante
+                  //  { name: "Estilo de Vida", url: "https://pluto.tv/br/live-tv/664df5221dc48600087592b1", image: "https://api.iconify.design/tabler/triangle.svg?color=%23e5e5e5" }, // Use um ícone relevante
 					
-					{ name: "Notícias de Europa", url: "https://www.youtube.com/embed/O9mOtdZ-nSk", image: "https://api.iconify.design/tabler/box.svg?color=%23e5e5e5" } // Use um ícone relevante
-                ]
-            },
-            {
+					//{ name: "Notícias de Europa", url: "https://www.youtube.com/embed/O9mOtdZ-nSk", image: "https://api.iconify.design/tabler/box.svg?color=%23e5e5e5" } // Use um ícone relevante
+              //  ]
+        //    },
+         //   {
                 name: "Internos",
                 items: [
                 { name: "CNIS", url: "https://www.youtube.com/embed/OkqGQA-0XQU", image: "https://api.iconify.design/tabler/video.svg?color=%23e5e5e5" }, // Use um ícone relevante
@@ -1483,8 +1483,10 @@
             'historia', 'cultura', 'arte', 'literatura', 'idiomas', 'linguas', 'escrita',
             'finanças', 'investimentos', 'empreendedorismo', 'negocios', 'direito', 'aposentadoria',
             'jardinagem', 'horta', 'culinaria', 'gastronomia', 'receitas',
-            'tecnologia', 'digital', 'informatica', 'internet', 'computador', 'celular', 'redes sociais',
-            'viagem', 'turismo', 'lazer', 'jogos', 'espiritualidade', 'meditacao', 'qualidade de vida', 'voluntariado'
+            'tecnologia', 'digital', 'informatica', 'informática', 'internet', 'computador', 'celular', 'redes sociais',
+            'viagem', 'turismo', 'lazer', 'jogos', 'espiritualidade', 'meditacao', 'qualidade de vida', 'voluntariado',
+            'gsuite', 'g-suite', 'google', 'gmail', 'drive', 'docs', 'sheets', 'slides', 'forms', 'calendar', 'meet', 'workspace',
+            'planilha', 'documento', 'apresentacao', 'formulario', 'agenda', 'email', 'nuvem', 'cloud', 'office', 'produtividade'
         ];
 
         // Função para ocultar o header e ajustar layout se em modo embedded
@@ -1560,6 +1562,10 @@
             ul.innerHTML = '<li>Carregando...</li>';
             console.log('fetchCategories: Iniciando requisição para categorias...');
             console.log('fetchCategories: Usando apiToken:', apiToken);
+            
+            // DEBUG: Mostrar palavras-chave que estão sendo usadas
+            console.log('DEBUG: Palavras-chave para filtro:', relevantKeywordsFor50Plus);
+            
             try {
                 const fd = new FormData();
                 fd.append('token', apiToken);
@@ -1584,9 +1590,18 @@
             ul.innerHTML = '';
             let categoriesRendered = 0;
 
+            // DEBUG: Log de todas as categorias recebidas
+            console.log('DEBUG: Categorias recebidas da API IPED:', cats.length);
+            cats.forEach((cat, idx) => {
+                console.log(`DEBUG: Categoria ${idx + 1}: "${cat.category_title}"`);
+            });
+
             cats.forEach((cat, idx) => {
                 const categoryTitleLower = cat.category_title.toLowerCase();
                 const isRelevant = relevantKeywordsFor50Plus.some(keyword => categoryTitleLower.includes(keyword));
+
+                // DEBUG: Log do processo de filtragem
+                console.log(`DEBUG: "${cat.category_title}" -> ${categoryTitleLower} -> Relevante: ${isRelevant}`);
 
                 if (isRelevant) {
                     const li = document.createElement('li');
@@ -1597,8 +1612,11 @@
                     li.appendChild(btn);
                     ul.appendChild(li);
                     categoriesRendered++;
+                    console.log(`DEBUG: Categoria "${cat.category_title}" ADICIONADA à lista`);
                 }
             });
+
+            console.log(`DEBUG: Total de categorias renderizadas: ${categoriesRendered}`);
 
             if (categoriesRendered === 0) {
                 ul.innerHTML = '<li>Nenhuma categoria de interesse para 50+ encontrada no momento.</li>';
